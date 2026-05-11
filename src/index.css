@@ -1,0 +1,247 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-primary: var(--theme-bg-primary);
+  --color-bg-card: var(--theme-bg-card);
+  --color-bg-card-hover: var(--theme-bg-card-hover);
+  --color-accent-cyan: var(--theme-accent-cyan);
+  --color-accent-purple: var(--theme-accent-purple);
+  --color-accent-green: var(--theme-accent-green);
+  --color-text-primary: var(--theme-text-primary);
+  --color-text-muted: var(--theme-text-muted);
+  --color-border-glow: var(--theme-border-glow);
+
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "Fira Code", monospace;
+  --font-display: "JetBrains Mono", monospace;
+}
+
+@layer base {
+  :root {
+    --glow-cyan: 0 0 20px rgba(0, 245, 255, 0.4);
+    --glow-purple: 0 0 20px rgba(168, 85, 247, 0.4);
+
+    --theme-bg-primary: #0a0a0a;
+    --theme-bg-card: #0d1117;
+    --theme-bg-card-hover: #161b22;
+    --theme-accent-cyan: #00f5ff;
+    --theme-accent-purple: #a855f7;
+    --theme-accent-green: #00ff41;
+    --theme-text-primary: #e2e8f0;
+    --theme-text-muted: #64748b;
+    --theme-border-glow: rgba(0, 245, 255, 0.25);
+  }
+
+  .light-mode {
+    --theme-bg-primary: #f8fafc;
+    --theme-bg-card: #ffffff;
+    --theme-bg-card-hover: #f1f5f9;
+    --theme-accent-cyan: #0891b2;
+    --theme-accent-purple: #7c3aed;
+    --theme-accent-green: #059669;
+    --theme-text-primary: #0f172a;
+    --theme-text-muted: #475569;
+    --theme-border-glow: rgba(8, 145, 178, 0.25);
+    --glow-cyan: 0 0 12px rgba(8, 145, 178, 0.25);
+    --glow-purple: 0 0 12px rgba(124, 58, 237, 0.25);
+  }
+
+  body {
+    background-color: var(--theme-bg-primary);
+    color: var(--theme-text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="rgba(0, 245, 255, 0.2)" stroke="%2300f5ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="1"></circle></svg>') 12 12, auto;
+  }
+
+  /* Disable custom cursor on touch devices — serves no purpose and can lag */
+  @media (pointer: coarse) {
+    body {
+      cursor: auto;
+    }
+    a, button, [role="button"] {
+      cursor: pointer;
+    }
+  }
+
+  a, button, [role="button"] {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="rgba(168, 85, 247, 0.4)" stroke="%23a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="1"></circle></svg>') 12 12, pointer;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.025em;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  section[id] {
+    scroll-margin-top: 5rem;
+  }
+  
+  ::selection {
+    background: rgba(0, 245, 255, 0.3);
+    color: #fff;
+  }
+
+  .light-mode ::selection {
+    background: rgba(8, 145, 178, 0.3);
+    color: #fff;
+  }
+}
+
+@layer utilities {
+  .text-glow-cyan {
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.5), 0 0 20px rgba(0, 245, 255, 0.3);
+  }
+  .light-mode .text-glow-cyan {
+    text-shadow: none;
+  }
+  .box-glow-cyan {
+    box-shadow: 0 0 15px rgba(0, 245, 255, 0.3);
+  }
+  .light-mode .box-glow-cyan {
+    box-shadow: 0 0 10px rgba(8, 145, 178, 0.15);
+  }
+  .box-glow-purple {
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+  }
+  .light-mode .box-glow-purple {
+    box-shadow: 0 0 10px rgba(124, 58, 237, 0.15);
+  }
+  .glitch-text {
+    position: relative;
+  }
+  .glitch-text::before, .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+  }
+  .glitch-text::before {
+    left: 2px;
+    text-shadow: -2px 0 var(--color-accent-cyan);
+    animation: glitch-anim-1 2s infinite linear alternate-reverse;
+  }
+  .glitch-text::after {
+    left: -2px;
+    text-shadow: -2px 0 var(--color-accent-purple);
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+  }
+  /* Subtler glitch in light mode */
+  .light-mode .glitch-text::before,
+  .light-mode .glitch-text::after {
+    opacity: 0.3;
+  }
+  .crt-scanline {
+    background: linear-gradient(
+      rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.25) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+  }
+  /* Disable CRT scanlines in light mode */
+  .light-mode .crt-scanline {
+    background: none;
+  }
+  /* Boost orb & particle visibility in light mode */
+  .light-mode .hero-orb {
+    opacity: 3;
+    filter: blur(64px);
+  }
+  .light-mode .hero-particle {
+    width: 6px;
+    height: 6px;
+    box-shadow: 0 0 6px currentColor;
+  }
+
+  /* Hide scrollbar while keeping scroll functionality (certifications carousel) */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes glitch-anim-1 {
+  0% { clip-path: inset(20% 0 80% 0); }
+  20% { clip-path: inset(60% 0 10% 0); }
+  40% { clip-path: inset(40% 0 50% 0); }
+  60% { clip-path: inset(80% 0 5% 0); }
+  80% { clip-path: inset(10% 0 70% 0); }
+  100% { clip-path: inset(30% 0 20% 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip-path: inset(10% 0 60% 0); }
+  20% { clip-path: inset(30% 0 20% 0); }
+  40% { clip-path: inset(70% 0 10% 0); }
+  60% { clip-path: inset(20% 0 50% 0); }
+  80% { clip-path: inset(50% 0 30% 0); }
+  100% { clip-path: inset(5% 0 80% 0); }
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: var(--color-accent-cyan); }
+}
+
+.typewriter-text {
+  overflow: hidden;
+  border-right: .15em solid var(--color-accent-cyan);
+  white-space: nowrap;
+  animation: 
+    typing 2s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-text-muted);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-cyan);
+}
+
+/* Respect user motion preferences — disables all CSS animations & transitions */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .typewriter-text {
+    animation: none;
+    width: auto;
+    border-right: none;
+  }
+
+  .glitch-text::before,
+  .glitch-text::after {
+    display: none;
+  }
+}
