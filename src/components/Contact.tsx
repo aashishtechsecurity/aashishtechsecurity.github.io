@@ -1,6 +1,36 @@
+import { useState } from 'react';
 import { Instagram, Linkedin, Medium, XTwitter } from './Icons';
 
 const Contact = () => {
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus('loading');
+    
+    const formData = new FormData(e.currentTarget);
+    
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/priyathambande1729@gmail.com", {
+        method: "POST",
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        (e.target as HTMLFormElement).reset();
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        setStatus('error');
+      }
+    } catch (err) {
+      setStatus('error');
+    }
+  };
+
   return (
     <section id="contact" className="py-24 relative z-10 border-t border-border-glow/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -13,17 +43,70 @@ const Contact = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
           <div className="space-y-6">
-            <form action="https://formsubmit.co/priyathambande1729@gmail.com" method="POST" className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* 
+                PRO TIP: To fully hide your email from the source code, 
+                replace the email address in the fetch URL above with the 
+                "Random String" provided by FormSubmit after your first submission.
+              */}
               <input type="hidden" name="_captcha" value="true" />
               <input type="text" name="_honey" style={{display: 'none'}} />
               <input type="hidden" name="_subject" value="New message from AashishTechSecurity" />
-              <input type="text" name="name" required placeholder="Name" className="w-full bg-bg-card border border-border-glow/30 rounded p-4 text-text-primary focus:outline-none focus:border-accent-cyan focus:box-glow-cyan transition-all" />
-              <input type="email" name="email" required placeholder="Email" className="w-full bg-bg-card border border-border-glow/30 rounded p-4 text-text-primary focus:outline-none focus:border-accent-cyan focus:box-glow-cyan transition-all" />
-              <input type="text" name="subject" placeholder="Subject (Optional)" className="w-full bg-bg-card border border-border-glow/30 rounded p-4 text-text-primary focus:outline-none focus:border-accent-cyan focus:box-glow-cyan transition-all" />
-              <textarea name="message" required placeholder="Message" rows={5} className="w-full bg-bg-card border border-border-glow/30 rounded p-4 text-text-primary focus:outline-none focus:border-accent-cyan focus:box-glow-cyan transition-all resize-none"></textarea>
-              <button type="submit" className="w-full py-4 bg-accent-cyan text-bg-primary font-bold rounded hover:bg-[#00d5ff] transition-all hover:box-glow-cyan flex items-center justify-center gap-2">
-                ⚡ Transmit Message
+              
+              <input 
+                type="text" 
+                name="name" 
+                required 
+                placeholder="Name" 
+                className="w-full bg-bg-card border border-border-glow/30 rounded p-4 text-text-primary focus:outline-none focus:border-accent-cyan focus:box-glow-cyan transition-all" 
+              />
+              <input 
+                type="email" 
+                name="email" 
+                required 
+                placeholder="Email" 
+                className="w-full bg-bg-card border border-border-glow/30 rounded p-4 text-text-primary focus:outline-none focus:border-accent-cyan focus:box-glow-cyan transition-all" 
+              />
+              <input 
+                type="text" 
+                name="subject" 
+                placeholder="Subject (Optional)" 
+                className="w-full bg-bg-card border border-border-glow/30 rounded p-4 text-text-primary focus:outline-none focus:border-accent-cyan focus:box-glow-cyan transition-all" 
+              />
+              <textarea 
+                name="message" 
+                required 
+                placeholder="Message" 
+                rows={5} 
+                className="w-full bg-bg-card border border-border-glow/30 rounded p-4 text-text-primary focus:outline-none focus:border-accent-cyan focus:box-glow-cyan transition-all resize-none"
+              ></textarea>
+              
+              <button 
+                type="submit" 
+                disabled={status === 'loading'}
+                className="w-full py-4 bg-accent-cyan text-bg-primary font-bold rounded hover:bg-[#00d5ff] transition-all hover:box-glow-cyan flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {status === 'loading' ? (
+                  <span className="flex items-center gap-2">
+                    <span className="w-4 h-4 border-2 border-bg-primary border-t-transparent rounded-full animate-spin"></span>
+                    Transmitting...
+                  </span>
+                ) : (
+                  <>⚡ Transmit Message</>
+                )}
               </button>
+
+              {status === 'success' && (
+                <div className="p-4 bg-green-500/10 border border-green-500/50 text-green-500 rounded text-center animate-fade-in">
+                  Message sent successfully! I'll get back to you soon.
+                </div>
+              )}
+
+              {status === 'error' && (
+                <div className="p-4 bg-red-500/10 border border-red-500/50 text-red-500 rounded text-center animate-fade-in">
+                  Something went wrong. Please try again or reach out via social media.
+                </div>
+              )}
             </form>
           </div>
 
