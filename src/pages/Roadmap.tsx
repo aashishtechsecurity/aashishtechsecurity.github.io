@@ -235,6 +235,16 @@ const ROADMAP_DATA = [
               { name: "Nexpose", url: "https://www.rapid7.com/products/nexpose/" }
             ],
             exercises: "Perform vulnerability assessments. Prioritize based on risk. Develop remediation plans. Implement processes."
+          },
+          {
+            name: "Identity & Access Management (IAM)",
+            resources: [
+              { name: "Zero Trust Architecture (NIST)", url: "https://csrc.nist.gov/publications/detail/sp/800-207/final" },
+              { name: "Microsoft Identity Training", url: "https://learn.microsoft.com/en-us/training/paths/explore-identity-azure-ad/" },
+              { name: "OAuth 2.0 & OIDC", url: "https://oauth.net/2/" },
+              { name: "Google BeyondCorp", url: "https://cloud.google.com/beyondcorp" }
+            ],
+            exercises: "Implement SSO using SAML or OIDC. Configure Role-Based Access Control (RBAC). Design a Zero Trust network model."
           }
         ]
       },
@@ -280,6 +290,26 @@ const ROADMAP_DATA = [
               { name: "Vulert", url: "https://www.vulert.com/" }
             ],
             exercises: "Review code for vulnerabilities. Implement secure auth. Secure data storage. Integrate security into SDLC."
+          },
+          {
+            name: "API Security",
+            resources: [
+              { name: "OWASP API Security Top 10", url: "https://owasp.org/www-project-api-security/" },
+              { name: "APIsec University", url: "https://www.apisecuniversity.com/" },
+              { name: "crAPI (Completely Ridiculous API)", url: "https://github.com/OWASP/crAPI" },
+              { name: "Postman API Security", url: "https://www.postman.com/api-security/" }
+            ],
+            exercises: "Test REST and GraphQL APIs for vulnerabilities. Analyze JWT tokens. Implement rate limiting and authentication."
+          },
+          {
+            name: "DevSecOps & CI/CD Security",
+            resources: [
+              { name: "GitHub Advanced Security", url: "https://docs.github.com/en/get-started/learning-about-github/about-github-advanced-security" },
+              { name: "GitLab DevSecOps", url: "https://about.gitlab.com/solutions/devsecops/" },
+              { name: "OWASP DefectDojo", url: "https://github.com/DefectDojo/django-DefectDojo" },
+              { name: "Trivy Scanner", url: "https://github.com/aquasecurity/trivy" }
+            ],
+            exercises: "Integrate SAST/DAST tools into a GitHub Actions pipeline. Set up automated secret scanning."
           }
         ]
       }
@@ -411,17 +441,17 @@ const ROADMAP_DATA = [
             exercises: "Design secure cloud architecture. Implement defense in depth. Create secure IaC templates."
           },
           {
-            name: "Container Security",
+            name: "Container & Cloud-Native Security",
             resources: [
               { name: "Docker Security", url: "https://docs.docker.com/engine/security/" },
               { name: "Kubernetes Security", url: "https://kubernetes.io/docs/concepts/security/" },
               { name: "OWASP Docker Cheat Sheet", url: "https://cheatsheetseries.owasp.org/cheatsheets/Docker_Security_Cheat_Sheet.html" },
-              { name: "Clair", url: "https://github.com/quay/clair" },
+              { name: "Checkov (IaC Scanner)", url: "https://www.checkov.io/" },
               { name: "Trivy", url: "https://github.com/aquasecurity/trivy" },
               { name: "Falco", url: "https://falco.org/" },
               { name: "Aqua Security", url: "https://www.aquasec.com/" }
             ],
-            exercises: "Secure Docker containers/images. Implement K8s security. Set up vulnerability scanning."
+            exercises: "Secure Docker containers/images. Scan IaC (Terraform/CloudFormation) for misconfigurations using Checkov. Set up runtime threat detection with Falco."
           }
         ]
       }
@@ -474,6 +504,16 @@ const ROADMAP_DATA = [
               { name: "Sigma", url: "https://github.com/SigmaHQ/sigma" }
             ],
             exercises: "Analyze APT campaigns. Create detection rules for APT tactics. Simulate APT attacks."
+          },
+          {
+            name: "AI & LLM Security",
+            resources: [
+              { name: "OWASP Top 10 for LLMs", url: "https://owasp.org/www-project-top-10-for-large-language-model-applications/" },
+              { name: "Lakera Gandalf (Prompt Injection)", url: "https://gandalf.lakera.ai/" },
+              { name: "NIST AI Risk Management", url: "https://www.nist.gov/itl/ai-risk-management-framework" },
+              { name: "AI Village", url: "https://aivillage.org/" }
+            ],
+            exercises: "Perform prompt injection attacks in a safe environment. Evaluate an AI model for data leakage and privacy risks."
           }
         ]
       },
@@ -570,6 +610,16 @@ const ROADMAP_DATA = [
               { name: "TryHackMe Paths", url: "https://tryhackme.com/paths" }
             ],
             exercises: "Subscribe to newsletters/podcasts. Set up a personal blog. Participate in bug bounties."
+          },
+          {
+            name: "Soft Skills & Business Risk",
+            resources: [
+              { name: "Threat Modeling (STRIDE)", url: "https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool" },
+              { name: "FAIR Risk Framework", url: "https://www.fairinstitute.org/" },
+              { name: "Writing an Executive Summary", url: "https://www.sans.org/blog/how-to-write-an-executive-summary-for-a-pen-test-report/" },
+              { name: "Effective Communication in InfoSec", url: "https://www.cybersecuritydive.com/news/communication-skills-cybersecurity/645100/" }
+            ],
+            exercises: "Write a one-page executive summary of a technical vulnerability. Conduct a STRIDE threat modeling session on a sample app."
           }
         ]
       },
