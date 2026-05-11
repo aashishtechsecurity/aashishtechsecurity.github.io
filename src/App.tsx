@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 
 const Resources = lazy(() => import('./pages/Resources'));
+const Roadmap = lazy(() => import('./pages/Roadmap'));
 
 /** Skeleton placeholder shown while lazy chunks load */
 const PageFallback = () => (
@@ -40,6 +41,7 @@ function App() {
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<PageTransition><Home /></PageTransition>} />
               <Route path="/resources" element={<PageTransition><Resources /></PageTransition>} />
+              <Route path="/roadmap" element={<PageTransition><Roadmap /></PageTransition>} />
             </Routes>
           </AnimatePresence>
         </Suspense>

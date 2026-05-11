@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { name: 'Experience', href: '/#experience', id: 'experience' },
   { name: 'Toolkit', href: '/#toolkit', id: 'toolkit' },
   { name: 'Resources', href: '/resources', id: '' },
+  { name: 'Roadmap', href: '/roadmap', id: '' },
   { name: 'Contact', href: '/#contact', id: 'contact' }
 ];
 
@@ -80,6 +81,7 @@ const Navbar = () => {
 
   const isLinkActive = (href: string, id: string) => {
     if (href === '/resources') return location.pathname === '/resources';
+    if (href === '/roadmap') return location.pathname === '/roadmap';
     if (location.pathname === '/') return activeSection === id;
     return false; // If not on home, hash links aren't strictly "active"
   };
