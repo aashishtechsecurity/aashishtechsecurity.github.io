@@ -63,7 +63,7 @@ const Hero = () => {
           <img 
             src={logo} 
             alt="AashishTechSecurity Logo" 
-            className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 object-contain relative z-10 hover:scale-105 transition-transform duration-500 drop-shadow-[0_0_20px_rgba(0,245,255,0.4)]" 
+            className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 object-contain brand-logo relative z-10 hover:scale-105 transition-transform duration-500 drop-shadow-[0_0_20px_rgba(0,245,255,0.4)]" 
           />
         </motion.div>
 

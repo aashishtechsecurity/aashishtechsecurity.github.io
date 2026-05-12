@@ -93,7 +93,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16 sm:h-20">
           <Link to="/" className="flex items-center space-x-3 group" aria-label="AashishTechSecurity Home">
             <div className="relative">
-              <img src={logo} alt="ATS Logo" className="w-10 h-10 sm:w-12 sm:h-12 object-contain group-hover:scale-110 transition-transform duration-300" />
+              <img src={logo} alt="ATS Logo" className="w-10 h-10 sm:w-12 sm:h-12 object-contain brand-logo group-hover:scale-110 transition-transform duration-300" />
               <div className="absolute inset-0 bg-accent-cyan/20 blur-lg rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
             <span className="font-display font-bold text-lg sm:text-xl text-accent-cyan tracking-tight">AashishTechSecurity</span>

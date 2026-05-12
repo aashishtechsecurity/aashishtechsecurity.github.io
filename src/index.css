@@ -163,6 +163,18 @@
     box-shadow: 0 0 6px currentColor;
   }
 
+  /* Logo styling for Light Mode compatibility */
+  .brand-logo {
+    clip-path: circle(48%);
+    filter: drop-shadow(0 0 8px rgba(0, 245, 255, 0.2));
+    border: 1px solid rgba(0, 245, 255, 0.1);
+  }
+  .light-mode .brand-logo {
+    filter: drop-shadow(0 0 12px rgba(0, 245, 255, 0.4));
+    border: 1px solid rgba(0, 245, 255, 0.3);
+    background: #0a0a0a; /* Keeps the techy dark core of the logo even in light mode */
+  }
+
   /* Hide scrollbar while keeping scroll functionality (certifications carousel) */
   .hide-scrollbar {
     -ms-overflow-style: none;
