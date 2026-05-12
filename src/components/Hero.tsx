@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import logo from '../assets/logo.png';
 
 const Hero = () => {
   const shouldReduceMotion = useReducedMotion();
@@ -53,9 +54,23 @@ const Hero = () => {
       
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto flex flex-col items-center">
         <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="relative mb-8"
+        >
+          <div className="absolute inset-0 bg-accent-cyan/30 blur-3xl rounded-full animate-pulse" />
+          <img 
+            src={logo} 
+            alt="AashishTechSecurity Logo" 
+            className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 object-contain relative z-10 hover:scale-105 transition-transform duration-500 drop-shadow-[0_0_20px_rgba(0,245,255,0.4)]" 
+          />
+        </motion.div>
+
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 1, delay: 0.2 }}
           className="font-mono text-accent-green mb-4 md:mb-6 typewriter-text inline-block text-xs sm:text-sm"
         >
           {'> System Ready // Access Granted ✓'}

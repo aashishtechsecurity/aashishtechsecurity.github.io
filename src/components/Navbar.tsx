@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Shield, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import logo from '../assets/logo.png';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
@@ -90,9 +91,12 @@ const Navbar = () => {
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-bg-primary/80 backdrop-blur-md border-b border-border-glow' : 'bg-transparent'}`} aria-label="Main navigation">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 sm:h-20">
-          <Link to="/" className="flex items-center space-x-2" aria-label="AashishTechSecurity Home">
-            <Shield className="w-7 h-7 sm:w-8 sm:h-8 text-accent-cyan" />
-            <span className="font-display font-bold text-lg sm:text-xl text-accent-cyan">AashishTechSecurity</span>
+          <Link to="/" className="flex items-center space-x-3 group" aria-label="AashishTechSecurity Home">
+            <div className="relative">
+              <img src={logo} alt="ATS Logo" className="w-10 h-10 sm:w-12 sm:h-12 object-contain group-hover:scale-110 transition-transform duration-300" />
+              <div className="absolute inset-0 bg-accent-cyan/20 blur-lg rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+            </div>
+            <span className="font-display font-bold text-lg sm:text-xl text-accent-cyan tracking-tight">AashishTechSecurity</span>
           </Link>
 
           {/* Desktop Nav & Theme Toggle */}

@@ -4,10 +4,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   BookOpen, Terminal, Network, Shield, Globe, 
   Swords, ShieldCheck, Cpu, Laptop, GraduationCap, 
-  ChevronDown, ExternalLink, ChevronRight
+  ChevronDown, ExternalLink, ChevronRight, Search, 
+  CheckCircle2, X
 } from 'lucide-react';
+import { useEffect } from 'react';
 
-const ROADMAP_DATA = [
+const CYBERSECURITY_ROADMAP = [
   {
     phase: "Foundation Phase",
     description: "Build core knowledge in computing, networking, and basic security principles.",
@@ -712,7 +714,298 @@ const ROADMAP_DATA = [
   }
 ];
 
-const RoadmapPhase = ({ phase, index }: { phase: typeof ROADMAP_DATA[0], index: number }) => {
+const BUG_BOUNTY_ROADMAP = [
+  {
+    phase: "Architectural Foundations",
+    description: "Master the mechanics of the web. You cannot automate what you do not understand.",
+    icon: <Globe className="w-6 h-6" />,
+    color: "text-emerald-500",
+    bgColor: "bg-emerald-500/10",
+    borderColor: "border-emerald-500/30",
+    topics: [
+      {
+        title: "1. The Protocol Level",
+        icon: <Network className="w-5 h-5" />,
+        subTopics: [
+          {
+            name: "Web Mechanics",
+            resources: [
+              { name: "HTTP MDN Web Docs", url: "https://developer.mozilla.org/en-US/docs/Web/HTTP" },
+              { name: "HTTP Status Codes Guide", url: "https://httpstatuses.com/" },
+              { name: "OWASP Session Management", url: "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html" }
+            ],
+            exercises: "Practice analyzing HTTP requests/responses. Understand how cookies and headers manage sessions."
+          }
+        ]
+      },
+      {
+        title: "2. Vulnerability Mechanics",
+        icon: <Shield className="w-5 h-5" />,
+        subTopics: [
+          {
+            name: "OWASP Top 10 & Lab Practice",
+            resources: [
+              { name: "PortSwigger Web Security Academy", url: "https://portswigger.net/web-security" },
+              { name: "OWASP Top 10 Project", url: "https://owasp.org/www-project-top-ten/" },
+              { name: "HackTheBox Academy", url: "https://academy.hackthebox.com/" }
+            ],
+            exercises: "Complete the PortSwigger Academy top-to-bottom. Understand the 'Why' behind SQLi, XXE, and SSRF."
+          }
+        ]
+      },
+      {
+        title: "3. Interception Environment",
+        icon: <Terminal className="w-5 h-5" />,
+        subTopics: [
+          {
+            name: "Proxy Mastery & Mobile Labs",
+            resources: [
+              { name: "Burp Suite Community", url: "https://portswigger.net/burp/communitydownload" },
+              { name: "Caido Proxy", url: "https://caido.io/" },
+              { name: "Termux for Android", url: "https://termux.dev/" },
+              { name: "Kali NetHunter", url: "https://www.kali.org/docs/nethunter/" },
+              { name: "Burp Suite Pro (Worth the investment)", url: "https://portswigger.net/burp/pro" }
+            ],
+            exercises: "Learn to intercept, modify, and replay traffic. Set up a mobile lab with Termux or NetHunter for testing on the go."
+          },
+          {
+            name: "Senior Hunter Advice",
+            resources: [],
+            exercises: "Don't just use default settings. Master 'Match and Replace' rules to automate boring tasks like adding custom headers or bypassing simple client-side checks."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    phase: "AI-Accelerated Learning Loop",
+    description: "Build an accelerated feedback loop using AI to compress years of experience into months.",
+    icon: <Cpu className="w-6 h-6" />,
+    color: "text-purple-500",
+    bgColor: "bg-purple-500/10",
+    borderColor: "border-purple-500/30",
+    topics: [
+      {
+        title: "4. The New Ingestion Method",
+        icon: <BookOpen className="w-5 h-5" />,
+        subTopics: [
+          {
+            name: "Parsing Bug Write-ups",
+            resources: [
+              { name: "CrowdStrike Blog", url: "https://www.crowdstrike.com/blog/" },
+              { name: "HackerOne Hacktivity", url: "https://hackerone.com/hacktivity" },
+              { name: "PentesterLand Writeups", url: "https://pentester.land/writeups/" }
+            ],
+            exercises: "Use LLMs to explain complex bug bounty write-ups like SSTI or IDOR. Ask for beginner-friendly walkthroughs."
+          }
+        ]
+      },
+      {
+        title: "5. Prompt Architecture",
+        icon: <Terminal className="w-5 h-5" />,
+        subTopics: [
+          {
+            name: "Active Recall & Quizzing",
+            resources: [
+              { name: "Claude AI", url: "https://claude.ai/" },
+              { name: "ChatGPT", url: "https://chatgpt.com/" }
+            ],
+            exercises: "Ask AI to quiz you on concepts or generate mock scenarios for vulnerabilities. Transition to AI Red Teaming."
+          },
+          {
+            name: "Senior Hunter Advice",
+            resources: [],
+            exercises: "Use AI to deobfuscate minified JavaScript. It's incredibly good at renaming variables and explaining what a complex function is doing, which often leads to finding hidden API endpoints."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    phase: "Recon & Target Acquisition",
+    description: "Hunt where the attack surface is wide, messy, and less traversed.",
+    icon: <Globe className="w-6 h-6" />,
+    color: "text-blue-500",
+    bgColor: "bg-blue-500/10",
+    borderColor: "border-blue-500/30",
+    topics: [
+      {
+        title: "6. Core Stack & AI Parsing",
+        icon: <Laptop className="w-5 h-5" />,
+        subTopics: [
+          {
+            name: "Project Discovery Tools",
+            resources: [
+              { name: "Subfinder", url: "https://github.com/projectdiscovery/subfinder" },
+              { name: "HTTPX", url: "https://github.com/projectdiscovery/httpx" },
+              { name: "AlterX", url: "https://github.com/projectdiscovery/alterx" }
+            ],
+            exercises: "Standardize your tooling. Use AI to categorize subdomains (admin, api, internal) to find hidden gems."
+          }
+        ]
+      },
+      {
+        title: "7. Custom Automation",
+        icon: <Terminal className="w-5 h-5" />,
+        subTopics: [
+          {
+            name: "AI-Powered Tooling",
+            resources: [
+              { name: "Cursor AI", url: "https://cursor.com/" },
+              { name: "Claude Code", url: "https://claude.ai/code" }
+            ],
+            exercises: "Write custom Python scripts for JWT checks or Broken Access Control using AI assistants. Document edge cases."
+          },
+          {
+            name: "Senior Hunter Advice",
+            resources: [],
+            exercises: "Automation should be recursive. Don't just scan subdomains once; set up a 'monitors' that alerts you when a new subdomain or a new JS file appears. The biggest bugs are found in things that just changed."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    phase: "The Hunt & Surface Mapping",
+    description: "Execute and focus on logic bugs like BAC, IDOR, and Blind XSS.",
+    icon: <Swords className="w-6 h-6" />,
+    color: "text-red-500",
+    bgColor: "bg-red-500/10",
+    borderColor: "border-red-500/30",
+    topics: [
+      {
+        title: "8. Feature Mapping",
+        icon: <ShieldCheck className="w-5 h-5" />,
+        subTopics: [
+          {
+            name: "Strategic Testing",
+            resources: [
+              { name: "OWASP WSTG", url: "https://owasp.org/www-project-web-security-testing-guide/" },
+              { name: "Bugcrowd University", url: "https://www.bugcrowd.com/university/" }
+            ],
+            exercises: "Map the app (Dashboard, Billing, Teams). Ask AI to prioritize bug classes based on features."
+          }
+        ]
+      },
+      {
+        title: "9. Advanced Exploitation",
+        icon: <Network className="w-5 h-5" />,
+        subTopics: [
+          {
+            name: "Chaining & Logic Bugs",
+            resources: [
+              { name: "HTTP Request Smuggling", url: "https://portswigger.net/web-security/request-smuggling" },
+              { name: "Web Cache Deception", url: "https://owasp.org/www-community/attacks/Web_Cache_Deception" },
+              { name: "OAuth Misconfigurations", url: "https://portswigger.net/web-security/oauth" }
+            ],
+            exercises: "Go beyond XSS. Master Request Smuggling and Race Conditions. Learn how to chain a low-impact info leak with an IDOR to get full account takeover."
+          },
+          {
+            name: "Senior Hunter Advice",
+            resources: [],
+            exercises: "Always look for 'Second-Order' bugs. Where does your input go after it's saved? If it pops up in an admin dashboard three days later, that's a much higher payout than a simple self-XSS."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    phase: "Reporting & Authority",
+    description: "Convert findings into high-tier payouts and build your personal brand.",
+    icon: <GraduationCap className="w-6 h-6" />,
+    color: "text-amber-500",
+    bgColor: "bg-amber-500/10",
+    borderColor: "border-amber-500/30",
+    topics: [
+      {
+        title: "10. Sanitized AI Reporting",
+        icon: <BookOpen className="w-5 h-5" />,
+        subTopics: [
+          {
+            name: "Impact Statements",
+            resources: [
+              { name: "Bug Bounty Report Template", url: "https://github.com/charlax/bugbounty-writeups" },
+              { name: "HackerOne Brand Guidelines", url: "https://www.hackerone.com/brand" }
+            ],
+            exercises: "Describe bugs abstractly to AI to get professional impact statements. Avoid pasting sensitive target data."
+          }
+        ]
+      },
+      {
+        title: "11. Authority & Professionalism",
+        icon: <Globe className="w-5 h-5" />,
+        subTopics: [
+          {
+            name: "Teaching & Networking",
+            resources: [
+              { name: "100 Days of Hacking", url: "https://www.instagram.com/explore/tags/100daysofhacking/" },
+              { name: "Bug Bounty Community Discord", url: "https://discord.com/invite/bugbounty" }
+            ],
+            exercises: "Teach what you learn. Explain vulnerabilities in regional languages. Build a brand on visual platforms."
+          },
+          {
+            name: "Senior Hunter Advice",
+            resources: [],
+            exercises: "The best bugs are found through collaboration. Network with triage teams and other hunters. Sometimes a 'Duplicate' report can lead to a 'Collaboration' where you both win if you share your unique bypass techniques."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    phase: "The Elite Workflow",
+    description: "Focus on zero-day research, deep-dive methodology, and business-critical vulnerabilities.",
+    icon: <Cpu className="w-6 h-6" />,
+    color: "text-red-500",
+    bgColor: "bg-red-500/10",
+    borderColor: "border-red-500/30",
+    topics: [
+      {
+        title: "12. Deep-Dive Methodology",
+        icon: <ShieldCheck className="w-5 h-5" />,
+        subTopics: [
+          {
+            name: "Code Auditing & Zero-Days",
+            resources: [
+              { name: "Semgrep for Bug Hunting", url: "https://semgrep.dev/" },
+              { name: "CodeQL for Security Research", url: "https://codeql.github.com/" }
+            ],
+            exercises: "Stop just 'poking' the app. Learn to read the code (if available) or reverse engineer the logic. Look for architectural flaws that can't be fixed with a simple patch."
+          }
+        ]
+      },
+      {
+        title: "13. Business Impact & Chaining",
+        icon: <Swords className="w-5 h-5" />,
+        subTopics: [
+          {
+            name: "The $10k+ Mindset",
+            resources: [
+              { name: "Chaining Vulnerabilities for Max Impact", url: "https://hackerone.com/blog/vulnerability-chaining-for-the-win" }
+            ],
+            exercises: "Chain multiple bugs. For example: SSRF to reach internal metadata -> Get IAM tokens -> Access S3 buckets -> Find PII. That's how you get the critical payouts."
+          }
+        ]
+      }
+    ]
+  }
+];
+
+const RoadmapPhase = ({ 
+  phase, 
+  index, 
+  activeTab, 
+  onToggle, 
+  completedItems,
+  progress 
+}: { 
+  phase: typeof CYBERSECURITY_ROADMAP[0], 
+  index: number,
+  activeTab: string,
+  onToggle: (id: string) => void,
+  completedItems: string[],
+  progress: number
+}) => {
   const [isOpen, setIsOpen] = useState(index === 0);
 
   return (
@@ -720,27 +1013,48 @@ const RoadmapPhase = ({ phase, index }: { phase: typeof ROADMAP_DATA[0], index: 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
-      className={`border \${phase.borderColor} rounded-xl overflow-hidden bg-bg-card/50 backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:shadow-accent-cyan/5`}
+      className={`border ${phase.borderColor} rounded-xl overflow-hidden bg-bg-card/50 backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:shadow-accent-cyan/5`}
     >
       <button 
+        id={`phase-header-${index}`}
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full flex items-center justify-between p-5 md:p-6 text-left \${phase.bgColor} transition-colors`}
+        className={`w-full flex items-center justify-between p-5 md:p-6 text-left ${phase.bgColor} transition-colors group`}
         aria-expanded={isOpen}
+        aria-controls={`phase-content-${index}`}
       >
         <div className="flex items-center gap-4">
-          <div className={`p-3 rounded-lg bg-bg-primary/50 \${phase.color} shadow-sm`}>
+          <div className={`p-3 rounded-lg bg-bg-primary/50 ${phase.color} shadow-sm group-hover:scale-110 transition-transform`}>
             {phase.icon}
           </div>
           <div>
-            <h2 className="text-xl md:text-2xl font-display font-bold text-text-primary">
-              Phase {index + 1}: {phase.phase}
-            </h2>
-            <p className="text-text-muted mt-1 text-sm md:text-base">
-              {phase.description}
-            </p>
+            <div className="flex items-center gap-3">
+              <h2 className="text-xl md:text-2xl font-display font-bold text-text-primary">
+                Phase {index + 1}: {phase.phase}
+              </h2>
+              {progress === 100 && (
+                <span className="flex items-center gap-1 text-[10px] bg-accent-green/20 text-accent-green px-2 py-0.5 rounded-full border border-accent-green/30">
+                  <ShieldCheck className="w-3 h-3" /> Completed
+                </span>
+              )}
+            </div>
+            <div className="flex items-center gap-4 mt-1">
+              <p className="text-text-muted text-sm md:text-base line-clamp-1">
+                {phase.description}
+              </p>
+              <div className="hidden md:flex items-center gap-2 min-w-[100px]">
+                <div className="h-1.5 flex-1 bg-bg-primary/50 rounded-full overflow-hidden">
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    animate={{ width: `${progress}%` }}
+                    className={`h-full ${phase.color.replace('text-', 'bg-')}`}
+                  />
+                </div>
+                <span className="text-[10px] font-mono text-text-muted">{progress}%</span>
+              </div>
+            </div>
           </div>
         </div>
-        <ChevronDown className={`w-6 h-6 text-text-muted transition-transform duration-300 \${isOpen ? 'rotate-180' : ''}`} />
+        <ChevronDown className={`w-6 h-6 text-text-muted transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       <AnimatePresence>
@@ -750,57 +1064,121 @@ const RoadmapPhase = ({ phase, index }: { phase: typeof ROADMAP_DATA[0], index: 
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             className="overflow-hidden"
+            id={`phase-content-${index}`}
+            role="region"
+            aria-labelledby={`phase-header-${index}`}
           >
             <div className="p-5 md:p-6 space-y-8">
               {phase.topics.map((topic, tIdx) => (
                 <div key={tIdx} className="relative">
                   {/* Vertical Line indicator */}
-                  <div className={`absolute left-[11px] top-8 bottom-0 w-0.5 \${phase.bgColor} -z-10`} />
+                  <div className={`absolute left-[11px] top-8 bottom-0 w-0.5 ${phase.bgColor} -z-10`} />
                   
-                  <h3 className="flex items-center gap-3 text-lg font-bold text-text-primary mb-4">
-                    <div className={`p-1.5 rounded-full bg-bg-primary \${phase.color} border border-border-glow`}>
-                      {topic.icon}
-                    </div>
-                    {topic.title}
-                  </h3>
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="flex items-center gap-3 text-lg font-bold text-text-primary">
+                      <div className={`p-1.5 rounded-full bg-bg-primary ${phase.color} border border-border-glow`}>
+                        {topic.icon}
+                      </div>
+                      {topic.title}
+                    </h3>
+                    {/* Difficulty Badge */}
+                    <span className={`text-[10px] px-2 py-0.5 rounded border uppercase tracking-wider font-bold ${
+                      index < 2 ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' :
+                      index < 4 ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' :
+                      'bg-red-500/10 text-red-400 border-red-500/20'
+                    }`}>
+                      {index < 2 ? 'Beginner' : index < 4 ? 'Intermediate' : 'Advanced'}
+                    </span>
+                  </div>
                   
                   <div className="ml-8 space-y-6">
-                    {topic.subTopics.map((sub, sIdx) => (
-                      <div key={sIdx} className="bg-bg-primary/40 rounded-lg p-4 border border-border-glow/50">
-                        <h4 className="font-semibold text-accent-cyan mb-3 flex items-center gap-2">
-                          <ChevronRight className="w-4 h-4" />
-                          {sub.name}
-                        </h4>
-                        
-                        <div className="grid md:grid-cols-2 gap-4">
-                          <div>
-                            <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-2">Key Resources</span>
-                            <ul className="space-y-2">
-                              {sub.resources.map((res, rIdx) => (
-                                <li key={rIdx}>
-                                  <a 
-                                    href={res.url} 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    className="text-sm text-text-primary hover:text-accent-cyan transition-colors flex items-center gap-1 group"
-                                  >
-                                    <span className="w-1.5 h-1.5 rounded-full bg-accent-cyan/50 group-hover:bg-accent-cyan transition-colors" />
-                                    <span className="truncate">{res.name}</span>
-                                    <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
+                    {topic.subTopics.map((sub, sIdx) => {
+                      const itemId = `${activeTab}-${phase.phase}-${sub.name}`;
+                      const isCompleted = completedItems.includes(itemId);
+                      
+                      return (
+                        <div 
+                          key={sIdx} 
+                          className={`bg-bg-primary/40 rounded-lg p-4 border transition-all duration-300 ${
+                            isCompleted ? 'border-accent-green/30 bg-accent-green/5 opacity-80' : 
+                            sub.name === 'Senior Hunter Advice' ? 'border-accent-purple/50 bg-accent-purple/5' : 
+                            'border-border-glow/50'
+                          }`}
+                        >
+                          <div className="flex items-start gap-3 mb-3">
+                            <button 
+                              onClick={() => onToggle(itemId)}
+                              className={`mt-1 flex-shrink-0 w-5 h-5 rounded border flex items-center justify-center transition-all ${
+                                isCompleted 
+                                  ? 'bg-accent-green border-accent-green text-bg-primary' 
+                                  : 'border-border-glow hover:border-accent-cyan'
+                              }`}
+                            >
+                              {isCompleted && <ShieldCheck className="w-3.5 h-3.5" />}
+                            </button>
+                            
+                            <div className="flex-1">
+                              <h4 className={`font-semibold flex items-center justify-between gap-2 ${
+                                isCompleted ? 'text-accent-green line-through' :
+                                sub.name === 'Senior Hunter Advice' ? 'text-accent-purple' : 
+                                'text-accent-cyan'
+                              }`}>
+                                <span className="flex items-center gap-2">
+                                  {sub.name}
+                                </span>
+                                {sub.name === 'Senior Hunter Advice' && (
+                                  <span className="text-[10px] px-2 py-0.5 rounded bg-accent-purple/20 border border-accent-purple/30 uppercase tracking-tighter">Pro Tip</span>
+                                )}
+                              </h4>
+                            </div>
                           </div>
-                          <div className="bg-bg-card rounded p-3 border border-border-glow/20">
-                            <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-2">Practical Exercises</span>
-                            <p className="text-sm text-text-primary/80 leading-relaxed">
-                              {sub.exercises}
-                            </p>
+                          
+                          <div className="grid md:grid-cols-2 gap-4 ml-8">
+                            {sub.resources.length > 0 && (
+                              <div>
+                                <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-2">Key Resources</span>
+                                <ul className="space-y-2">
+                                  {sub.resources.map((res, rIdx) => (
+                                    <li key={rIdx}>
+                                      <a 
+                                        href={res.url} 
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                        className="text-sm text-text-primary hover:text-accent-cyan transition-colors flex items-center gap-1 group"
+                                      >
+                                        <span className={`w-1.5 h-1.5 rounded-full ${
+                                          isCompleted ? 'bg-accent-green/50 group-hover:bg-accent-green' :
+                                          sub.name === 'Senior Hunter Advice' ? 'bg-accent-purple/50 group-hover:bg-accent-purple' : 
+                                          'bg-accent-cyan/50 group-hover:bg-accent-cyan'
+                                        } transition-colors`} />
+                                        <span className="truncate">{res.name}</span>
+                                        <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                      </a>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                            <div className={`rounded p-3 border ${
+                              isCompleted ? 'bg-accent-green/10 border-accent-green/20' :
+                              sub.name === 'Senior Hunter Advice' ? 'bg-accent-purple/10 border-accent-purple/20 col-span-2' : 
+                              'bg-bg-card border-border-glow/20'
+                            } ${sub.resources.length === 0 ? 'col-span-2' : ''}`}>
+                              <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-2">
+                                {sub.name === 'Senior Hunter Advice' ? 'Strategic Insight' : 'Practical Exercises'}
+                              </span>
+                              <p className={`text-sm leading-relaxed ${
+                                isCompleted ? 'text-accent-green/80 italic' :
+                                sub.name === 'Senior Hunter Advice' ? 'text-text-primary italic' : 
+                                'text-text-primary/80'
+                              }`}>
+                                {sub.exercises}
+                              </p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               ))}
@@ -813,11 +1191,47 @@ const RoadmapPhase = ({ phase, index }: { phase: typeof ROADMAP_DATA[0], index: 
 };
 
 export default function Roadmap() {
+  const [activeTab, setActiveTab] = useState<'cybersecurity' | 'bugbounty'>('cybersecurity');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [completedItems, setCompletedItems] = useState<string[]>(() => {
+    const saved = localStorage.getItem('roadmap_progress');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  const currentData = activeTab === 'cybersecurity' ? CYBERSECURITY_ROADMAP : BUG_BOUNTY_ROADMAP;
+
+  // Sync progress to localStorage
+  useEffect(() => {
+    localStorage.setItem('roadmap_progress', JSON.stringify(completedItems));
+  }, [completedItems]);
+
+  const toggleItem = (itemId: string) => {
+    setCompletedItems(prev => 
+      prev.includes(itemId) ? prev.filter(id => id !== itemId) : [...prev, itemId]
+    );
+  };
+
+  const filteredData = currentData.map(phase => ({
+    ...phase,
+    topics: phase.topics.filter(topic => 
+      topic.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      topic.subTopics.some(sub => sub.name.toLowerCase().includes(searchQuery.toLowerCase()))
+    )
+  })).filter(phase => phase.topics.length > 0);
+
+  const calculateProgress = (phaseTopics: typeof CYBERSECURITY_ROADMAP[0]['topics']) => {
+    const total = phaseTopics.reduce((acc, t) => acc + t.subTopics.length, 0);
+    const completed = phaseTopics.reduce((acc, t) => 
+      acc + t.subTopics.filter(sub => completedItems.includes(`${activeTab}-${phaseTopics[0].title}-${sub.name}`)).length, 0
+    , 0);
+    return total === 0 ? 0 : Math.round((completed / total) * 100);
+  };
+
   return (
     <>
       <Helmet>
-        <title>Cybersecurity Roadmap | AashishTechSecurity</title>
-        <meta name="description" content="A comprehensive, step-by-step guide to mastering cybersecurity from beginner to expert level with curated resources, tools, and career guidance." />
+        <title>{activeTab === 'cybersecurity' ? 'Cybersecurity' : 'Bug Bounty'} Roadmap | AashishTechSecurity</title>
+        <meta name="description" content="A comprehensive, step-by-step guide to mastering cybersecurity and bug bounty hunting from beginner to expert level with curated resources." />
       </Helmet>
 
       <main className="pt-24 pb-20 min-h-screen">
@@ -838,26 +1252,98 @@ export default function Roadmap() {
               animate={{ opacity: 1, y: 0 }}
               className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-text-primary mb-4"
             >
-              Ultimate Cybersecurity <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-blue-500">Mastery Roadmap</span>
+              Ultimate {activeTab === 'cybersecurity' ? 'Cybersecurity' : 'Bug Bounty'} <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-blue-500">Mastery Roadmap</span>
             </motion.h1>
             
             <motion.p 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-lg text-text-muted max-w-2xl mx-auto"
+              className="text-lg text-text-muted max-w-2xl mx-auto mb-10"
             >
-              A comprehensive, step-by-step guide to mastering cybersecurity from beginner to expert level with curated resources, tools, and career guidance.
+              {activeTab === 'cybersecurity' 
+                ? "A comprehensive, step-by-step guide to mastering cybersecurity from beginner to expert level with curated resources, tools, and career guidance."
+                : "The AI-Accelerated path to Bug Bounty hunting. Learn to master the web, leverage AI for research, and execute high-impact hunts."}
             </motion.p>
+
+            {/* Tab Switcher */}
+            <div className="flex justify-center p-1 bg-bg-card/50 backdrop-blur-md rounded-xl border border-border-glow max-w-md mx-auto mb-12" role="tablist">
+              <button
+                id="tab-cybersecurity"
+                role="tab"
+                aria-selected={activeTab === 'cybersecurity'}
+                aria-controls="roadmap-content"
+                onClick={() => setActiveTab('cybersecurity')}
+                className={`flex-1 py-2.5 rounded-lg text-sm font-bold transition-all duration-300 ${
+                  activeTab === 'cybersecurity' 
+                    ? 'bg-accent-cyan text-bg-primary shadow-lg shadow-accent-cyan/20' 
+                    : 'text-text-muted hover:text-text-primary'
+                }`}
+              >
+                Cybersecurity
+              </button>
+              <button
+                id="tab-bugbounty"
+                role="tab"
+                aria-selected={activeTab === 'bugbounty'}
+                aria-controls="roadmap-content"
+                onClick={() => setActiveTab('bugbounty')}
+                className={`flex-1 py-2.5 rounded-lg text-sm font-bold transition-all duration-300 ${
+                  activeTab === 'bugbounty' 
+                    ? 'bg-accent-cyan text-bg-primary shadow-lg shadow-accent-cyan/20' 
+                    : 'text-text-muted hover:text-text-primary'
+                }`}
+              >
+                Bug Bounty
+              </button>
+            </div>
           </div>
 
-          <div className="space-y-6 relative">
+          {/* Search and Filters */}
+          <div className="max-w-2xl mx-auto mb-12 flex flex-col md:flex-row gap-4">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted" />
+              <input 
+                type="text" 
+                placeholder="Search topics, tools, or vulnerabilities..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-3 bg-bg-card/50 border border-border-glow rounded-xl focus:outline-none focus:border-accent-cyan transition-colors text-text-primary placeholder:text-text-muted/50"
+              />
+            </div>
+            <div className="flex items-center gap-2 px-4 py-2 bg-bg-card/30 rounded-xl border border-border-glow text-sm text-text-muted">
+              <span className="w-2 h-2 rounded-full bg-accent-green animate-pulse" />
+              {completedItems.length} tasks completed
+            </div>
+          </div>
+
+          <div className="space-y-6 relative" id="roadmap-content" role="tabpanel" key={activeTab}>
             {/* Background connection line */}
             <div className="absolute left-8 top-12 bottom-12 w-0.5 bg-gradient-to-b from-blue-500/20 via-purple-500/20 to-green-500/20 hidden lg:block -z-20" />
             
-            {ROADMAP_DATA.map((phase, index) => (
-              <RoadmapPhase key={index} phase={phase} index={index} />
+            {filteredData.map((phase, index) => (
+              <RoadmapPhase 
+                key={`${activeTab}-${index}`} 
+                phase={phase} 
+                index={index} 
+                activeTab={activeTab}
+                onToggle={toggleItem}
+                completedItems={completedItems}
+                progress={calculateProgress(phase.topics)}
+              />
             ))}
+
+            {filteredData.length === 0 && (
+              <div className="text-center py-20 bg-bg-card/20 rounded-3xl border border-dashed border-border-glow">
+                <p className="text-text-muted">No topics found matching "{searchQuery}"</p>
+                <button 
+                  onClick={() => setSearchQuery('')}
+                  className="mt-4 text-accent-cyan hover:underline"
+                >
+                  Clear search
+                </button>
+              </div>
+            )}
           </div>
 
           <motion.div 
