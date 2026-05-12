@@ -3,9 +3,8 @@ import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   BookOpen, Terminal, Network, Shield, Globe, 
-  Swords, ShieldCheck, Cpu, Laptop, GraduationCap, 
-  ChevronDown, ExternalLink, ChevronRight, Search, 
-  CheckCircle2, X
+  Swords, ShieldCheck, Cpu, Laptop, GraduationCap,
+  ChevronDown, ExternalLink, Search
 } from 'lucide-react';
 import { useEffect } from 'react';
 
@@ -1219,11 +1218,14 @@ export default function Roadmap() {
     )
   })).filter(phase => phase.topics.length > 0);
 
-  const calculateProgress = (phaseTopics: typeof CYBERSECURITY_ROADMAP[0]['topics']) => {
+  const calculateProgress = (phaseTopics: any[]) => {
     const total = phaseTopics.reduce((acc, t) => acc + t.subTopics.length, 0);
-    const completed = phaseTopics.reduce((acc, t) => 
-      acc + t.subTopics.filter(sub => completedItems.includes(`${activeTab}-${phaseTopics[0].title}-${sub.name}`)).length, 0
-    , 0);
+    const completed = phaseTopics.reduce((acc, t) => {
+      const topicCompletedCount = t.subTopics.filter((sub: any) => 
+        completedItems.includes(`${activeTab}-${t.title}-${sub.name}`)
+      ).length;
+      return acc + topicCompletedCount;
+    }, 0);
     return total === 0 ? 0 : Math.round((completed / total) * 100);
   };
 
