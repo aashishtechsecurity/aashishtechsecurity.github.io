@@ -1232,7 +1232,7 @@ export default function Roadmap() {
   return (
     <>
       <Helmet>
-        <title>{activeTab === 'cybersecurity' ? 'Cybersecurity' : 'Bug Bounty'} Roadmap | AashishTechSecurity</title>
+        <title>Ultimate Security Mastery Roadmap | AashishTechSecurity</title>
         <meta name="description" content="A comprehensive, step-by-step guide to mastering cybersecurity and bug bounty hunting from beginner to expert level with curated resources." />
       </Helmet>
 
@@ -1254,7 +1254,7 @@ export default function Roadmap() {
               animate={{ opacity: 1, y: 0 }}
               className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-text-primary mb-4"
             >
-              Ultimate {activeTab === 'cybersecurity' ? 'Cybersecurity' : 'Bug Bounty'} <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-blue-500">Mastery Roadmap</span>
+              Ultimate Security <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent-cyan to-blue-500">Mastery Roadmap</span>
             </motion.h1>
             
             <motion.p 
