@@ -113,7 +113,8 @@ const Contact = () => {
           <div className="space-y-8 flex flex-col justify-center">
             <div className="space-y-4 sm:space-y-6">
               {[
-                { icon: <Instagram className="w-6 h-6" />, text: '@aashish_tech_security', href: 'https://www.instagram.com/aashish_tech_security', label: 'Instagram' },
+                { icon: <Instagram className="w-6 h-6" />, text: '@aashishtechsecurity', href: 'https://www.instagram.com/aashishtechsecurity', label: 'Instagram' },
+                { icon: <Instagram className="w-6 h-6" />, text: '@aashish_tech_security (Backup)', href: 'https://www.instagram.com/aashish_tech_security', label: 'Backup Instagram' },
                 { icon: <Linkedin className="w-6 h-6" />, text: 'linkedin.com/in/aashishsec', href: 'https://www.linkedin.com/in/aashishsec', label: 'LinkedIn' },
                 { icon: <Medium className="w-6 h-6" />, text: 'aashishtechsecurity.medium.com', href: 'https://aashishtechsecurity.medium.com/', label: 'Medium' },
                 { icon: <XTwitter className="w-6 h-6" />, text: 'x.com/AashishTechSec', href: 'https://x.com/AashishTechSec', label: 'X / Twitter' },

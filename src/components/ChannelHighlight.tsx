@@ -30,7 +30,7 @@ const ChannelHighlight = () => {
                 </div>
               </div>
               <div className="p-4 bg-bg-card flex justify-center">
-                <a href="https://www.instagram.com/aashish_tech_security" target="_blank" rel="noopener noreferrer" className="text-accent-purple font-mono text-sm group-hover:text-[#c084fc] transition-colors flex items-center gap-2">
+                <a href="https://www.instagram.com/aashishtechsecurity" target="_blank" rel="noopener noreferrer" className="text-accent-purple font-mono text-sm group-hover:text-[#c084fc] transition-colors flex items-center gap-2">
                   [Watch Now →]
                 </a>
               </div>
@@ -40,9 +40,9 @@ const ChannelHighlight = () => {
 
         <div className="text-center space-y-6">
           <div className="font-mono text-sm text-text-muted">
-            @aashish_tech_security · 4,500+ Followers · తెలుగు
+            @aashishtechsecurity · 4,500+ Followers · తెలుగు
           </div>
-          <a href="https://www.instagram.com/aashish_tech_security" target="_blank" rel="noopener noreferrer" className="px-6 py-3.5 sm:py-3 bg-accent-cyan text-bg-primary font-bold rounded hover:bg-[#00d5ff] transition-all hover:box-glow-cyan inline-flex items-center justify-center gap-2 active:scale-95 w-full sm:w-auto max-w-md">
+          <a href="https://www.instagram.com/aashishtechsecurity" target="_blank" rel="noopener noreferrer" className="px-6 py-3.5 sm:py-3 bg-accent-cyan text-bg-primary font-bold rounded hover:bg-[#00d5ff] transition-all hover:box-glow-cyan inline-flex items-center justify-center gap-2 active:scale-95 w-full sm:w-auto max-w-md">
             <Instagram className="w-5 h-5" /> <span className="hidden sm:inline">Follow AashishTechSecurity on</span> <span className="sm:hidden">Follow on</span> Instagram
           </a>
         </div>
