@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -6,7 +7,17 @@ import {
   Swords, ShieldCheck, Cpu, Laptop, GraduationCap,
   ChevronDown, ExternalLink, Search
 } from 'lucide-react';
-import { useEffect } from 'react';
+
+const HASH_TO_TAB = {
+  '#Cybersecurity': 'cybersecurity',
+  '#BugBounty': 'bugbounty',
+} as const;
+
+const TAB_TO_HASH = {
+  cybersecurity: '#Cybersecurity',
+  bugbounty: '#BugBounty',
+} as const;
+
 
 const CYBERSECURITY_ROADMAP = [
   {
@@ -1190,12 +1201,26 @@ const RoadmapPhase = ({
 };
 
 export default function Roadmap() {
+  const { hash } = useLocation();
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'cybersecurity' | 'bugbounty'>('cybersecurity');
   const [searchQuery, setSearchQuery] = useState('');
   const [completedItems, setCompletedItems] = useState<string[]>(() => {
     const saved = localStorage.getItem('roadmap_progress');
     return saved ? JSON.parse(saved) : [];
   });
+
+  // Sync active tab with URL hash
+  useEffect(() => {
+    const currentTab = HASH_TO_TAB[hash as keyof typeof HASH_TO_TAB];
+    if (currentTab) {
+      if (currentTab !== activeTab) {
+        setActiveTab(currentTab);
+      }
+    } else {
+      navigate(TAB_TO_HASH[activeTab], { replace: true });
+    }
+  }, [hash, navigate, activeTab]);
 
   const currentData = activeTab === 'cybersecurity' ? CYBERSECURITY_ROADMAP : BUG_BOUNTY_ROADMAP;
 
@@ -1275,7 +1300,7 @@ export default function Roadmap() {
                 role="tab"
                 aria-selected={activeTab === 'cybersecurity'}
                 aria-controls="roadmap-content"
-                onClick={() => setActiveTab('cybersecurity')}
+                onClick={() => navigate(TAB_TO_HASH.cybersecurity, { replace: true })}
                 className={`flex-1 py-2.5 rounded-lg text-sm font-bold transition-all duration-300 ${
                   activeTab === 'cybersecurity' 
                     ? 'bg-accent-cyan text-bg-primary shadow-lg shadow-accent-cyan/20' 
@@ -1289,7 +1314,7 @@ export default function Roadmap() {
                 role="tab"
                 aria-selected={activeTab === 'bugbounty'}
                 aria-controls="roadmap-content"
-                onClick={() => setActiveTab('bugbounty')}
+                onClick={() => navigate(TAB_TO_HASH.bugbounty, { replace: true })}
                 className={`flex-1 py-2.5 rounded-lg text-sm font-bold transition-all duration-300 ${
                   activeTab === 'bugbounty' 
                     ? 'bg-accent-cyan text-bg-primary shadow-lg shadow-accent-cyan/20' 
