@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
+import ThemeTransitionOverlay from './components/ThemeTransitionOverlay';
 
 const Resources = lazy(() => import('./pages/Resources'));
 const Roadmap = lazy(() => import('./pages/Roadmap'));
@@ -34,6 +35,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-bg-primary text-text-primary selection:bg-accent-cyan/30 flex flex-col">
+      <ThemeTransitionOverlay />
       <Navbar />
       <div className="flex-grow">
         <Suspense fallback={<PageFallback />}>
