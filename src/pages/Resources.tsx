@@ -1,9 +1,23 @@
 import { useState, useEffect, useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { PlaySquare, Laptop, ShieldCheck, ExternalLink, Search, ArrowUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SEO from '../components/SEO';
 
 type Resource = { name: string; desc: string; url: string; tags: string[] };
+
+const HASH_TO_TAB = {
+  '#YtChannels': 'youtube',
+  '#PracticePlatforms': 'practice',
+  '#SecurityResources': 'security',
+} as const;
+
+const TAB_TO_HASH = {
+  youtube: '#YtChannels',
+  practice: '#PracticePlatforms',
+  security: '#SecurityResources',
+} as const;
+
 
 const YOUTUBE_CHANNELS: Resource[] = [
   { name: 'LiveOverflow', desc: 'Binary exploitation, reverse engineering, CTF', url: 'https://youtube.com/@LiveOverflow', tags: ['Binary Exp', 'Reverse Eng', 'CTF'] },
@@ -127,9 +141,23 @@ const ResourceCard = ({ name, desc, url, tags, index }: Resource & { index: numb
 };
 
 const Resources = () => {
+  const { hash } = useLocation();
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<'youtube' | 'practice' | 'security'>('youtube');
   const [searchQuery, setSearchQuery] = useState('');
   const [showScrollTop, setShowScrollTop] = useState(false);
+
+  // Sync active tab with URL hash
+  useEffect(() => {
+    const currentTab = HASH_TO_TAB[hash as keyof typeof HASH_TO_TAB];
+    if (currentTab) {
+      if (currentTab !== activeTab) {
+        setActiveTab(currentTab);
+      }
+    } else {
+      navigate(TAB_TO_HASH[activeTab], { replace: true });
+    }
+  }, [hash, navigate, activeTab]);
 
   // Scroll to top visibility
   useEffect(() => {
@@ -221,7 +249,7 @@ const Resources = () => {
             <button
               key={tab.id}
               onClick={() => {
-                setActiveTab(tab.id as typeof activeTab);
+                navigate(TAB_TO_HASH[tab.id as keyof typeof TAB_TO_HASH], { replace: true });
                 setSearchQuery(''); // Reset search on tab change
               }}
               className={`flex items-center justify-center sm:justify-start gap-2 px-5 py-3 rounded-md font-mono text-sm transition-all whitespace-nowrap active:scale-95 ${
