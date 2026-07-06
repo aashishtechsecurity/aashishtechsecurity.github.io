@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { PlaySquare, Laptop, ShieldCheck, ExternalLink, Search, ArrowUp } from 'lucide-react';
+import { PlaySquare, Laptop, ShieldCheck, ExternalLink, Search, ArrowUp, Briefcase } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SEO from '../components/SEO';
 
@@ -10,12 +10,15 @@ const HASH_TO_TAB = {
   '#YtChannels': 'youtube',
   '#PracticePlatforms': 'practice',
   '#SecurityResources': 'security',
+  '#JobSimulations': 'simulations',
+  '#jobsimulations': 'simulations',
 } as const;
 
 const TAB_TO_HASH = {
   youtube: '#YtChannels',
   practice: '#PracticePlatforms',
   security: '#SecurityResources',
+  simulations: '#JobSimulations',
 } as const;
 
 
@@ -90,6 +93,15 @@ const SECURITY_RESOURCES: Resource[] = [
   { name: 'PentesterLab', desc: 'Web vulnerability exploitation reference', url: 'https://pentesterlab.com', tags: ['Reference', 'Web Sec'] },
 ];
 
+const JOB_SIMULATIONS: Resource[] = [
+  { name: 'Commonwealth Bank - Intro to Cybersecurity', desc: 'Splunk-style analysis, incident response, SOC analyst tasks', url: 'https://www.theforage.com/simulations/commonwealth-bank/intro-cybersecurity-rdxl', tags: ['Splunk', 'Incident Response', 'SOC Analyst'] },
+  { name: 'AIG - Shields Up Cybersecurity', desc: 'Ransomware response, SOC thinking, real attack scenarios', url: 'https://www.theforage.com/simulations/aig/cybersecurity-ku1i', tags: ['Ransomware', 'SOC', 'Incident Response'] },
+  { name: 'Mastercard - Cybersecurity', desc: 'Security awareness, risk identification, threat prevention', url: 'https://www.theforage.com/simulations/mastercard/cybersecurity-t8ye', tags: ['Security Awareness', 'Risk Assessment', 'Threat Prevention'] },
+  { name: 'PwC - Cyber Security Consulting', desc: 'GRC, audit, risk assessment, consulting communication', url: 'https://www.theforage.com/simulations/pwc-us/cybersecurity-consulting-sr1m', tags: ['GRC', 'Audit', 'Risk Assessment', 'Consulting'] },
+  { name: 'Datacom - Cybersecurity Operations', desc: 'Cyberattack investigation, threat analysis, impact assessment', url: 'https://www.theforage.com/simulations/datacom/cybersecurity-zm6d', tags: ['Investigation', 'Threat Analysis', 'Impact Assessment'] },
+  { name: 'Tata - Cybersecurity & IAM', desc: 'Access control, IAM basics, security architecture', url: 'https://www.theforage.com/simulations/tata/cybersecurity-sbda', tags: ['Access Control', 'IAM', 'Security Architecture'] },
+];
+
 // Helper to get domain favicon
 const getFaviconUrl = (url: string) => {
   try {
@@ -143,7 +155,7 @@ const ResourceCard = ({ name, desc, url, tags, index }: Resource & { index: numb
 const Resources = () => {
   const { hash } = useLocation();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<'youtube' | 'practice' | 'security'>('youtube');
+  const [activeTab, setActiveTab] = useState<'youtube' | 'practice' | 'security' | 'simulations'>('youtube');
   const [searchQuery, setSearchQuery] = useState('');
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -172,6 +184,7 @@ const Resources = () => {
     { id: 'youtube', label: 'YouTube Channels', data: YOUTUBE_CHANNELS, icon: <PlaySquare className="w-4 h-4" /> },
     { id: 'practice', label: 'Practice Platforms', data: PRACTICE_PLATFORMS, icon: <Laptop className="w-4 h-4" /> },
     { id: 'security', label: 'Security Resources', data: SECURITY_RESOURCES, icon: <ShieldCheck className="w-4 h-4" /> },
+    { id: 'simulations', label: 'Job Simulations', data: JOB_SIMULATIONS, icon: <Briefcase className="w-4 h-4" /> },
   ] as const;
 
   const currentData = tabs.find(t => t.id === activeTab)?.data || [];
