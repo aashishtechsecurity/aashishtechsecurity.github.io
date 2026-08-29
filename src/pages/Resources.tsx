@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { PlaySquare, Laptop, ShieldCheck, ExternalLink, Search, ArrowUp, Briefcase } from 'lucide-react';
+import { PlaySquare, Laptop, ShieldCheck, ExternalLink, Search, ArrowUp, Briefcase, Terminal } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SEO from '../components/SEO';
 
@@ -12,6 +12,8 @@ const HASH_TO_TAB = {
   '#SecurityResources': 'security',
   '#JobSimulations': 'simulations',
   '#jobsimulations': 'simulations',
+  '#PenTesting': 'pentesting',
+  '#pentesting': 'pentesting',
 } as const;
 
 const TAB_TO_HASH = {
@@ -19,6 +21,7 @@ const TAB_TO_HASH = {
   practice: '#PracticePlatforms',
   security: '#SecurityResources',
   simulations: '#JobSimulations',
+  pentesting: '#PenTesting',
 } as const;
 
 
@@ -102,6 +105,18 @@ const JOB_SIMULATIONS: Resource[] = [
   { name: 'Tata - Cybersecurity & IAM', desc: 'Access control, IAM basics, security architecture', url: 'https://www.theforage.com/simulations/tata/cybersecurity-sbda', tags: ['Access Control', 'IAM', 'Security Architecture'] },
 ];
 
+const PEN_TESTING: Resource[] = [
+  { name: 'Ethical Hacking in 15 Hours (Part 1) · The Cyber Mentor', desc: 'Comprehensive ethical hacking course for beginners (Part 1)', url: 'https://youtu.be/3FNYvj2U0HM', tags: ['Pentesting', 'Beginner'] },
+  { name: 'Ethical Hacking in 15 Hours (Part 2) · The Cyber Mentor', desc: 'Comprehensive ethical hacking course for beginners (Part 2)', url: 'https://youtu.be/sH4JCwjybGs', tags: ['Pentesting', 'Beginner'] },
+  { name: 'Web Security Academy Series · Rana Khalil', desc: 'Nine vulnerability classes. Start with SQL Injection.', url: 'https://www.youtube.com/@RanaKhalil101/playlists', tags: ['Web Sec', 'Vulns'] },
+  { name: 'Hacking Active Directory · The Cyber Mentor', desc: 'Learn how to hack Active Directory environments', url: 'https://youtu.be/VXxH4n684HE', tags: ['AD', 'Pentesting'] },
+  { name: 'Linux Privilege Escalation · The Cyber Mentor', desc: 'Techniques for escalating privileges on Linux systems', url: 'https://youtu.be/ZTnwg3qCdVM', tags: ['Linux', 'PrivEsc'] },
+  { name: 'Red Team Essentials · HackerSploit', desc: 'Essential concepts and techniques for Red Teaming', url: 'https://www.youtube.com/playlist?list=PLBf0hzazHTGMjSlPmJ73Cydh9vCqxukCu', tags: ['Red Team', 'Essentials'] },
+  { name: 'Binary Exploitation · LiveOverflow', desc: 'Deep dive into binary exploitation techniques', url: 'https://www.youtube.com/playlist?list=PLhixgUqwRTjxglIswKp9mpkfPNfHkzyeN', tags: ['Binary Exp', 'Deep Dive'] },
+  { name: 'HackTheBox Walkthroughs · IppSec', desc: 'Walkthroughs and techniques. Search tool at ippsec.rocks', url: 'https://www.youtube.com/@ippsec', tags: ['HTB', 'Walkthroughs'] },
+  { name: 'Buffer OverFlow', desc: 'Understanding and exploiting buffer overflows', url: 'https://youtu.be/ncBblM920jw', tags: ['Buffer Overflow', 'Exploit'] },
+];
+
 // Helper to get domain favicon
 const getFaviconUrl = (url: string) => {
   try {
@@ -155,7 +170,7 @@ const ResourceCard = ({ name, desc, url, tags, index }: Resource & { index: numb
 const Resources = () => {
   const { hash } = useLocation();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<'youtube' | 'practice' | 'security' | 'simulations'>('youtube');
+  const [activeTab, setActiveTab] = useState<'youtube' | 'practice' | 'security' | 'simulations' | 'pentesting'>('youtube');
   const [searchQuery, setSearchQuery] = useState('');
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -185,6 +200,7 @@ const Resources = () => {
     { id: 'practice', label: 'Practice Platforms', data: PRACTICE_PLATFORMS, icon: <Laptop className="w-4 h-4" /> },
     { id: 'security', label: 'Security Resources', data: SECURITY_RESOURCES, icon: <ShieldCheck className="w-4 h-4" /> },
     { id: 'simulations', label: 'Job Simulations', data: JOB_SIMULATIONS, icon: <Briefcase className="w-4 h-4" /> },
+    { id: 'pentesting', label: 'Pen Testing', data: PEN_TESTING, icon: <Terminal className="w-4 h-4" /> },
   ] as const;
 
   const currentData = tabs.find(t => t.id === activeTab)?.data || [];
@@ -256,61 +272,68 @@ const Resources = () => {
           </motion.div>
         </div>
 
-        {/* Tab Navigation */}
-        <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 mb-10 overflow-x-auto hide-scrollbar pb-2 sm:pb-0">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => {
-                navigate(TAB_TO_HASH[tab.id as keyof typeof TAB_TO_HASH], { replace: true });
-                setSearchQuery(''); // Reset search on tab change
-              }}
-              className={`flex items-center justify-center sm:justify-start gap-2 px-5 py-3 rounded-md font-mono text-sm transition-all whitespace-nowrap active:scale-95 ${
-                activeTab === tab.id 
-                  ? 'bg-accent-cyan text-bg-primary font-bold box-glow-cyan border-transparent' 
-                  : 'bg-bg-card border border-border-glow/30 text-text-muted hover:border-accent-cyan hover:text-accent-cyan'
-              }`}
-            >
-              {tab.icon}
-              {tab.label}
-              <span className={`px-2 py-0.5 rounded-full text-xs ${activeTab === tab.id ? 'bg-bg-primary/20' : 'bg-bg-primary'}`}>
-                {tab.data.length}
-              </span>
-            </button>
-          ))}
-        </div>
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Sidebar / Tab Navigation */}
+          <div className="lg:w-1/4 shrink-0 flex overflow-x-auto lg:flex-col gap-2 pb-4 lg:pb-0 hide-scrollbar items-start lg:items-stretch">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => {
+                  navigate(TAB_TO_HASH[tab.id as keyof typeof TAB_TO_HASH], { replace: true });
+                  setSearchQuery(''); // Reset search on tab change
+                }}
+                className={`flex items-center justify-between gap-3 px-5 py-3 rounded-md font-mono text-sm transition-all whitespace-nowrap active:scale-95 shrink-0 w-full ${
+                  activeTab === tab.id 
+                    ? 'bg-accent-cyan text-bg-primary font-bold box-glow-cyan border-transparent' 
+                    : 'bg-bg-card border border-border-glow/30 text-text-muted hover:border-accent-cyan hover:text-accent-cyan'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  {tab.icon}
+                  <span>{tab.label}</span>
+                </div>
+                <span className={`px-2 py-0.5 rounded-full text-xs ml-2 ${activeTab === tab.id ? 'bg-bg-primary/20' : 'bg-bg-primary'}`}>
+                  {tab.data.length}
+                </span>
+              </button>
+            ))}
+          </div>
 
-        {/* Content Grid */}
-        <AnimatePresence mode="wait">
-          {filteredData.length === 0 ? (
-            <motion.div
-              key="empty"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="text-center py-20"
-            >
-              <Search className="w-12 h-12 text-text-muted mx-auto mb-4 opacity-50" />
-              <h3 className="text-xl font-display font-bold text-text-primary mb-2">No resources found</h3>
-              <p className="text-text-muted font-mono text-sm">
-                No matches for "{searchQuery}" in {tabs.find(t => t.id === activeTab)?.label}.
-              </p>
-            </motion.div>
-          ) : (
-            <motion.div
-              key={activeTab + searchQuery}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-            >
-              {filteredData.map((res, i) => (
-                <ResourceCard key={res.name} index={i} {...res} />
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
+          {/* Main Content Area */}
+          <div className="lg:w-3/4">
+            {/* Content Grid */}
+            <AnimatePresence mode="wait">
+              {filteredData.length === 0 ? (
+                <motion.div
+                  key="empty"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="text-center py-20"
+                >
+                  <Search className="w-12 h-12 text-text-muted mx-auto mb-4 opacity-50" />
+                  <h3 className="text-xl font-display font-bold text-text-primary mb-2">No resources found</h3>
+                  <p className="text-text-muted font-mono text-sm">
+                    No matches for "{searchQuery}" in {tabs.find(t => t.id === activeTab)?.label}.
+                  </p>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key={activeTab + searchQuery}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="grid grid-cols-1 md:grid-cols-2 gap-4"
+                >
+                  {filteredData.map((res, i) => (
+                    <ResourceCard key={res.name} index={i} {...res} />
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
 
       </div>
 

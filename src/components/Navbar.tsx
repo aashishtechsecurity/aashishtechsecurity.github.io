@@ -12,6 +12,7 @@ const NAV_LINKS = [
   { name: 'Toolkit', href: '/#toolkit', id: 'toolkit' },
   { name: 'Resources', href: '/resources', id: '' },
   { name: 'Roadmap', href: '/roadmap', id: '' },
+  { name: 'CTI Monitor', href: 'https://www.aashishtechsecurity.in/cti-monitor/', id: '', isExternal: true },
   { name: 'Contact', href: '/#contact', id: 'contact' }
 ];
 
@@ -102,10 +103,17 @@ const Navbar = () => {
           {/* Desktop Nav & Theme Toggle */}
           <div className="hidden md:flex items-center space-x-8">
             {NAV_LINKS.map((item) => (
-              <Link key={item.name} to={item.href} className={`text-text-primary hover:text-accent-cyan transition-colors relative group font-medium ${isLinkActive(item.href, item.id) ? 'text-accent-cyan' : ''}`}>
-                {item.name}
-                <span className={`absolute -bottom-1 left-0 h-0.5 bg-accent-cyan transition-all group-hover:w-full ${isLinkActive(item.href, item.id) ? 'w-full' : 'w-0'}`}></span>
-              </Link>
+              item.isExternal ? (
+                <a key={item.name} href={item.href} target="_blank" rel="noopener noreferrer" className={`text-text-primary hover:text-accent-cyan transition-colors relative group font-medium`}>
+                  {item.name}
+                  <span className={`absolute -bottom-1 left-0 h-0.5 bg-accent-cyan transition-all group-hover:w-full w-0`}></span>
+                </a>
+              ) : (
+                <Link key={item.name} to={item.href} className={`text-text-primary hover:text-accent-cyan transition-colors relative group font-medium ${isLinkActive(item.href, item.id) ? 'text-accent-cyan' : ''}`}>
+                  {item.name}
+                  <span className={`absolute -bottom-1 left-0 h-0.5 bg-accent-cyan transition-all group-hover:w-full ${isLinkActive(item.href, item.id) ? 'w-full' : 'w-0'}`}></span>
+                </Link>
+              )
             ))}
             <ThemeToggle />
           </div>
@@ -138,16 +146,31 @@ const Navbar = () => {
           >
             <div className="flex flex-col p-6 pt-8">
               {NAV_LINKS.map((item, idx) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className={`text-xl font-display transition-colors py-3 border-b border-border-glow/20 ${isLinkActive(item.href, item.id) ? 'text-accent-cyan' : 'text-text-primary hover:text-accent-cyan active:text-accent-cyan'}`}
-                  style={{ animationDelay: `${idx * 50}ms` }}
-                >
-                  <span className="text-accent-cyan font-mono text-sm mr-3">0{idx + 1}.</span>
-                  {item.name}
-                </Link>
+                item.isExternal ? (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsOpen(false)}
+                    className={`text-xl font-display transition-colors py-3 border-b border-border-glow/20 text-text-primary hover:text-accent-cyan active:text-accent-cyan`}
+                    style={{ animationDelay: `${idx * 50}ms` }}
+                  >
+                    <span className="text-accent-cyan font-mono text-sm mr-3">0{idx + 1}.</span>
+                    {item.name}
+                  </a>
+                ) : (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`text-xl font-display transition-colors py-3 border-b border-border-glow/20 ${isLinkActive(item.href, item.id) ? 'text-accent-cyan' : 'text-text-primary hover:text-accent-cyan active:text-accent-cyan'}`}
+                    style={{ animationDelay: `${idx * 50}ms` }}
+                  >
+                    <span className="text-accent-cyan font-mono text-sm mr-3">0{idx + 1}.</span>
+                    {item.name}
+                  </Link>
+                )
               ))}
             </div>
           </motion.div>
