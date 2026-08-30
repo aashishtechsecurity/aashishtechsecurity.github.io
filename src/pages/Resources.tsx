@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { PlaySquare, Laptop, ShieldCheck, ExternalLink, Search, ArrowUp, Briefcase, Terminal, Award, Radar, Cloud, Key, Smartphone } from 'lucide-react';
+import { PlaySquare, Laptop, ShieldCheck, ExternalLink, Search, ArrowUp, Briefcase, Terminal, Award, Radar, Cloud, Key, Smartphone, BookOpen } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SEO from '../components/SEO';
 
@@ -26,6 +26,8 @@ const HASH_TO_TAB = {
   '#mobileandroid': 'android',
   '#MobileiOS': 'ios',
   '#mobileios': 'ios',
+  '#Fundamentals': 'fundamentals',
+  '#fundamentals': 'fundamentals',
 } as const;
 
 const TAB_TO_HASH = {
@@ -40,6 +42,7 @@ const TAB_TO_HASH = {
   crypto: '#Cryptography',
   android: '#MobileAndroid',
   ios: '#MobileiOS',
+  fundamentals: '#Fundamentals',
 } as const;
 
 
@@ -187,6 +190,16 @@ const MOBILE_IOS: Resource[] = [
   { name: 'HackTricks iOS Pentesting', desc: 'iOS application pentesting techniques', url: 'https://hacktricks.wiki/en/mobile-pentesting/ios-pentesting/index.html', tags: ['Pentesting', 'HackTricks'] },
 ];
 
+const FUNDAMENTALS: Resource[] = [
+  { name: 'Fundamentals of OS (Linux)', desc: 'Linux fundamentals video series', url: 'https://www.youtube.com/watch?v=kLVV3FVKQHE&list=PLsep1uQfemNFvT57-DOjzSnGspJv8efpS', tags: ['OS', 'Linux', 'YouTube'] },
+  { name: 'Fundamentals of OS (Windows)', desc: 'Windows fundamentals video', url: 'https://www.youtube.com/watch?v=sWbUDq4S6Y8', tags: ['OS', 'Windows', 'YouTube'] },
+  { name: 'Networking Basics - Part 1', desc: 'Introduction to networking concepts', url: 'https://www.youtube.com/watch?v=CY4hn70K3r8', tags: ['Networking', 'Fundamentals', 'YouTube'] },
+  { name: 'Networking Basics - Part 2', desc: 'Further networking concepts', url: 'https://www.youtube.com/watch?v=fQbBPa0ADvs', tags: ['Networking', 'Fundamentals', 'YouTube'] },
+  { name: 'MDN Web Docs: HTTP', desc: 'Overview of HTTP protocols and concepts', url: 'https://developer.mozilla.org/en-US/docs/Web/HTTP', tags: ['Web', 'HTTP', 'Reference'] },
+  { name: 'MDN Web Docs: HTTP Status', desc: 'Reference for HTTP status codes', url: 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status', tags: ['Web', 'HTTP Status', 'Reference'] },
+  { name: 'PortSwigger Web Security', desc: 'Web security academy and materials', url: 'https://portswigger.net/web-security', tags: ['Web Sec', 'Training'] },
+];
+
 // Helper to get domain favicon
 const getFaviconUrl = (url: string) => {
   try {
@@ -240,7 +253,7 @@ const ResourceCard = ({ name, desc, url, tags, index }: Resource & { index: numb
 const Resources = () => {
   const { hash } = useLocation();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<'youtube' | 'practice' | 'security' | 'simulations' | 'pentesting' | 'soc' | 'certs' | 'cloud' | 'crypto' | 'android' | 'ios'>('youtube');
+  const [activeTab, setActiveTab] = useState<'youtube' | 'practice' | 'security' | 'simulations' | 'pentesting' | 'soc' | 'certs' | 'cloud' | 'crypto' | 'android' | 'ios' | 'fundamentals'>('youtube');
   const [searchQuery, setSearchQuery] = useState('');
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -268,6 +281,7 @@ const Resources = () => {
   const tabs = [
     { id: 'youtube', label: 'YouTube Channels', data: YOUTUBE_CHANNELS, icon: <PlaySquare className="w-4 h-4" /> },
     { id: 'practice', label: 'Practice Platforms', data: PRACTICE_PLATFORMS, icon: <Laptop className="w-4 h-4" /> },
+    { id: 'fundamentals', label: 'Fundamentals', data: FUNDAMENTALS, icon: <BookOpen className="w-4 h-4" /> },
     { id: 'security', label: 'Security Resources', data: SECURITY_RESOURCES, icon: <ShieldCheck className="w-4 h-4" /> },
     { id: 'simulations', label: 'Job Simulations', data: JOB_SIMULATIONS, icon: <Briefcase className="w-4 h-4" /> },
     { id: 'pentesting', label: 'Pen Testing', data: PEN_TESTING, icon: <Terminal className="w-4 h-4" /> },
