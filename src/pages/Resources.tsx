@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { PlaySquare, Laptop, ShieldCheck, ExternalLink, Search, ArrowUp, Briefcase, Terminal, Award, Radar } from 'lucide-react';
+import { PlaySquare, Laptop, ShieldCheck, ExternalLink, Search, ArrowUp, Briefcase, Terminal, Award, Radar, Cloud, Key, Smartphone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SEO from '../components/SEO';
 
@@ -18,6 +18,14 @@ const HASH_TO_TAB = {
   '#socresources': 'soc',
   '#FreeCertifications': 'certs',
   '#freecertifications': 'certs',
+  '#CloudSecurity': 'cloud',
+  '#cloudsecurity': 'cloud',
+  '#Cryptography': 'crypto',
+  '#cryptography': 'crypto',
+  '#MobileAndroid': 'android',
+  '#mobileandroid': 'android',
+  '#MobileiOS': 'ios',
+  '#mobileios': 'ios',
 } as const;
 
 const TAB_TO_HASH = {
@@ -28,6 +36,10 @@ const TAB_TO_HASH = {
   pentesting: '#PenTesting',
   soc: '#SOCResources',
   certs: '#FreeCertifications',
+  cloud: '#CloudSecurity',
+  crypto: '#Cryptography',
+  android: '#MobileAndroid',
+  ios: '#MobileiOS',
 } as const;
 
 
@@ -147,6 +159,34 @@ const FREE_CERTS: Resource[] = [
   { name: 'Android Security', desc: 'Hextree x Google Android Security', url: 'https://www.hextree.io/hextree-x-google', tags: ['Android', 'Mobile Sec'] },
 ];
 
+const CLOUD_SECURITY: Resource[] = [
+  { name: 'Awesome CloudSec Labs', desc: 'Curated list of free and paid cloud security labs', url: 'https://github.com/iknowjason/Awesome-CloudSec-Labs', tags: ['Cloud', 'Labs'] },
+];
+
+const CRYPTOGRAPHY: Resource[] = [
+  { name: 'PicoLock', desc: 'Interactive cryptography puzzles', url: 'https://projects.etc.cmu.edu/picolock/', tags: ['Interactive', 'Crypto'] },
+  { name: 'CryptoHack', desc: 'Learn cryptography through fun challenges', url: 'https://cryptohack.org/', tags: ['Challenges', 'Crypto'] },
+  { name: 'Cryptopals', desc: 'The cryptopals crypto challenges', url: 'https://cryptopals.com/', tags: ['Challenges', 'Crypto'] },
+];
+
+const MOBILE_ANDROID: Resource[] = [
+  { name: 'Building an Android Pentest Lab', desc: 'Step-by-step guide to building an Android pentest lab', url: 'https://medium.com/purplebox/step-by-step-guide-to-building-an-android-pentest-lab-853b4af6945e', tags: ['Guide', 'Pentest Lab'] },
+  { name: 'Vendor-specific Vulnerabilities', desc: 'Discovering vendor-specific vulnerabilities in Android', url: 'https://oversecured.com/blog/discovering-vendor-specific-vulnerabilities-in-android', tags: ['Vulns', 'Research'] },
+  { name: 'OWASP MASWE', desc: 'Mobile Application Security Web Editor', url: 'https://mas.owasp.org/MASWE/#', tags: ['OWASP', 'Tool'] },
+  { name: 'OWASP MASTG', desc: 'Mobile Application Security Testing Guide', url: 'https://mas.owasp.org/MASTG/', tags: ['Guide', 'OWASP'] },
+  { name: 'HackTricks Android Checklist', desc: 'Android pentesting checklist', url: 'https://hacktricks.wiki/en/mobile-pentesting/android-checklist.html', tags: ['Checklist', 'HackTricks'] },
+  { name: 'HackTricks Android App Pentesting', desc: 'Android application pentesting techniques', url: 'https://hacktricks.wiki/en/mobile-pentesting/android-app-pentesting/index.html', tags: ['Pentesting', 'HackTricks'] },
+  { name: 'OWASP MASVS', desc: 'Mobile Application Security Verification Standard', url: 'https://mas.owasp.org/MASVS/', tags: ['Standard', 'OWASP'] },
+  { name: 'Oversecured Blog', desc: 'Mobile security blogs and research', url: 'https://oversecured.com/blog', tags: ['Blog', 'Research'] },
+  { name: 'Intro to Android Hacking', desc: 'YouTube playlist on Android hacking', url: 'https://www.youtube.com/watch?v=niRooMwDUPU&list=PLmqenIp2RQcjBWzwMZQbIkbuVDmkYi_KF', tags: ['YouTube', 'Tutorials'] },
+  { name: 'Android App Pen Test Checklist', desc: 'XMind mindmap for Android pentesting', url: 'https://xmind.app/m/GkgaYH/', tags: ['Checklist', 'Mindmap'] },
+];
+
+const MOBILE_IOS: Resource[] = [
+  { name: 'HackTricks iOS Checklist', desc: 'iOS pentesting checklist', url: 'https://hacktricks.wiki/en/mobile-pentesting/ios-pentesting-checklist.html', tags: ['Checklist', 'HackTricks'] },
+  { name: 'HackTricks iOS Pentesting', desc: 'iOS application pentesting techniques', url: 'https://hacktricks.wiki/en/mobile-pentesting/ios-pentesting/index.html', tags: ['Pentesting', 'HackTricks'] },
+];
+
 // Helper to get domain favicon
 const getFaviconUrl = (url: string) => {
   try {
@@ -200,7 +240,7 @@ const ResourceCard = ({ name, desc, url, tags, index }: Resource & { index: numb
 const Resources = () => {
   const { hash } = useLocation();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<'youtube' | 'practice' | 'security' | 'simulations' | 'pentesting' | 'soc' | 'certs'>('youtube');
+  const [activeTab, setActiveTab] = useState<'youtube' | 'practice' | 'security' | 'simulations' | 'pentesting' | 'soc' | 'certs' | 'cloud' | 'crypto' | 'android' | 'ios'>('youtube');
   const [searchQuery, setSearchQuery] = useState('');
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -233,6 +273,10 @@ const Resources = () => {
     { id: 'pentesting', label: 'Pen Testing', data: PEN_TESTING, icon: <Terminal className="w-4 h-4" /> },
     { id: 'soc', label: 'SOC / Threat Hunting', data: SOC_RESOURCES, icon: <Radar className="w-4 h-4" /> },
     { id: 'certs', label: 'Free Certifications', data: FREE_CERTS, icon: <Award className="w-4 h-4" /> },
+    { id: 'cloud', label: 'Cloud Security', data: CLOUD_SECURITY, icon: <Cloud className="w-4 h-4" /> },
+    { id: 'crypto', label: 'Cryptography', data: CRYPTOGRAPHY, icon: <Key className="w-4 h-4" /> },
+    { id: 'android', label: 'Mobile (Android)', data: MOBILE_ANDROID, icon: <Smartphone className="w-4 h-4" /> },
+    { id: 'ios', label: 'Mobile (iOS)', data: MOBILE_IOS, icon: <Smartphone className="w-4 h-4" /> },
   ] as const;
 
   const currentData = tabs.find(t => t.id === activeTab)?.data || [];
