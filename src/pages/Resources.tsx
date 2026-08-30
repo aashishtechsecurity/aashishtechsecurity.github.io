@@ -279,19 +279,38 @@ const Resources = () => {
     { id: 'ios', label: 'Mobile (iOS)', data: MOBILE_IOS, icon: <Smartphone className="w-4 h-4" /> },
   ] as const;
 
-  const currentData = tabs.find(t => t.id === activeTab)?.data || [];
-
   // Filter based on search query
   const filteredData = useMemo(() => {
     const query = searchQuery.toLowerCase().trim();
-    if (!query) return currentData;
     
-    return currentData.filter(item => 
+    // If no search query, return the data for the active tab only
+    if (!query) {
+      return tabs.find(t => t.id === activeTab)?.data || [];
+    }
+    
+    // If there is a search query, search across ALL resources
+    const allData = tabs.flatMap(t => t.data);
+    
+    // We use a Set or just return the filtered array (assuming no duplicates)
+    // Filter the flattened array
+    const results = allData.filter(item => 
       item.name.toLowerCase().includes(query) || 
       item.desc.toLowerCase().includes(query) ||
       item.tags.some(tag => tag.toLowerCase().includes(query))
     );
-  }, [currentData, searchQuery]);
+
+    // Remove duplicates based on URL just in case
+    const uniqueResults = [];
+    const seenUrls = new Set();
+    for (const item of results) {
+      if (!seenUrls.has(item.url)) {
+        seenUrls.add(item.url);
+        uniqueResults.push(item);
+      }
+    }
+    
+    return uniqueResults;
+  }, [activeTab, searchQuery]);
 
   return (
     <div className="pt-24 pb-20 min-h-screen">
@@ -390,7 +409,9 @@ const Resources = () => {
                   <Search className="w-12 h-12 text-text-muted mx-auto mb-4 opacity-50" />
                   <h3 className="text-xl font-display font-bold text-text-primary mb-2">No resources found</h3>
                   <p className="text-text-muted font-mono text-sm">
-                    No matches for "{searchQuery}" in {tabs.find(t => t.id === activeTab)?.label}.
+                    {searchQuery 
+                      ? `No matches found for "${searchQuery}" across all resources.`
+                      : `No resources available in ${tabs.find(t => t.id === activeTab)?.label}.`}
                   </p>
                 </motion.div>
               ) : (
