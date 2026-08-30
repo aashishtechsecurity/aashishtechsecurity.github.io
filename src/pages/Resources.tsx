@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { PlaySquare, Laptop, ShieldCheck, ExternalLink, Search, ArrowUp, Briefcase, Terminal } from 'lucide-react';
+import { PlaySquare, Laptop, ShieldCheck, ExternalLink, Search, ArrowUp, Briefcase, Terminal, Award, Radar } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SEO from '../components/SEO';
 
@@ -14,6 +14,10 @@ const HASH_TO_TAB = {
   '#jobsimulations': 'simulations',
   '#PenTesting': 'pentesting',
   '#pentesting': 'pentesting',
+  '#SOCResources': 'soc',
+  '#socresources': 'soc',
+  '#FreeCertifications': 'certs',
+  '#freecertifications': 'certs',
 } as const;
 
 const TAB_TO_HASH = {
@@ -22,6 +26,8 @@ const TAB_TO_HASH = {
   security: '#SecurityResources',
   simulations: '#JobSimulations',
   pentesting: '#PenTesting',
+  soc: '#SOCResources',
+  certs: '#FreeCertifications',
 } as const;
 
 
@@ -67,6 +73,10 @@ const PRACTICE_PLATFORMS: Resource[] = [
   { name: 'Immersive Labs', desc: 'Gamified cybersecurity training', url: 'https://immersivelabs.com', tags: ['Gamified', 'Training'] },
   { name: 'UnderTheWire', desc: 'Windows PowerShell security', url: 'https://underthewire.tech', tags: ['Windows', 'PowerShell'] },
   { name: 'Malware-Traffic-Analysis.net', desc: 'Network traffic and malware analysis', url: 'https://malware-traffic-analysis.net', tags: ['Blue Team', 'Malware'] },
+  { name: 'DVWA', desc: 'Damn Vulnerable Web App', url: 'https://github.com/digininja/DVWA', tags: ['Web Sec', 'Vulnerable App'] },
+  { name: 'OWASP WebGoat', desc: 'Deliberately insecure web application', url: 'https://github.com/WebGoat/WebGoat', tags: ['Web Sec', 'Vulnerable App'] },
+  { name: 'Google Gruyere', desc: 'Web Application Exploitation and Defenses', url: 'https://google-gruyere.appspot.com', tags: ['Web Sec', 'Vulnerable App'] },
+  { name: 'Defend The Org', desc: 'Platform to Learn Threat Hunting', url: 'https://defendtheorg.com', tags: ['Threat Hunting', 'Blue Team'] },
 ];
 
 const SECURITY_RESOURCES: Resource[] = [
@@ -115,6 +125,26 @@ const PEN_TESTING: Resource[] = [
   { name: 'Binary Exploitation · LiveOverflow', desc: 'Deep dive into binary exploitation techniques', url: 'https://www.youtube.com/playlist?list=PLhixgUqwRTjxglIswKp9mpkfPNfHkzyeN', tags: ['Binary Exp', 'Deep Dive'] },
   { name: 'HackTheBox Walkthroughs · IppSec', desc: 'Walkthroughs and techniques. Search tool at ippsec.rocks', url: 'https://www.youtube.com/@ippsec', tags: ['HTB', 'Walkthroughs'] },
   { name: 'Buffer OverFlow', desc: 'Understanding and exploiting buffer overflows', url: 'https://youtu.be/ncBblM920jw', tags: ['Buffer Overflow', 'Exploit'] },
+];
+
+const SOC_RESOURCES: Resource[] = [
+  { name: 'EnableWindowsLogSettings', desc: 'Turn the right Windows logs on', url: 'https://github.com/Yamato-Security/EnableWindowsLogSettings', tags: ['Windows', 'Logs', 'Blue Team'] },
+  { name: 'DeTTECT', desc: 'Score what your data sources can actually see', url: 'https://github.com/rabobank-cdc/DeTTECT', tags: ['Data Sources', 'Framework'] },
+  { name: 'ThreatHunter-Playbook', desc: 'Hunting hypotheses as runnable notebooks', url: 'https://github.com/OTRF/ThreatHunter-Playbook', tags: ['Threat Hunting', 'Playbook'] },
+  { name: 'Hunting Queries', desc: '450+ KQL queries for Defender and Sentinel', url: 'https://github.com/Bert-JanP/Hunting-Queries-Detection-Rules', tags: ['KQL', 'Defender', 'Sentinel'] },
+  { name: 'Security-Datasets', desc: 'Real attack telemetry to practice on', url: 'https://github.com/OTRF/Security-Datasets', tags: ['Telemetry', 'Datasets'] },
+  { name: 'Blue-Team-Notes', desc: 'One-liners and field notes for daily work', url: 'https://github.com/Purp1eW0lf/Blue-Team-Notes', tags: ['Notes', 'Blue Team'] },
+  { name: 'IRM', desc: 'One-page incident response cheat sheets', url: 'https://github.com/certsocietegenerale/IRM', tags: ['Incident Response', 'Cheat Sheet'] },
+];
+
+const FREE_CERTS: Resource[] = [
+  { name: 'ISC2 CC', desc: 'Certified in Cybersecurity (CC)', url: 'https://www.isc2.org/certifications/cc', tags: ['Certification', 'Beginner'] },
+  { name: 'BTJA Pathway', desc: 'Security Blue Team - Junior Analyst', url: 'https://www.securityblue.team/courses/blue-team-junior-analyst-pathway-bundle', tags: ['Blue Team', 'Analyst'] },
+  { name: 'EC-Council Essentials', desc: 'Cybersecurity essentials series', url: 'https://www.eccouncil.org/academia/essentials/', tags: ['Essentials', 'Beginner'] },
+  { name: 'Fortinet FCF', desc: 'Fortinet Certified Fundamentals', url: 'https://training.fortinet.com/local/staticpage/view.php?page=fcf_cybersecurity', tags: ['Fundamentals', 'Fortinet'] },
+  { name: 'Fortinet FCA', desc: 'Fortinet Certified Associate', url: 'https://training.fortinet.com/local/staticpage/view.php?page=fca_cybersecurity', tags: ['Associate', 'Fortinet'] },
+  { name: 'Hack Wiser Core', desc: 'Hackviser Core Certification', url: 'https://hackviser.com/core', tags: ['Certification', 'Pentesting'] },
+  { name: 'Android Security', desc: 'Hextree x Google Android Security', url: 'https://www.hextree.io/hextree-x-google', tags: ['Android', 'Mobile Sec'] },
 ];
 
 // Helper to get domain favicon
@@ -170,7 +200,7 @@ const ResourceCard = ({ name, desc, url, tags, index }: Resource & { index: numb
 const Resources = () => {
   const { hash } = useLocation();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<'youtube' | 'practice' | 'security' | 'simulations' | 'pentesting'>('youtube');
+  const [activeTab, setActiveTab] = useState<'youtube' | 'practice' | 'security' | 'simulations' | 'pentesting' | 'soc' | 'certs'>('youtube');
   const [searchQuery, setSearchQuery] = useState('');
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -201,6 +231,8 @@ const Resources = () => {
     { id: 'security', label: 'Security Resources', data: SECURITY_RESOURCES, icon: <ShieldCheck className="w-4 h-4" /> },
     { id: 'simulations', label: 'Job Simulations', data: JOB_SIMULATIONS, icon: <Briefcase className="w-4 h-4" /> },
     { id: 'pentesting', label: 'Pen Testing', data: PEN_TESTING, icon: <Terminal className="w-4 h-4" /> },
+    { id: 'soc', label: 'SOC / Threat Hunting', data: SOC_RESOURCES, icon: <Radar className="w-4 h-4" /> },
+    { id: 'certs', label: 'Free Certifications', data: FREE_CERTS, icon: <Award className="w-4 h-4" /> },
   ] as const;
 
   const currentData = tabs.find(t => t.id === activeTab)?.data || [];
