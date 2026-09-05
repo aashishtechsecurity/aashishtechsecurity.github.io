@@ -170,7 +170,7 @@ const CLOUD_SECURITY: Resource[] = [
 ];
 
 const CRYPTOGRAPHY: Resource[] = [
-  { name: 'PicoLock', desc: 'Interactive cryptography puzzles', url: 'https://projects.etc.cmu.edu/picolock/', tags: ['Interactive', 'Crypto'] },
+  { name: 'PicoLock', desc: 'Interactive cryptography puzzles', url: 'https://picolock.itch.io/picolockgame', tags: ['Interactive', 'Crypto'] },
   { name: 'CryptoHack', desc: 'Learn cryptography through fun challenges', url: 'https://cryptohack.org/', tags: ['Challenges', 'Crypto'] },
   { name: 'Cryptopals', desc: 'The cryptopals crypto challenges', url: 'https://cryptopals.com/', tags: ['Challenges', 'Crypto'] },
 ];
