@@ -1,5 +1,6 @@
 import { Smartphone, Search, Zap, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const tools = [
   { icon: <Smartphone className="w-6 h-6 text-accent-purple" />, title: 'Mobile Pentesting', items: 'Termux · NetHunter\nMobSF · APKTool' },
@@ -48,9 +49,9 @@ const Toolkit = () => {
         </div>
 
         <div className="text-center">
-          <button className="px-8 py-3 bg-transparent border border-accent-cyan text-accent-cyan font-bold rounded hover:bg-[rgba(0,245,255,0.1)] transition-all box-glow-cyan inline-flex items-center gap-2">
+          <Link to="/toolkit" className="px-8 py-3 bg-transparent border border-accent-cyan text-accent-cyan font-bold rounded hover:bg-[rgba(0,245,255,0.1)] transition-all box-glow-cyan inline-flex items-center gap-2">
             ⚡ Explore Full Toolkit →
-          </button>
+          </Link>
           <p className="text-[#4a5568] text-xs mt-6 font-mono max-w-lg mx-auto">
             "For educational and authorized testing purposes only. AashishTechSecurity does not endorse unauthorized use."
           </p>

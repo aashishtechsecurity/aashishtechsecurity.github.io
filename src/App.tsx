@@ -8,6 +8,7 @@ import ThemeTransitionOverlay from './components/ThemeTransitionOverlay';
 
 const Resources = lazy(() => import('./pages/Resources'));
 const Roadmap = lazy(() => import('./pages/Roadmap'));
+const ToolkitPage = lazy(() => import('./pages/ToolkitPage'));
 
 /** Skeleton placeholder shown while lazy chunks load */
 const PageFallback = () => (
@@ -42,6 +43,7 @@ function App() {
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+              <Route path="/toolkit" element={<PageTransition><ToolkitPage /></PageTransition>} />
               <Route path="/resources" element={<PageTransition><Resources /></PageTransition>} />
               <Route path="/roadmap" element={<PageTransition><Roadmap /></PageTransition>} />
             </Routes>

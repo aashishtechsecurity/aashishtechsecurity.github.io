@@ -9,7 +9,7 @@ const NAV_LINKS = [
   { name: 'Home', href: '/', id: 'home' },
   { name: 'About', href: '/#about', id: 'about' },
   { name: 'Experience', href: '/#experience', id: 'experience' },
-  { name: 'Toolkit', href: '/#toolkit', id: 'toolkit' },
+  { name: 'Toolkit', href: '/toolkit', id: '' },
   { name: 'Resources', href: '/resources', id: '' },
   { name: 'Roadmap', href: '/roadmap', id: '' },
   { name: 'CTI Monitor', href: 'https://www.aashishtechsecurity.in/cti-monitor/', id: '', isExternal: true },
@@ -84,6 +84,7 @@ const Navbar = () => {
   const isLinkActive = (href: string, id: string) => {
     if (href === '/resources') return location.pathname === '/resources';
     if (href === '/roadmap') return location.pathname === '/roadmap';
+    if (href === '/toolkit') return location.pathname === '/toolkit';
     if (location.pathname === '/') return activeSection === id;
     return false; // If not on home, hash links aren't strictly "active"
   };
