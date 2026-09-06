@@ -167,11 +167,11 @@ const ToolkitPage = () => {
             {/* Horizontal Stats Row */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8 font-mono text-center">
               <div className="bg-bg-card border border-border-glow rounded-xl p-6 text-center shadow-lg">
-                <div className="text-3xl font-bold mb-2 text-accent-purple">{categoriesCount}</div>
+                <div className="text-3xl font-bold mb-2 text-accent-cyan">{categoriesCount}</div>
                 <div className="text-sm font-medium text-text-muted capitalize tracking-wide">Categories</div>
               </div>
               <div className="bg-bg-card border border-border-glow rounded-xl p-6 text-center shadow-lg">
-                <div className="text-3xl font-bold mb-2 text-accent-purple">{toolsCount}+</div>
+                <div className="text-3xl font-bold mb-2 text-accent-cyan">{toolsCount}+</div>
                 <div className="text-sm font-medium text-text-muted capitalize tracking-wide">Tools</div>
               </div>
               <div className="bg-bg-card border border-border-glow rounded-xl p-6 text-center shadow-lg">
@@ -179,7 +179,7 @@ const ToolkitPage = () => {
                 <div className="text-sm font-medium text-text-muted capitalize tracking-wide">Free</div>
               </div>
               <div className="bg-bg-card border border-border-glow rounded-xl p-6 text-center shadow-lg">
-                <div className="text-3xl font-bold mb-2 text-accent-purple">24/7</div>
+                <div className="text-3xl font-bold mb-2 text-accent-cyan">24/7</div>
                 <div className="text-sm font-medium text-text-muted capitalize tracking-wide">Access</div>
               </div>
             </div>
@@ -188,32 +188,32 @@ const ToolkitPage = () => {
                 <div className="bg-bg-card border border-border-glow rounded-2xl p-6 mb-8 shadow-lg font-mono">
                   <div className="flex flex-col md:flex-row gap-4 mb-6">
                     <div className="relative flex-1">
-                      <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-accent-purple" />
+                      <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-accent-cyan" />
                       <input 
                         type="text" 
                         placeholder="Search tools, categories, or descriptions..." 
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        className="w-full bg-bg-primary border border-border-glow rounded-xl pl-12 pr-4 py-4 text-text-primary placeholder:text-text-muted/40 focus:outline-none focus:border-accent-purple focus:ring-1 focus:ring-accent-purple transition-all font-medium"
+                        className="w-full bg-bg-primary border border-border-glow rounded-xl pl-12 pr-4 py-4 text-text-primary placeholder:text-text-muted/40 focus:outline-none focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan transition-all font-medium"
                       />
                     </div>
                     <div className="relative md:w-64">
-                      <Filter className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-accent-purple" />
+                      <Filter className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-accent-cyan" />
                       <select 
                         value={selectedCategory}
                         onChange={(e) => setSelectedCategory(e.target.value)}
-                        className="w-full bg-bg-primary border border-border-glow rounded-xl pl-12 pr-10 py-4 text-text-primary appearance-none focus:outline-none focus:border-accent-purple focus:ring-1 focus:ring-accent-purple transition-all font-medium cursor-pointer"
+                        className="w-full bg-bg-primary border border-border-glow rounded-xl pl-12 pr-10 py-4 text-text-primary appearance-none focus:outline-none focus:border-accent-cyan focus:ring-1 focus:ring-accent-cyan transition-all font-medium cursor-pointer"
                       >
                         <option value="All Categories">All Categories</option>
                         {activeData.map(c => (
                           <option key={c.title} value={c.title}>{c.title}</option>
                         ))}
                       </select>
-                      <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-accent-purple pointer-events-none" />
+                      <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-accent-cyan pointer-events-none" />
                     </div>
                   </div>
                   <div className="flex gap-4 justify-center">
-                    <button onClick={expandAll} className="px-6 py-2 rounded-full bg-accent-purple/20 border border-accent-purple/50 text-accent-purple text-sm font-medium hover:bg-accent-purple/30 transition-colors">Expand All</button>
+                    <button onClick={expandAll} className="px-6 py-2 rounded-full bg-accent-cyan/20 border border-accent-cyan/50 text-accent-cyan text-sm font-medium hover:bg-accent-cyan/30 transition-colors">Expand All</button>
                     <button onClick={collapseAll} className="px-6 py-2 rounded-full bg-bg-primary border border-border-glow text-text-muted text-sm font-medium hover:bg-bg-card-hover transition-colors">Collapse All</button>
                   </div>
                 </div>
@@ -223,7 +223,7 @@ const ToolkitPage = () => {
                   {filteredData.map((category, idx) => {
                     const isExpanded = expandedCats.has(category.title);
                     return (
-                      <div key={idx} className={`border rounded-xl overflow-hidden transition-all duration-300 bg-bg-card border-border-glow hover:border-accent-purple/30 ${isExpanded ? 'border-accent-purple/50' : ''}`}>
+                      <div key={idx} className={`border rounded-xl overflow-hidden transition-all duration-300 bg-bg-card border-border-glow hover:border-accent-cyan/30 ${isExpanded ? 'border-accent-cyan/50' : ''}`}>
                         <button 
                           onClick={() => toggleCategory(category.title)}
                           className="w-full p-5 flex items-center justify-between focus:outline-none text-left"
@@ -235,11 +235,11 @@ const ToolkitPage = () => {
                             <span className="text-lg md:text-xl font-bold text-text-primary uppercase tracking-wider font-display">
                               {category.title}
                             </span>
-                            <div className="hidden sm:block bg-accent-purple/10 text-accent-purple text-xs font-bold px-3 py-1 rounded-sm border border-accent-purple/40">
+                            <div className="hidden sm:block bg-accent-cyan/10 text-accent-cyan text-xs font-bold px-3 py-1 rounded-sm border border-accent-cyan/40">
                               {category.items.length}
                             </div>
                           </div>
-                          <div className="sm:hidden bg-accent-purple/10 text-accent-purple text-xs font-bold px-3 py-1 rounded-sm border border-accent-purple/40">
+                          <div className="sm:hidden bg-accent-cyan/10 text-accent-cyan text-xs font-bold px-3 py-1 rounded-sm border border-accent-cyan/40">
                             {category.items.length}
                           </div>
                         </button>
@@ -255,7 +255,7 @@ const ToolkitPage = () => {
                               <div className="p-4 md:p-6 border-t border-border-glow bg-bg-primary/30">
                                 <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
                                   {category.items.map((item, itemIdx) => (
-                                    <div key={itemIdx} className="p-4 bg-bg-primary rounded-lg border border-border-glow/30 hover:border-accent-purple/50 transition-colors group">
+                                    <div key={itemIdx} className="p-4 bg-bg-primary rounded-lg border border-border-glow/30 hover:border-accent-cyan/50 transition-colors group">
                                       <div className="flex justify-between items-start gap-4">
                                         <div className="flex items-start gap-3 min-w-0">
                                           {item.url ? (
@@ -268,13 +268,13 @@ const ToolkitPage = () => {
                                               }}
                                             />
                                           ) : (
-                                            <div className="w-6 h-6 rounded flex-shrink-0 mt-0.5 bg-accent-purple/10 flex items-center justify-center text-accent-purple">
+                                            <div className="w-6 h-6 rounded flex-shrink-0 mt-0.5 bg-accent-cyan/10 flex items-center justify-center text-accent-cyan">
                                               <Terminal className="w-3.5 h-3.5" />
                                             </div>
                                           )}
                                           <div className="min-w-0">
                                             {item.url ? (
-                                              <a href={item.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-bold text-text-primary hover:text-accent-purple transition-colors font-display group/link truncate max-w-full">
+                                              <a href={item.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-bold text-text-primary hover:text-accent-cyan transition-colors font-display group/link truncate max-w-full">
                                                 {item.name}
                                               </a>
                                             ) : (
@@ -294,7 +294,7 @@ const ToolkitPage = () => {
                                             href={item.url}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="p-2 bg-bg-card rounded-lg text-text-muted hover:text-accent-purple hover:bg-accent-purple/10 transition-colors flex-shrink-0"
+                                            className="p-2 bg-bg-card rounded-lg text-text-muted hover:text-accent-cyan hover:bg-accent-cyan/10 transition-colors flex-shrink-0"
                                             title={`Visit ${item.name}`}
                                           >
                                             <ExternalLink className="w-4 h-4" />
