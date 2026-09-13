@@ -7721,6 +7721,77 @@ export const socToolkit: ToolkitCategory[] = [
 
 export const ctiToolkit: ToolkitCategory[] = [
   {
+    title: 'Threat Intel, News & Updates',
+    items: [
+      { name: 'Bleeping Computer', url: 'https://www.bleepingcomputer.com/', desc: 'Databreaches, Cyber News, Dark Web' },
+      { name: 'Daily Dark Web', url: 'https://x.com/DailyDarkWeb', desc: 'Data Breaches, Initial Accesses' },
+      { name: 'Falcon Feeds', url: 'https://x.com/FalconFeedsio', desc: 'Telegram Chatter, Data Breaches, Hacktivism' },
+      { name: 'PC Risk', url: 'https://www.pcrisk.com/', desc: 'Security News, Malware removal guides' }
+    ]
+  },
+  {
+    title: 'Malware Analysis, Sandboxing & Hashes',
+    items: [
+      { name: 'VirusTotal', url: 'https://www.virustotal.com/', desc: 'Multi-engine file and URL analysis' },
+      { name: 'Triage', url: 'https://tria.ge/', desc: 'Malware sandbox and hash collection' },
+      { name: 'Malware Bazaar', url: 'https://bazaar.abuse.ch/browse/', desc: 'Community malware sample database' },
+      { name: 'Any.Run', url: 'https://app.any.run/', desc: 'Interactive malware sandbox' },
+      { name: 'The Raven File', url: 'https://theravenfile.com/', desc: 'Threat intel and malware analysis' },
+      { name: 'MalwareHunterTeam', url: 'https://x.com/malwrhunterteam', desc: 'Malware samples, malicious domains' }
+    ]
+  },
+  {
+    title: 'Ransomware Tracking',
+    items: [
+      { name: 'Ransom Watch', url: 'https://ransomwatch.telemetry.ltd/#/', desc: 'Ransomware repository & telemetry' },
+      { name: 'Ransomlook', url: 'https://www.ransomlook.io/', desc: 'Ransomware groups and attacks repository' },
+      { name: 'Dexpose', url: 'https://www.dexpose.io/category/ransomware-attacks/', desc: 'Ransomware attacks reporting & categorization' },
+      { name: 'VenariX', url: 'https://x.com/_venarix_', desc: 'Ransomware alerts' },
+      { name: 'ThreatMon', url: 'https://x.com/TMRansomMon', desc: 'Ransomware alerts' }
+    ]
+  },
+  {
+    title: 'Dark Web, Forums & Hacktivism',
+    items: [
+      { name: 'Zone-H', url: 'https://www.zone-h.org/archive/special=1/page=2', desc: 'Hacktivism updates & defacement archive' },
+      { name: 'Haxor ID', url: 'https://haxor.id/home', desc: 'Hacktivism updates' },
+      { name: 'Telemetr.io', url: 'https://telemetr.io/en', desc: 'Identifying new Telegram groups' },
+      { name: 'DarkForums', url: 'https://darkforums.as', desc: 'Dark web forum / discussion' },
+      { name: 'Leakbase', url: 'https://leakbase.su', desc: 'Database leaks forum' }
+    ]
+  },
+  {
+    title: 'Domain, URL & Crypto OSINT',
+    items: [
+      { name: 'URLScan.io', url: 'https://urlscan.io/', desc: 'Malicious URL analysis with live screenshots' },
+      { name: 'WhoisDS', url: 'https://www.whoisds.com/newly-registered-domains', desc: 'Newly registered domains list for verification' },
+      { name: 'Blockchain Explorer', url: 'https://www.blockchain.com/explorer', desc: 'Tracking cryptocurrency transactions' }
+    ]
+  },
+  {
+    title: 'VirusTotal Analysts',
+    items: [
+      { name: 'Petik', url: 'https://www.virustotal.com/gui/user/petik/comments', desc: 'Comments on malicious file hashes' },
+      { name: 'JaffaCakes118', url: 'https://www.virustotal.com/gui/user/JaffaCakes118/comments', desc: 'Comments on malicious file hashes' },
+      { name: 'PC Risk', url: 'https://www.virustotal.com/gui/user/pcrisk/comments', desc: 'Comments on malicious file hashes' }
+    ]
+  },
+  {
+    title: 'Educational & Methodologies',
+    items: [
+      { name: 'Kraven Security', url: 'https://kravensecurity.com/diamond-model-analysis/', desc: 'Diamond Model Analysis tutorial/framework' }
+    ]
+  },
+  {
+    title: 'Class / Training Specific Links',
+    items: [
+      { name: 'Triage Ransomware Search', url: 'https://tria.ge/s?q=tag%3Aransomware+AND+NOT+tag%3Astealer+AND+NOT+tag%3Aspyware', desc: 'Search tag:ransomware AND NOT tag:stealer AND NOT tag:spyware' },
+      { name: 'Malware Bazaar Ransomware', url: 'https://bazaar.abuse.ch/browse.php?search=tag%3Aransomware', desc: 'Search tag:ransomware' },
+      { name: 'CRPX0 Ransomlook Profile', url: 'https://www.ransomlook.io/group/crpx0', desc: 'CRPX0 Group Profile on Ransomlook' },
+      { name: 'CRPX0 Attack Dexpose', url: 'https://www.dexpose.io/crpxo-ransomware-attack-on-prei-capital/', desc: 'CRPX0 Attack on PREI Capital' }
+    ]
+  },
+  {
     title: 'Threat Intelligence Platforms',
     items: [
       { name: 'MISP', desc: 'Open Source Threat Intelligence Platform & Open Standards For Threat Information Sharing.' },

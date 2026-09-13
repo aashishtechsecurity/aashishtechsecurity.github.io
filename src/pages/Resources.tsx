@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { PlaySquare, Laptop, ShieldCheck, ExternalLink, Search, ArrowUp, Briefcase, Terminal, Award, Radar, Cloud, Key, Smartphone, BookOpen, Cpu } from 'lucide-react';
+import { PlaySquare, Laptop, ShieldCheck, ExternalLink, Search, ArrowUp, Briefcase, Terminal, Award, Radar, Cloud, Key, Smartphone, BookOpen, Cpu, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SEO from '../components/SEO';
 
@@ -30,6 +30,8 @@ const HASH_TO_TAB = {
   '#fundamentals': 'fundamentals',
   '#AISecurity': 'ai_security',
   '#aisecurity': 'ai_security',
+  '#ThreatIntel': 'threat_intel',
+  '#threatintel': 'threat_intel',
 } as const;
 
 const TAB_TO_HASH = {
@@ -46,6 +48,7 @@ const TAB_TO_HASH = {
   ios: '#MobileiOS',
   fundamentals: '#Fundamentals',
   ai_security: '#AISecurity',
+  threat_intel: '#ThreatIntel',
 } as const;
 
 
@@ -309,6 +312,54 @@ const AI_SECURITY: Resource[] = [
   { name: 'Black Hills — Getting Started with AI Hacking', desc: 'Black Hills InfoSec’s practical intro to AI hacking and prompt injection — a solid on-ramp that pairs with their AI-CTF.', url: 'https://www.blackhillsinfosec.com/getting-started-with-ai-hacking-part-2/', tags: ['Guide', 'Black Hills InfoSec', 'Resources', 'AI Security'] },
 ];
 
+const THREAT_INTEL: Resource[] = [
+  // Threat Intel, News & Updates
+  { name: 'Bleeping Computer', desc: 'Databreaches, Cyber News, Dark Web', url: 'https://www.bleepingcomputer.com/', tags: ['News', 'Databreaches'] },
+  { name: 'Daily Dark Web', desc: 'Data Breaches, Initial Accesses', url: 'https://x.com/DailyDarkWeb', tags: ['Dark Web', 'News'] },
+  { name: 'Falcon Feeds', desc: 'Telegram Chatter, Data Breaches, Hacktivism', url: 'https://x.com/FalconFeedsio', tags: ['News', 'Hacktivism'] },
+  { name: 'PC Risk', desc: 'Security News, Malware removal guides', url: 'https://www.pcrisk.com/', tags: ['News', 'Guides'] },
+
+  // Malware Analysis, Sandboxing & Hashes
+  { name: 'VirusTotal', desc: 'Multi-engine file and URL analysis', url: 'https://www.virustotal.com/', tags: ['Malware', 'Analysis'] },
+  { name: 'Triage', desc: 'Malware sandbox and hash collection', url: 'https://tria.ge/', tags: ['Malware', 'Sandbox'] },
+  { name: 'Malware Bazaar', desc: 'Community malware sample database', url: 'https://bazaar.abuse.ch/browse/', tags: ['Malware', 'Database'] },
+  { name: 'Any.Run', desc: 'Interactive malware sandbox', url: 'https://app.any.run/', tags: ['Malware', 'Sandbox'] },
+  { name: 'The Raven File', desc: 'Threat intel and malware analysis', url: 'https://theravenfile.com/', tags: ['Intel', 'Malware'] },
+  { name: 'MalwareHunterTeam', desc: 'Malware samples, malicious domains', url: 'https://x.com/malwrhunterteam', tags: ['Malware', 'Intel'] },
+
+  // Ransomware Tracking
+  { name: 'Ransom Watch', desc: 'Ransomware repository & telemetry', url: 'https://ransomwatch.telemetry.ltd/#/', tags: ['Ransomware', 'Tracker'] },
+  { name: 'Ransomlook', desc: 'Ransomware groups and attacks repository', url: 'https://www.ransomlook.io/', tags: ['Ransomware', 'Tracker'] },
+  { name: 'Dexpose', desc: 'Ransomware attacks reporting & categorization', url: 'https://www.dexpose.io/category/ransomware-attacks/', tags: ['Ransomware', 'Tracker'] },
+  { name: 'VenariX', desc: 'Ransomware alerts', url: 'https://x.com/_venarix_', tags: ['Ransomware', 'Intel'] },
+  { name: 'ThreatMon', desc: 'Ransomware alerts', url: 'https://x.com/TMRansomMon', tags: ['Ransomware', 'Intel'] },
+
+  // Dark Web, Forums & Hacktivism
+  { name: 'Zone-H', desc: 'Hacktivism updates & defacement archive', url: 'https://www.zone-h.org/archive/special=1/page=2', tags: ['Hacktivism', 'Archive'] },
+  { name: 'Haxor ID', desc: 'Hacktivism updates', url: 'https://haxor.id/home', tags: ['Hacktivism', 'News'] },
+  { name: 'Telemetr.io', desc: 'Identifying new Telegram groups', url: 'https://telemetr.io/en', tags: ['OSINT', 'Telegram'] },
+  { name: 'DarkForums', desc: 'Dark web forum / discussion', url: 'https://darkforums.as', tags: ['Dark Web', 'Forum'] },
+  { name: 'Leakbase', desc: 'Database leaks forum', url: 'https://leakbase.su', tags: ['Dark Web', 'Leaks'] },
+
+  // Domain, URL & Crypto OSINT
+  { name: 'URLScan.io', desc: 'Malicious URL analysis with live screenshots', url: 'https://urlscan.io/', tags: ['OSINT', 'URL'] },
+  { name: 'WhoisDS', desc: 'Newly registered domains list for verification', url: 'https://www.whoisds.com/newly-registered-domains', tags: ['OSINT', 'Domain'] },
+  { name: 'Blockchain Explorer', desc: 'Tracking cryptocurrency transactions', url: 'https://www.blockchain.com/explorer', tags: ['OSINT', 'Crypto'] },
+
+  // VirusTotal Analysts
+  { name: 'Petik (VirusTotal)', desc: 'Comments on malicious file hashes', url: 'https://www.virustotal.com/gui/user/petik/comments', tags: ['Analyst', 'VirusTotal'] },
+  { name: 'JaffaCakes118 (VirusTotal)', desc: 'Comments on malicious file hashes', url: 'https://www.virustotal.com/gui/user/JaffaCakes118/comments', tags: ['Analyst', 'VirusTotal'] },
+
+  // Educational
+  { name: 'Kraven Security', desc: 'Diamond Model Analysis tutorial/framework', url: 'https://kravensecurity.com/diamond-model-analysis/', tags: ['Education', 'Framework'] },
+
+  // Class specific
+  { name: 'Triage Ransomware Search', desc: 'Search tag:ransomware AND NOT tag:stealer AND NOT tag:spyware', url: 'https://tria.ge/s?q=tag%3Aransomware+AND+NOT+tag%3Astealer+AND+NOT+tag%3Aspyware', tags: ['Class', 'Search'] },
+  { name: 'Malware Bazaar Ransomware', desc: 'Search tag:ransomware', url: 'https://bazaar.abuse.ch/browse.php?search=tag%3Aransomware', tags: ['Class', 'Search'] },
+  { name: 'CRPX0 Ransomlook', desc: 'CRPX0 Group Profile on Ransomlook', url: 'https://www.ransomlook.io/group/crpx0', tags: ['Class', 'Profile'] },
+  { name: 'CRPX0 Attack Dexpose', desc: 'CRPX0 Attack on PREI Capital', url: 'https://www.dexpose.io/crpxo-ransomware-attack-on-prei-capital/', tags: ['Class', 'Attack'] },
+];
+
 // Helper to get domain favicon
 const getFaviconUrl = (url: string) => {
   try {
@@ -362,7 +413,7 @@ const ResourceCard = ({ name, desc, url, tags, index }: Resource & { index: numb
 const Resources = () => {
   const { hash } = useLocation();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<'youtube' | 'practice' | 'security' | 'simulations' | 'pentesting' | 'soc' | 'certs' | 'cloud' | 'crypto' | 'android' | 'ios' | 'fundamentals' | 'ai_security'>('youtube');
+  const [activeTab, setActiveTab] = useState<'youtube' | 'practice' | 'security' | 'simulations' | 'pentesting' | 'soc' | 'certs' | 'cloud' | 'crypto' | 'android' | 'ios' | 'fundamentals' | 'ai_security' | 'threat_intel'>('youtube');
   const [searchQuery, setSearchQuery] = useState('');
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [activeFilter, setActiveFilter] = useState('All');
@@ -394,6 +445,7 @@ const Resources = () => {
     { id: 'fundamentals', label: 'Fundamentals', data: FUNDAMENTALS, icon: <BookOpen className="w-4 h-4" /> },
     { id: 'security', label: 'Security Resources', data: SECURITY_RESOURCES, icon: <ShieldCheck className="w-4 h-4" /> },
     { id: 'ai_security', label: 'AI Security', data: AI_SECURITY, icon: <Cpu className="w-4 h-4" /> },
+    { id: 'threat_intel', label: 'Threat Intel', data: THREAT_INTEL, icon: <Globe className="w-4 h-4" /> },
     { id: 'simulations', label: 'Job Simulations', data: JOB_SIMULATIONS, icon: <Briefcase className="w-4 h-4" /> },
     { id: 'pentesting', label: 'Pen Testing', data: PEN_TESTING, icon: <Terminal className="w-4 h-4" /> },
     { id: 'soc', label: 'SOC / Threat Hunting', data: SOC_RESOURCES, icon: <Radar className="w-4 h-4" /> },
