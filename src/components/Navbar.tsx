@@ -13,6 +13,7 @@ const NAV_LINKS = [
   { name: 'Resources', href: '/resources', id: '' },
   { name: 'Roadmap', href: '/roadmap', id: '' },
   { name: 'CTI Monitor', href: 'https://www.aashishtechsecurity.in/cti-monitor/', id: '', isExternal: true },
+  { name: 'Blogs', href: 'https://aashishtechsecurity.medium.com/', id: '', isExternal: true },
   { name: 'Contact', href: '/#contact', id: 'contact' }
 ];
 
