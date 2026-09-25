@@ -22,8 +22,8 @@ const Footer = () => {
             <div className="flex flex-col space-y-2">
               {[
                 { name: 'Home', href: '/' },
-                { name: 'Toolkit', href: '/#toolkit' },
-                { name: 'Roadmap', href: '/#roadmap' },
+                { name: 'Toolkit', href: '/toolkit' },
+                { name: 'Roadmap', href: '/roadmap' },
                 { name: 'Resources', href: '/resources' },
                 { name: 'About', href: '/#about' },
                 { name: 'Contact', href: '/#contact' }
@@ -61,13 +61,14 @@ const Footer = () => {
             </div>
             <div className="text-text-muted text-xs space-y-1 font-mono">
               <p>Business: Hyderabad, TG, India</p>
-              <p>Email: privacy@aashishtechsecurity.in</p>
+              <p>Phone: <a href="tel:+910000000000" className="hover:text-accent-cyan transition-colors">+91 0000 000 000</a></p>
+              <p>Email: <a href="mailto:privacy@aashishtechsecurity.in" className="hover:text-accent-cyan transition-colors">privacy@aashishtechsecurity.in</a></p>
             </div>
           </div>
         </div>
 
         <div className="border-t border-[#1a1a1a] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-text-muted text-xs">© 2026 AashishTechSecurity. All rights reserved.</p>
+          <p className="text-text-muted text-xs">© {new Date().getFullYear()} AashishTechSecurity. All rights reserved.</p>
           <div className="bg-accent-cyan text-black font-mono text-xs font-bold px-4 py-1">
             ██ Hack the Planet ██
           </div>

@@ -16,6 +16,7 @@ const PrivacyPolicy = lazy(() => import('./pages/legal/PrivacyPolicy'));
 const TermsConditions = lazy(() => import('./pages/legal/TermsConditions'));
 const CookiePolicy = lazy(() => import('./pages/legal/CookiePolicy'));
 const RefundPolicy = lazy(() => import('./pages/legal/RefundPolicy'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 /** Skeleton placeholder shown while lazy chunks load */
 const PageFallback = () => (
@@ -42,7 +43,7 @@ function App() {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen bg-bg-primary text-text-primary selection:bg-accent-cyan/30 flex flex-col">
+    <div className="min-h-screen bg-bg-primary text-text-primary selection:bg-accent-cyan/30 flex flex-col overflow-x-hidden">
       <ThemeTransitionOverlay />
       <Navbar />
       <div className="flex-grow">
@@ -58,6 +59,8 @@ function App() {
               <Route path="/terms" element={<PageTransition><TermsConditions /></PageTransition>} />
               <Route path="/cookie-policy" element={<PageTransition><CookiePolicy /></PageTransition>} />
               <Route path="/refund-policy" element={<PageTransition><RefundPolicy /></PageTransition>} />
+              
+              <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
             </Routes>
           </AnimatePresence>
         </Suspense>
