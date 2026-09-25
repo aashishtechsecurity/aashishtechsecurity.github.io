@@ -261,7 +261,7 @@ const ToolkitPage = () => {
                                           {item.url ? (
                                             <img 
                                               src={`https://www.google.com/s2/favicons?domain=${encodeURIComponent(item.url)}&sz=64`}
-                                              alt=""
+                                              alt={`${item.name} icon`}
                                               className="w-6 h-6 rounded flex-shrink-0 mt-0.5 bg-bg-card"
                                               onError={(e) => {
                                                 (e.target as HTMLImageElement).style.display = 'none';

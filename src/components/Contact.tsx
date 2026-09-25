@@ -85,26 +85,30 @@ const Contact = () => {
                 type="text" 
                 name="name" 
                 required 
-                placeholder="Name" 
+                placeholder="Name"
+                aria-label="Your Name"
                 className="w-full bg-bg-card border border-border-glow/30 rounded p-4 text-text-primary focus:outline-none focus:border-accent-cyan focus:box-glow-cyan transition-all" 
               />
               <input 
                 type="email" 
                 name="email" 
                 required 
-                placeholder="Email" 
+                placeholder="Email"
+                aria-label="Your Email"
                 className="w-full bg-bg-card border border-border-glow/30 rounded p-4 text-text-primary focus:outline-none focus:border-accent-cyan focus:box-glow-cyan transition-all" 
               />
               <input 
                 type="text" 
                 name="subject" 
-                placeholder="Subject (Optional)" 
+                placeholder="Subject (Optional)"
+                aria-label="Message Subject"
                 className="w-full bg-bg-card border border-border-glow/30 rounded p-4 text-text-primary focus:outline-none focus:border-accent-cyan focus:box-glow-cyan transition-all" 
               />
               <textarea 
                 name="message" 
                 required 
                 placeholder="Message" 
+                aria-label="Your Message"
                 rows={5} 
                 className="w-full bg-bg-card border border-border-glow/30 rounded p-4 text-text-primary focus:outline-none focus:border-accent-cyan focus:box-glow-cyan transition-all resize-none"
               ></textarea>
@@ -138,10 +142,11 @@ const Contact = () => {
                       setCaptchaError(false);
                     }}
                     required
+                    aria-label="Captcha Answer"
                     className={`w-full sm:w-24 bg-bg-card border ${captchaError ? 'border-red-500 box-glow-red' : 'border-border-glow/30'} rounded p-2 text-text-primary focus:outline-none focus:border-accent-cyan focus:box-glow-cyan transition-all text-center font-mono`}
                     placeholder="?"
                   />
-                  <button type="button" onClick={generateCaptcha} className="px-3 py-2 text-xs font-mono text-accent-cyan hover:bg-accent-cyan/10 rounded transition-colors border border-accent-cyan/20">
+                  <button type="button" onClick={generateCaptcha} aria-label="Reload Captcha" className="px-3 py-2 text-xs font-mono text-accent-cyan hover:bg-accent-cyan/10 rounded transition-colors border border-accent-cyan/20">
                     Reload
                   </button>
                 </div>
@@ -153,6 +158,7 @@ const Contact = () => {
               <button 
                 type="submit" 
                 disabled={status === 'loading'}
+                aria-label="Send Message"
                 className="w-full py-4 bg-accent-cyan text-bg-primary font-bold rounded hover:bg-[#00d5ff] transition-all hover:box-glow-cyan flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {status === 'loading' ? (

@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="bg-bg-primary border-t border-border-glow/30 pt-16 pb-8 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 text-center md:text-left">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 text-center md:text-left">
           
           <div className="space-y-4 flex flex-col items-center md:items-start">
             <div className="flex items-center space-x-2">
@@ -35,13 +35,33 @@ const Footer = () => {
             </div>
           </div>
 
+          <div className="space-y-4">
+            <h4 className="font-bold text-text-primary mb-4">Legal & Policy</h4>
+            <div className="flex flex-col space-y-2">
+              {[
+                { name: 'Privacy Policy', href: '/privacy-policy' },
+                { name: 'Terms & Conditions', href: '/terms' },
+                { name: 'Cookie Policy', href: '/cookie-policy' },
+                { name: 'Refund Policy', href: '/refund-policy' }
+              ].map(link => (
+                <Link key={link.name} to={link.href} className="text-text-muted hover:text-accent-cyan transition-colors text-sm">
+                  {'>'} {link.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
           <div className="space-y-4 flex flex-col items-center md:items-start">
-            <h4 className="font-bold text-text-primary mb-4">Connect with AashishTechSecurity</h4>
-            <div className="flex gap-3">
+            <h4 className="font-bold text-text-primary mb-4">Connect with Us</h4>
+            <div className="flex gap-3 mb-4">
               <a href="https://www.instagram.com/aashishtechsecurity" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center bg-bg-card border border-border-glow/30 rounded hover:border-accent-cyan hover:text-accent-cyan active:scale-95 transition-all"><Instagram className="w-5 h-5" /></a>
               <a href="https://www.linkedin.com/in/aashishsec" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center bg-bg-card border border-border-glow/30 rounded hover:border-accent-cyan hover:text-accent-cyan active:scale-95 transition-all"><Linkedin className="w-5 h-5" /></a>
               <a href="https://aashishtechsecurity.medium.com/" target="_blank" rel="noopener noreferrer" aria-label="Medium" className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center bg-bg-card border border-border-glow/30 rounded hover:border-accent-cyan hover:text-accent-cyan active:scale-95 transition-all"><Medium className="w-5 h-5" /></a>
               <a href="https://x.com/AashishTechSec" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter" className="p-3 min-w-[44px] min-h-[44px] flex items-center justify-center bg-bg-card border border-border-glow/30 rounded hover:border-accent-cyan hover:text-accent-cyan active:scale-95 transition-all"><XTwitter className="w-5 h-5" /></a>
+            </div>
+            <div className="text-text-muted text-xs space-y-1 font-mono">
+              <p>Business: Hyderabad, TG, India</p>
+              <p>Email: privacy@aashishtechsecurity.in</p>
             </div>
           </div>
         </div>

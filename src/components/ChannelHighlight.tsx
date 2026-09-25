@@ -34,6 +34,7 @@ const ChannelHighlight = () => {
               <div className="w-full bg-bg-card relative border-b border-border-glow/30 overflow-hidden">
                 <iframe
                   src={vid.embedUrl}
+                  title={`Instagram video: ${vid.title}`}
                   className="w-full h-[450px] sm:h-[500px]"
                   frameBorder="0"
                   scrolling="no"

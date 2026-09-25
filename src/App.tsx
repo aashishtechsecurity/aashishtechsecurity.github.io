@@ -5,17 +5,24 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import ThemeTransitionOverlay from './components/ThemeTransitionOverlay';
+import CookieConsent from './components/CookieConsent';
 
 const Resources = lazy(() => import('./pages/Resources'));
 const Roadmap = lazy(() => import('./pages/Roadmap'));
 const ToolkitPage = lazy(() => import('./pages/ToolkitPage'));
+
+// Legal Pages
+const PrivacyPolicy = lazy(() => import('./pages/legal/PrivacyPolicy'));
+const TermsConditions = lazy(() => import('./pages/legal/TermsConditions'));
+const CookiePolicy = lazy(() => import('./pages/legal/CookiePolicy'));
+const RefundPolicy = lazy(() => import('./pages/legal/RefundPolicy'));
 
 /** Skeleton placeholder shown while lazy chunks load */
 const PageFallback = () => (
   <div className="min-h-screen flex items-center justify-center bg-bg-primary">
     <div className="flex flex-col items-center gap-3">
       <div className="w-8 h-8 border-2 border-accent-cyan border-t-transparent rounded-full animate-spin" />
-      <span className="text-text-muted font-mono text-xs">Loading…</span>
+      <span className="text-text-muted font-mono text-xs">Loading...</span>
     </div>
   </div>
 );
@@ -46,11 +53,17 @@ function App() {
               <Route path="/toolkit" element={<PageTransition><ToolkitPage /></PageTransition>} />
               <Route path="/resources" element={<PageTransition><Resources /></PageTransition>} />
               <Route path="/roadmap" element={<PageTransition><Roadmap /></PageTransition>} />
+              
+              <Route path="/privacy-policy" element={<PageTransition><PrivacyPolicy /></PageTransition>} />
+              <Route path="/terms" element={<PageTransition><TermsConditions /></PageTransition>} />
+              <Route path="/cookie-policy" element={<PageTransition><CookiePolicy /></PageTransition>} />
+              <Route path="/refund-policy" element={<PageTransition><RefundPolicy /></PageTransition>} />
             </Routes>
           </AnimatePresence>
         </Suspense>
       </div>
       <Footer />
+      <CookieConsent />
     </div>
   );
 }
