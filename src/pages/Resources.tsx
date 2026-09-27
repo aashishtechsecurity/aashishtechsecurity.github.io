@@ -179,6 +179,13 @@ const CRYPTOGRAPHY: Resource[] = [
 ];
 
 const MOBILE_ANDROID: Resource[] = [
+  { name: 'Hextree x Google: Android Security', desc: 'Free Android Security Course from Google', url: 'https://www.hextree.io/hextree-x-google', tags: ['Course', 'Google', 'Hextree'] },
+  { name: 'MobSF', desc: 'Static analysis ki — oka APK petti automatic ga vulnerabilities chupistundi.', url: 'https://github.com/MobSF/Mobile-Security-Framework-MobSF', tags: ['Tool', 'Static Analysis'] },
+  { name: 'JADX', desc: 'Decompile cheyyadaniki — source code chudachu.', url: 'https://github.com/skylot/jadx', tags: ['Tool', 'Decompiler'] },
+  { name: 'APKTool', desc: 'Resources modify cheyyali ante.', url: 'https://ibotpeaches.github.io/Apktool/', tags: ['Tool', 'Reverse Engineering'] },
+  { name: 'Frida', desc: 'Runtime lo hook cheyyali ante — SSL pinning kuda bypass chestundi.', url: 'https://frida.re/', tags: ['Tool', 'Hooking'] },
+  { name: 'Drozer', desc: 'IPC components attack cheyyali ante.', url: 'https://github.com/WithSecureLabs/drozer', tags: ['Tool', 'Exploitation'] },
+  { name: 'Burp Suite', desc: 'Traffic intercept ki + phone proxy set.', url: 'https://portswigger.net/burp', tags: ['Tool', 'Proxy'] },
   { name: 'Building an Android Pentest Lab', desc: 'Step-by-step guide to building an Android pentest lab', url: 'https://medium.com/purplebox/step-by-step-guide-to-building-an-android-pentest-lab-853b4af6945e', tags: ['Guide', 'Pentest Lab'] },
   { name: 'Vendor-specific Vulnerabilities', desc: 'Discovering vendor-specific vulnerabilities in Android', url: 'https://oversecured.com/blog/discovering-vendor-specific-vulnerabilities-in-android', tags: ['Vulns', 'Research'] },
   { name: 'OWASP MASWE', desc: 'Mobile Application Security Web Editor', url: 'https://mas.owasp.org/MASWE/#', tags: ['OWASP', 'Tool'] },
