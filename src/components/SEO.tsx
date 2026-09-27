@@ -10,8 +10,8 @@ interface SEOProps {
 const SEO = ({ 
   title, 
   description = "Security Analyst & Cybersecurity Educator. Breaking things to build them stronger. A Telugu cybersecurity education platform.",
-  image = "/logo.png", 
-  url = "https://aashishtechsecurity.com"
+  image = "/logo.webp", 
+  url = "https://www.aashishtechsecurity.in"
 }: SEOProps) => {
   const siteTitle = `${title} | AashishTechSecurity`;
 

@@ -26,11 +26,17 @@ const Footer = () => {
                 { name: 'Roadmap', href: '/roadmap' },
                 { name: 'Resources', href: '/resources' },
                 { name: 'About', href: '/#about' },
-                { name: 'Contact', href: '/#contact' }
+                { name: 'Contact', href: 'https://www.linkedin.com/in/aashishsec', isExternal: true }
               ].map(link => (
-                <Link key={link.name} to={link.href} className="text-text-muted hover:text-accent-cyan transition-colors text-sm">
-                  {'>'} {link.name}
-                </Link>
+                link.isExternal ? (
+                  <a key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" className="text-text-muted hover:text-accent-cyan transition-colors text-sm">
+                    {'>'} {link.name}
+                  </a>
+                ) : (
+                  <Link key={link.name} to={link.href} className="text-text-muted hover:text-accent-cyan transition-colors text-sm">
+                    {'>'} {link.name}
+                  </Link>
+                )
               ))}
             </div>
           </div>

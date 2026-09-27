@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import ThemeTransitionOverlay from './components/ThemeTransitionOverlay';
 import CookieConsent from './components/CookieConsent';
+import ScrollToTopButton from './components/ScrollToTopButton';
 
 const Resources = lazy(() => import('./pages/Resources'));
 const Roadmap = lazy(() => import('./pages/Roadmap'));
@@ -44,9 +45,12 @@ function App() {
 
   return (
     <div className="min-h-screen bg-bg-primary text-text-primary selection:bg-accent-cyan/30 flex flex-col overflow-x-hidden">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:px-4 focus:py-2 focus:bg-accent-cyan focus:text-bg-primary font-bold top-0 left-0">
+        Skip to main content
+      </a>
       <ThemeTransitionOverlay />
       <Navbar />
-      <div className="flex-grow">
+      <main id="main-content" className="flex-grow">
         <Suspense fallback={<PageFallback />}>
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
@@ -64,9 +68,10 @@ function App() {
             </Routes>
           </AnimatePresence>
         </Suspense>
-      </div>
+      </main>
       <Footer />
       <CookieConsent />
+      <ScrollToTopButton />
     </div>
   );
 }

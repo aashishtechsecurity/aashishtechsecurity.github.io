@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo.webp';
 
 const ThemeTransitionOverlay: React.FC = () => {
   const { isTransitioning, transitionTheme } = useTheme();

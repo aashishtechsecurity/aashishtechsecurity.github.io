@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo.webp';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
@@ -14,7 +14,7 @@ const NAV_LINKS = [
   { name: 'Roadmap', href: '/roadmap', id: '' },
   { name: 'CTI Monitor', href: 'https://www.aashishtechsecurity.in/cti-monitor/', id: '', isExternal: true },
   { name: 'Blogs', href: 'https://aashishtechsecurity.medium.com/', id: '', isExternal: true },
-  { name: 'Contact', href: '/#contact', id: 'contact' }
+  { name: 'Contact', href: 'https://www.linkedin.com/in/aashishsec', id: '', isExternal: true }
 ];
 
 const Navbar = () => {
