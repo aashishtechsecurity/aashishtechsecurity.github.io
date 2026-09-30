@@ -130,26 +130,26 @@ const ToolkitPage = () => {
         </div>
 
         {/* Navigation Tabs */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-2.5 sm:gap-4 mb-8 sm:mb-12">
           <button
             onClick={() => handleTabChange('ethical-hacking')}
-            className={`flex items-center gap-2 px-6 py-3 rounded-full font-display font-bold transition-all ${activeTab === 'ethical-hacking' ? 'bg-accent-cyan/10 text-accent-cyan border border-accent-cyan/30 box-glow-cyan shadow-[0_0_15px_rgba(0,245,255,0.2)]' : 'text-text-muted hover:text-text-primary hover:bg-bg-card border border-border-glow'}`}
+            className={`flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-display text-xs sm:text-base font-bold transition-all ${activeTab === 'ethical-hacking' ? 'bg-accent-cyan/10 text-accent-cyan border border-accent-cyan/30 box-glow-cyan shadow-[0_0_15px_rgba(0,245,255,0.2)]' : 'text-text-muted hover:text-text-primary hover:bg-bg-card border border-border-glow'}`}
           >
-            <Terminal className="w-5 h-5" />
+            <Terminal className="w-4 h-4 sm:w-5 sm:h-5" />
             Ethical Hacking
           </button>
           <button
             onClick={() => handleTabChange('soc')}
-            className={`flex items-center gap-2 px-6 py-3 rounded-full font-display font-bold transition-all ${activeTab === 'soc' ? 'bg-accent-cyan/10 text-accent-cyan border border-accent-cyan/30 box-glow-cyan shadow-[0_0_15px_rgba(0,245,255,0.2)]' : 'text-text-muted hover:text-text-primary hover:bg-bg-card border border-border-glow'}`}
+            className={`flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-display text-xs sm:text-base font-bold transition-all ${activeTab === 'soc' ? 'bg-accent-cyan/10 text-accent-cyan border border-accent-cyan/30 box-glow-cyan shadow-[0_0_15px_rgba(0,245,255,0.2)]' : 'text-text-muted hover:text-text-primary hover:bg-bg-card border border-border-glow'}`}
           >
-            <Shield className="w-5 h-5" />
+            <Shield className="w-4 h-4 sm:w-5 sm:h-5" />
             SOC Analyst
           </button>
           <button
             onClick={() => handleTabChange('cti')}
-            className={`flex items-center gap-2 px-6 py-3 rounded-full font-display font-bold transition-all ${activeTab === 'cti' ? 'bg-accent-cyan/10 text-accent-cyan border border-accent-cyan/30 box-glow-cyan shadow-[0_0_15px_rgba(0,245,255,0.2)]' : 'text-text-muted hover:text-text-primary hover:bg-bg-card border border-border-glow'}`}
+            className={`flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-display text-xs sm:text-base font-bold transition-all ${activeTab === 'cti' ? 'bg-accent-cyan/10 text-accent-cyan border border-accent-cyan/30 box-glow-cyan shadow-[0_0_15px_rgba(0,245,255,0.2)]' : 'text-text-muted hover:text-text-primary hover:bg-bg-card border border-border-glow'}`}
           >
-            <Radar className="w-5 h-5" />
+            <Radar className="w-4 h-4 sm:w-5 sm:h-5" />
             Threat Intelligence
           </button>
         </div>

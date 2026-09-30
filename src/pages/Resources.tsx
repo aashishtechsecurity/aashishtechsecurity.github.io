@@ -3,7 +3,7 @@ import type { Resource } from '../data/resourcesData';
 import { YOUTUBE_CHANNELS, PRACTICE_PLATFORMS, SECURITY_RESOURCES, JOB_SIMULATIONS, PEN_TESTING, SOC_RESOURCES, FREE_CERTS, CLOUD_SECURITY, CRYPTOGRAPHY, MOBILE_ANDROID, MOBILE_IOS, FUNDAMENTALS, AI_SECURITY, THREAT_INTEL , getFaviconUrl , API_PENTESTING, NETWORK_PENTESTING, RED_TEAMING} from '../data/resourcesData';
 
 import { useLocation, useNavigate } from 'react-router-dom';
-import { PlaySquare, Laptop, ShieldCheck, ExternalLink, Search, ArrowUp, Briefcase, Terminal, Award, Radar, Cloud, Key, Smartphone, BookOpen, Cpu, Globe } from 'lucide-react';
+import { PlaySquare, Laptop, ShieldCheck, ExternalLink, Search, ArrowUp, Briefcase, Terminal, Award, Radar, Cloud, Key, Smartphone, BookOpen, Cpu, Globe, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SEO from '../components/SEO';
 
@@ -286,8 +286,58 @@ const Resources = () => {
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* Sidebar / Tab Navigation */}
-          <div className="lg:w-1/4 shrink-0 flex overflow-x-auto lg:flex-col gap-2 pb-4 lg:pb-0 hide-scrollbar items-start lg:items-stretch">
+          {/* Mobile Category Navigation (< lg) */}
+          <div className="lg:hidden w-full space-y-3 mb-2">
+            {/* Quick Dropdown Picker for 17+ categories */}
+            <div className="relative">
+              <label htmlFor="mobile-category-select" className="sr-only">Select Category</label>
+              <select
+                id="mobile-category-select"
+                value={activeTab}
+                onChange={(e) => {
+                  navigate(TAB_TO_HASH[e.target.value as keyof typeof TAB_TO_HASH], { replace: true });
+                  setSearchQuery('');
+                  setActiveFilter('All');
+                }}
+                className="w-full bg-bg-card border border-accent-cyan/40 text-accent-cyan font-mono text-sm rounded-xl px-4 py-3 appearance-none focus:outline-none focus:border-accent-cyan focus:box-glow-cyan transition-all font-semibold cursor-pointer shadow-sm"
+              >
+                {tabs.map((tab) => (
+                  <option key={tab.id} value={tab.id} className="bg-bg-primary text-text-primary">
+                    {tab.label} ({tab.data.length})
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-accent-cyan pointer-events-none" />
+            </div>
+
+            {/* Horizontal Scrollable Chips Bar (w-auto so multiple chips fit on screen) */}
+            <div className="flex overflow-x-auto gap-2 pb-2 hide-scrollbar items-center touch-pan-x -mx-4 px-4 sm:mx-0 sm:px-0">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => {
+                    navigate(TAB_TO_HASH[tab.id as keyof typeof TAB_TO_HASH], { replace: true });
+                    setSearchQuery('');
+                    setActiveFilter('All');
+                  }}
+                  className={`flex items-center gap-2 px-3.5 py-2 rounded-full font-mono text-xs whitespace-nowrap shrink-0 transition-all active:scale-95 ${
+                    activeTab === tab.id 
+                      ? 'bg-accent-cyan text-bg-primary font-bold shadow-md shadow-accent-cyan/20' 
+                      : 'bg-bg-card border border-border-glow/30 text-text-muted hover:border-accent-cyan hover:text-accent-cyan'
+                  }`}
+                >
+                  <span className="scale-90">{tab.icon}</span>
+                  <span>{tab.label}</span>
+                  <span className={`px-1.5 py-0.5 rounded-full text-[10px] ${activeTab === tab.id ? 'bg-bg-primary/20 text-bg-primary' : 'bg-bg-primary/60 text-text-muted'}`}>
+                    {tab.data.length}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop Sidebar Navigation (lg+) */}
+          <div className="hidden lg:flex lg:flex-col lg:w-1/4 shrink-0 gap-2">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
@@ -296,7 +346,7 @@ const Resources = () => {
                   setSearchQuery('');
                   setActiveFilter('All'); // Reset filter on tab change
                 }}
-                className={`flex items-center justify-between gap-3 px-5 py-3 rounded-md font-mono text-sm transition-all whitespace-nowrap active:scale-95 shrink-0 w-full ${
+                className={`flex items-center justify-between gap-3 px-5 py-3 rounded-md font-mono text-sm transition-all whitespace-nowrap active:scale-95 w-full ${
                   activeTab === tab.id 
                     ? 'bg-accent-cyan text-bg-primary font-bold box-glow-cyan border-transparent' 
                     : 'bg-bg-card border border-border-glow/30 text-text-muted hover:border-accent-cyan hover:text-accent-cyan'

@@ -1078,14 +1078,14 @@ const RoadmapPhase = ({
             role="region"
             aria-labelledby={`phase-header-${index}`}
           >
-            <div className="p-5 md:p-6 space-y-8">
+            <div className="p-3.5 sm:p-5 md:p-6 space-y-6 sm:space-y-8">
               {phase.topics.map((topic, tIdx) => (
                 <div key={tIdx} className="relative">
                   {/* Vertical Line indicator */}
                   <div className={`absolute left-[11px] top-8 bottom-0 w-0.5 ${phase.bgColor} -z-10`} />
                   
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="flex items-center gap-3 text-lg font-bold text-text-primary">
+                    <h3 className="flex items-center gap-2.5 sm:gap-3 text-base sm:text-lg font-bold text-text-primary">
                       <div className={`p-1.5 rounded-full bg-bg-primary ${phase.color} border border-border-glow`}>
                         {topic.icon}
                       </div>
@@ -1101,7 +1101,7 @@ const RoadmapPhase = ({
                     </span>
                   </div>
                   
-                  <div className="ml-8 space-y-6">
+                  <div className="ml-2 sm:ml-8 space-y-4 sm:space-y-6">
                     {topic.subTopics.map((sub, sIdx) => {
                       const itemId = `${activeTab}-${phase.phase}-${sub.name}`;
                       const isCompleted = completedItems.includes(itemId);
@@ -1143,7 +1143,7 @@ const RoadmapPhase = ({
                             </div>
                           </div>
                           
-                          <div className="grid md:grid-cols-2 gap-4 ml-8">
+                          <div className="grid md:grid-cols-2 gap-3 sm:gap-4 ml-0 sm:ml-8 mt-2">
                             {sub.resources.length > 0 && (
                               <div>
                                 <span className="text-xs font-mono uppercase tracking-wider text-text-muted block mb-2">Key Resources</span>

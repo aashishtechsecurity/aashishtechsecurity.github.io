@@ -142,7 +142,7 @@ const Navbar = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'tween', duration: 0.25 }}
-            className="md:hidden fixed inset-0 top-16 sm:top-20 bg-bg-card/95 backdrop-blur-md border-t border-border-glow z-40"
+            className="md:hidden fixed inset-0 top-16 sm:top-20 bg-bg-card/95 backdrop-blur-md border-t border-border-glow z-40 overflow-y-auto pb-12"
             role="dialog"
             aria-label="Mobile navigation menu"
           >
