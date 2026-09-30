@@ -117,6 +117,7 @@ export const FREE_CERTS: Resource[] = [
 ];
 
 export const CLOUD_SECURITY: Resource[] = [
+  { name: 'HackTricks Cloud Pentesting', desc: 'Comprehensive guide to cloud pentesting', url: 'https://cloud.hacktricks.wiki/en/index.html', tags: ['Cloud', 'Pentesting', 'HackTricks'] },
   { name: 'Awesome CloudSec Labs', desc: 'Curated list of free and paid cloud security labs', url: 'https://github.com/iknowjason/Awesome-CloudSec-Labs', tags: ['Cloud', 'Labs'] },
 ];
 
@@ -325,3 +326,30 @@ export const getFaviconUrl = (url: string) => {
   }
 };
 
+
+
+export const API_PENTESTING: Resource[] = [
+  { name: 'APISec University', desc: 'Free API Security Courses', url: 'https://au.apisec.ai/', tags: ['Course', 'API'] },
+  { name: 'OWASP API Security Top 10', desc: 'Top 10 API Security Risks', url: 'https://apisecurity.io/owasp-api-security-top-10/', tags: ['OWASP', 'Top 10'] },
+  { name: 'HolyTips', desc: 'Bug Bounty / Web / API tips', url: 'https://github.com/HolyBugx/HolyTips', tags: ['Tips', 'Bug Bounty'] },
+  { name: 'API Audit Checklist', desc: 'Comprehensive API Audit Checklist', url: 'https://www.apiopscycles.com/api-audit-checklist', tags: ['Checklist', 'Audit'] },
+  { name: '31 Days of API Security Tips', desc: 'Daily tips for securing APIs', url: 'https://github.com/inonshk/31-days-of-API-Security-Tips', tags: ['Tips', 'Security'] },
+  { name: 'API Security Checklist', desc: 'Security countermeasures when designing and testing APIs', url: 'https://github.com/shieldfy/API-Security-Checklist', tags: ['Checklist', 'Security'] },
+  { name: 'OAuth2 Threat Model', desc: 'In-depth look at OAuth2 vulnerabilities', url: 'https://web.archive.org/web/20210607123429/https://www.binarybrotherhood.io/oauth2_threat_model.html', tags: ['OAuth2', 'Threat Model'] },
+  { name: 'JWT Security Cheatsheet', desc: 'PentesterLab JWT Security Cheatsheet PDF', url: 'https://assets.pentesterlab.com/jwt_security_cheatsheet/jwt_security_cheatsheet.pdf', tags: ['JWT', 'Cheatsheet'] },
+  { name: 'OWASP Microservices Security', desc: 'Cheat Sheet for Microservices Security', url: 'https://cheatsheetseries.owasp.org/cheatsheets/Microservices_security.html', tags: ['OWASP', 'Microservices'] },
+  { name: 'OWASP GraphQL Cheat Sheet', desc: 'Security Cheat Sheet for GraphQL', url: 'https://cheatsheetseries.owasp.org/cheatsheets/GraphQL_Cheat_Sheet.html', tags: ['OWASP', 'GraphQL'] },
+  { name: 'API Security Top 10 Cheat Sheet', desc: 'Visual A4 PDF for OWASP API Security Top 10', url: 'https://apisecurity.io/encyclopedia/content/owasp-api-security-top-10-cheat-sheet-a4.pdf', tags: ['Cheatsheet', 'PDF'] },
+  { name: 'OWASP REST Assessment', desc: 'REST Assessment Cheat Sheet', url: 'https://cheatsheetseries.owasp.org/cheatsheets/REST_Assessment_Cheat_Sheet.html', tags: ['OWASP', 'REST'] },
+  { name: 'OWASP REST Security', desc: 'REST Security Cheat Sheet', url: 'https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html', tags: ['OWASP', 'REST'] },
+  { name: 'API Security Encyclopedia', desc: 'Encyclopedia of API Security concepts and vulnerabilities', url: 'https://apisecurity.io/encyclopedia/content/api-security-encyclopedia.htm', tags: ['Encyclopedia', 'API'] },
+];
+
+export const NETWORK_PENTESTING: Resource[] = [
+  { name: 'Total OSCP Guide', desc: 'Comprehensive guide covering Network and General Pentesting', url: 'https://sushant747.gitbooks.io/total-oscp-guide/content/', tags: ['OSCP', 'Network', 'Guide'] },
+  { name: 'Network Recon Cheat Sheet', desc: 'Network Reconnaissance Cheatsheet by yezz123', url: 'https://gist.github.com/yezz123/52d2fc45c5de284ec89131c2a3dde389#Recon', tags: ['Recon', 'Cheatsheet'] },
+];
+
+export const RED_TEAMING: Resource[] = [
+  { name: 'Red Team Garage', desc: 'Resources, insights, and tools for Red Teaming', url: 'https://www.redteamgarage.com/', tags: ['Red Team', 'Blog'] },
+];

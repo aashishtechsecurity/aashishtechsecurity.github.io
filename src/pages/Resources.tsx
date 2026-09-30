@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import type { Resource } from '../data/resourcesData';
-import { YOUTUBE_CHANNELS, PRACTICE_PLATFORMS, SECURITY_RESOURCES, JOB_SIMULATIONS, PEN_TESTING, SOC_RESOURCES, FREE_CERTS, CLOUD_SECURITY, CRYPTOGRAPHY, MOBILE_ANDROID, MOBILE_IOS, FUNDAMENTALS, AI_SECURITY, THREAT_INTEL , getFaviconUrl } from '../data/resourcesData';
+import { YOUTUBE_CHANNELS, PRACTICE_PLATFORMS, SECURITY_RESOURCES, JOB_SIMULATIONS, PEN_TESTING, SOC_RESOURCES, FREE_CERTS, CLOUD_SECURITY, CRYPTOGRAPHY, MOBILE_ANDROID, MOBILE_IOS, FUNDAMENTALS, AI_SECURITY, THREAT_INTEL , getFaviconUrl , API_PENTESTING, NETWORK_PENTESTING, RED_TEAMING} from '../data/resourcesData';
 
 import { useLocation, useNavigate } from 'react-router-dom';
 import { PlaySquare, Laptop, ShieldCheck, ExternalLink, Search, ArrowUp, Briefcase, Terminal, Award, Radar, Cloud, Key, Smartphone, BookOpen, Cpu, Globe } from 'lucide-react';
@@ -35,6 +35,13 @@ const HASH_TO_TAB = {
   '#aisecurity': 'ai_security',
   '#ThreatIntel': 'threat_intel',
   '#threatintel': 'threat_intel',
+
+  '#APIPenTesting': 'api_pentesting',
+  '#apipentesting': 'api_pentesting',
+  '#NetworkPenTesting': 'network_pentesting',
+  '#networkpentesting': 'network_pentesting',
+  '#RedTeaming': 'red_teaming',
+  '#redteaming': 'red_teaming',
 } as const;
 
 const TAB_TO_HASH = {
@@ -51,7 +58,11 @@ const TAB_TO_HASH = {
   ios: '#MobileiOS',
   fundamentals: '#Fundamentals',
   ai_security: '#AISecurity',
+  
   threat_intel: '#ThreatIntel',
+  api_pentesting: '#APIPenTesting',
+  network_pentesting: '#NetworkPenTesting',
+  red_teaming: '#RedTeaming',
 } as const;
 
 
@@ -99,7 +110,7 @@ const ResourceCard = ({ name, desc, url, tags, index }: Resource & { index: numb
 const Resources = () => {
   const { hash } = useLocation();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<'youtube' | 'practice' | 'security' | 'simulations' | 'pentesting' | 'soc' | 'certs' | 'cloud' | 'crypto' | 'android' | 'ios' | 'fundamentals' | 'ai_security' | 'threat_intel'>('youtube');
+  const [activeTab, setActiveTab] = useState<'youtube' | 'practice' | 'security' | 'simulations' | 'pentesting' | 'soc' | 'certs' | 'cloud' | 'crypto' | 'android' | 'ios' | 'fundamentals' | 'ai_security' | 'threat_intel' | 'api_pentesting' | 'network_pentesting' | 'red_teaming'>('youtube');
   const [searchQuery, setSearchQuery] = useState('');
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [activeFilter, setActiveFilter] = useState('All');
@@ -138,8 +149,12 @@ const Resources = () => {
     { id: 'certs', label: 'Free Certifications', data: FREE_CERTS, icon: <Award className="w-4 h-4" /> },
     { id: 'cloud', label: 'Cloud Security', data: CLOUD_SECURITY, icon: <Cloud className="w-4 h-4" /> },
     { id: 'crypto', label: 'Cryptography', data: CRYPTOGRAPHY, icon: <Key className="w-4 h-4" /> },
+    
     { id: 'android', label: 'Mobile (Android)', data: MOBILE_ANDROID, icon: <Smartphone className="w-4 h-4" /> },
     { id: 'ios', label: 'Mobile (iOS)', data: MOBILE_IOS, icon: <Smartphone className="w-4 h-4" /> },
+    { id: 'api_pentesting', label: 'API Pen Testing', data: API_PENTESTING, icon: <Terminal className="w-4 h-4" /> },
+    { id: 'network_pentesting', label: 'Network Pen Testing', data: NETWORK_PENTESTING, icon: <Radar className="w-4 h-4" /> },
+    { id: 'red_teaming', label: 'Red Teaming', data: RED_TEAMING, icon: <ShieldCheck className="w-4 h-4" /> },
   ] as const;
 
   // Compute dynamic filters for the active tab
