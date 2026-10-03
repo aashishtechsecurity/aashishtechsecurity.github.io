@@ -266,6 +266,8 @@ export const AI_SECURITY: Resource[] = [
   { name: 'awesome-prompt-injection', desc: 'A curated index of prompt-injection resources — papers, tools, labs and write-ups in one place.', url: 'https://github.com/Joe-B-Security/awesome-prompt-injection', tags: ['Curated List', 'Resources', 'AI Security'] },
   { name: 'JailbreakBench', desc: 'An open benchmark and leaderboard for LLM jailbreak robustness, with standardized artifacts and attack/defense tracking.', url: 'https://jailbreakbench.github.io/', tags: ['Benchmark', 'Leaderboard', 'Resources', 'AI Security'] },
   { name: 'Black Hills — Getting Started with AI Hacking', desc: 'Black Hills InfoSec’s practical intro to AI hacking and prompt injection — a solid on-ramp that pairs with their AI-CTF.', url: 'https://www.blackhillsinfosec.com/getting-started-with-ai-hacking-part-2/', tags: ['Guide', 'Black Hills InfoSec', 'Resources', 'AI Security'] },
+  { name: 'MITRE ATLAS', desc: 'Adversarial Threat Landscape for Artificial-Intelligence Systems — a globally accessible, living knowledge base of adversary tactics, techniques, and real-world case studies against AI systems.', url: 'https://atlas.mitre.org/', tags: ['Framework', 'MITRE', 'Resources', 'AI Security'] },
+  { name: 'OWASP Top 10 for LLM Applications', desc: 'Official OWASP standard highlighting the top 10 most critical security vulnerabilities, attack vectors, and mitigations for Large Language Model (LLM) applications.', url: 'https://owasp.org/www-project-top-10-for-large-language-model-applications/', tags: ['OWASP', 'Standards', 'Top 10', 'Resources', 'AI Security'] },
 ];
 
 export const THREAT_INTEL: Resource[] = [
