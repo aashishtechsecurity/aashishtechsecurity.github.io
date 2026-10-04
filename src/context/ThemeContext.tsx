@@ -12,26 +12,26 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>('dark');
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('theme') as Theme | null;
+      if (savedTheme === 'light' || savedTheme === 'dark') {
+        return savedTheme;
+      }
+    }
+    return 'dark';
+  });
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [transitionTheme, setTransitionTheme] = useState<Theme | null>(null);
 
-  // Initialize theme from localStorage or system preference
+  // Sync document root class whenever theme updates
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as Theme | null;
-    if (savedTheme) {
-      setTheme(savedTheme);
-      if (savedTheme === 'light') {
-        document.documentElement.classList.add('light-mode');
-      } else {
-        document.documentElement.classList.remove('light-mode');
-      }
+    if (theme === 'light') {
+      document.documentElement.classList.add('light-mode');
     } else {
-      // Default is dark mode per CSS, but set explicitly
-      setTheme('dark');
       document.documentElement.classList.remove('light-mode');
     }
-  }, []);
+  }, [theme]);
 
   const toggleTheme = () => {
     if (isTransitioning) return; // Prevent double trigger
@@ -65,6 +65,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (context === undefined) {

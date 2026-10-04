@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -1200,24 +1200,36 @@ const RoadmapPhase = ({
   );
 };
 
+interface SubTopicItem {
+  name: string;
+  resources: { name: string; url: string }[];
+}
+
+interface PhaseTopicItem {
+  title: string;
+  icon?: React.ReactNode;
+  subTopics: SubTopicItem[];
+}
+
 export default function Roadmap() {
   const { hash } = useLocation();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<'cybersecurity' | 'bugbounty'>('cybersecurity');
+  const activeTab = useMemo<'cybersecurity' | 'bugbounty'>(() => {
+    if (hash && hash in HASH_TO_TAB) {
+      return HASH_TO_TAB[hash as keyof typeof HASH_TO_TAB];
+    }
+    return 'cybersecurity';
+  }, [hash]);
+
   const [searchQuery, setSearchQuery] = useState('');
   const [completedItems, setCompletedItems] = useState<string[]>(() => {
     const saved = localStorage.getItem('roadmap_progress');
     return saved ? JSON.parse(saved) : [];
   });
 
-  // Sync active tab with URL hash
+  // Ensure fallback without setState inside effect
   useEffect(() => {
-    const currentTab = HASH_TO_TAB[hash as keyof typeof HASH_TO_TAB];
-    if (currentTab) {
-      if (currentTab !== activeTab) {
-        setActiveTab(currentTab);
-      }
-    } else {
+    if (!hash || !(hash in HASH_TO_TAB)) {
       navigate(TAB_TO_HASH[activeTab], { replace: true });
     }
   }, [hash, navigate, activeTab]);
@@ -1243,10 +1255,10 @@ export default function Roadmap() {
     )
   })).filter(phase => phase.topics.length > 0);
 
-  const calculateProgress = (phaseTopics: any[]) => {
+  const calculateProgress = (phaseTopics: PhaseTopicItem[]) => {
     const total = phaseTopics.reduce((acc, t) => acc + t.subTopics.length, 0);
     const completed = phaseTopics.reduce((acc, t) => {
-      const topicCompletedCount = t.subTopics.filter((sub: any) => 
+      const topicCompletedCount = t.subTopics.filter((sub: SubTopicItem) => 
         completedItems.includes(`${activeTab}-${t.title}-${sub.name}`)
       ).length;
       return acc + topicCompletedCount;

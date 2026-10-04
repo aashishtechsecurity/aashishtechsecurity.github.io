@@ -39,13 +39,12 @@ const ToolkitPage = () => {
     if (!hash || !(hash in HASH_TO_TAB)) {
       navigate('/toolkit#ethical-hacking', { replace: true });
     }
-    // Reset filters when tab changes
-    setSearchQuery('');
-    setSelectedCategory('All Categories');
-    setExpandedCats(new Set());
   }, [location.hash, navigate]);
 
   const handleTabChange = (tab: TabKey) => {
+    setSearchQuery('');
+    setSelectedCategory('All Categories');
+    setExpandedCats(new Set());
     navigate(`/toolkit#${tab}`);
   };
 

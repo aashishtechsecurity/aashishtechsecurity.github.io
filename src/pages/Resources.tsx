@@ -110,19 +110,20 @@ const ResourceCard = ({ name, desc, url, tags, index }: Resource & { index: numb
 const Resources = () => {
   const { hash } = useLocation();
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<'youtube' | 'practice' | 'security' | 'simulations' | 'pentesting' | 'soc' | 'certs' | 'cloud' | 'crypto' | 'android' | 'ios' | 'fundamentals' | 'ai_security' | 'threat_intel' | 'api_pentesting' | 'network_pentesting' | 'red_teaming'>('youtube');
+  const activeTab = useMemo<keyof typeof TAB_TO_HASH>(() => {
+    if (hash && hash in HASH_TO_TAB) {
+      return HASH_TO_TAB[hash as keyof typeof HASH_TO_TAB];
+    }
+    return 'youtube';
+  }, [hash]);
+
   const [searchQuery, setSearchQuery] = useState('');
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [activeFilter, setActiveFilter] = useState('All');
 
-  // Sync active tab with URL hash
+  // Ensure valid URL hash fallback without setState in effect
   useEffect(() => {
-    const currentTab = HASH_TO_TAB[hash as keyof typeof HASH_TO_TAB];
-    if (currentTab) {
-      if (currentTab !== activeTab) {
-        setActiveTab(currentTab);
-      }
-    } else {
+    if (!hash || !(hash in HASH_TO_TAB)) {
       navigate(TAB_TO_HASH[activeTab], { replace: true });
     }
   }, [hash, navigate, activeTab]);
@@ -136,7 +137,7 @@ const Resources = () => {
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  const tabs = [
+  const tabs = useMemo(() => [
     { id: 'youtube', label: 'YouTube Channels', data: YOUTUBE_CHANNELS, icon: <PlaySquare className="w-4 h-4" /> },
     { id: 'practice', label: 'Practice Platforms', data: PRACTICE_PLATFORMS, icon: <Laptop className="w-4 h-4" /> },
     { id: 'fundamentals', label: 'Fundamentals', data: FUNDAMENTALS, icon: <BookOpen className="w-4 h-4" /> },
@@ -155,7 +156,7 @@ const Resources = () => {
     { id: 'api_pentesting', label: 'API Pen Testing', data: API_PENTESTING, icon: <Terminal className="w-4 h-4" /> },
     { id: 'network_pentesting', label: 'Network Pen Testing', data: NETWORK_PENTESTING, icon: <Radar className="w-4 h-4" /> },
     { id: 'red_teaming', label: 'Red Teaming', data: RED_TEAMING, icon: <ShieldCheck className="w-4 h-4" /> },
-  ] as const;
+  ], []);
 
   // Compute dynamic filters for the active tab
   const currentTabFilters = useMemo(() => {

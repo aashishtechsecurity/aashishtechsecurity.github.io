@@ -55,7 +55,6 @@ const Navbar: React.FC = () => {
   // Scroll Spy via Intersection Observer on Home Page
   useEffect(() => {
     if (location.pathname !== '/') {
-      setActiveSection('');
       return;
     }
 
