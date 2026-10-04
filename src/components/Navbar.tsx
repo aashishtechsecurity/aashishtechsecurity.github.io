@@ -8,8 +8,6 @@ import ThemeToggle from './ThemeToggle';
 interface NavItem {
   name: string;
   href: string;
-  id: string;
-  isExternal?: boolean;
 }
 
 interface NavbarProps {
@@ -17,20 +15,16 @@ interface NavbarProps {
 }
 
 const NAV_LINKS: NavItem[] = [
-  { name: 'Home', href: '/', id: 'home' },
-  { name: 'Resources', href: '/resources', id: 'resources' },
-  { name: 'Toolkit', href: '/toolkit', id: 'toolkit' },
-  { name: 'Projects', href: '/#projects', id: 'projects' },
-  { name: 'Services', href: '/#services', id: 'services' },
-  { name: 'Research', href: '/#research', id: 'research' },
-  { name: 'About', href: '/about', id: 'about' },
-  { name: 'Contact', href: 'https://www.linkedin.com/in/aashishsec', id: '', isExternal: true },
+  { name: 'Home', href: '/' },
+  { name: 'Resources', href: '/resources' },
+  { name: 'Toolkit', href: '/toolkit' },
+  { name: 'Roadmap', href: '/roadmap' },
+  { name: 'About', href: '/about' },
 ];
 
 const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
   const location = useLocation();
 
   // Scroll to hash when location changes
@@ -49,37 +43,12 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
     }
   }, [location.pathname, location.hash]);
 
-  // General scroll state
+  // General scroll state for glassmorphic backdrop
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
+    const handleScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  // Scroll Spy via Intersection Observer on Home Page
-  useEffect(() => {
-    if (location.pathname !== '/') {
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleSections = entries.filter((entry) => entry.isIntersecting);
-        if (visibleSections.length > 0) {
-          setActiveSection(visibleSections[0].target.id);
-        }
-      },
-      { rootMargin: '-20% 0px -60% 0px' }
-    );
-
-    const sectionIds = ['home', 'ecosystem', 'domains', 'toolkit-preview', 'projects', 'services', 'education', '100-days', 'roadmap', 'research', 'about-preview'];
-    sectionIds.forEach(id => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, [location.pathname]);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -91,17 +60,9 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
     return () => { document.body.style.overflow = ''; };
   }, [isOpen]);
 
-  const isLinkActive = (href: string, id: string) => {
-    if (href === '/resources') return location.pathname === '/resources';
-    if (href === '/roadmap') return location.pathname === '/roadmap';
-    if (href === '/toolkit') return location.pathname === '/toolkit';
-    if (href === '/about') return location.pathname === '/about' && !location.hash;
-    if (href === '/about#contact') return location.pathname === '/about' && location.hash === '#contact';
-    if (location.pathname === '/') {
-      if (href === '/') return !activeSection || activeSection === 'home';
-      return activeSection === id;
-    }
-    return false;
+  const isLinkActive = (href: string) => {
+    if (href === '/') return location.pathname === '/';
+    return location.pathname === href || location.pathname.startsWith(href + '/');
   };
 
   return (
@@ -115,50 +76,42 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 sm:h-20">
+          
           {/* Brand Logo & Name */}
-          <Link to="/" className="flex items-center space-x-3 group flex-shrink-0" aria-label="AashishTechSecurity Home">
+          <Link 
+            to="/" 
+            className="flex items-center space-x-3 group flex-shrink-0 mr-4 lg:mr-8 xl:mr-10" 
+            aria-label="AashishTechSecurity Home"
+          >
             <div className="relative">
               <img
                 src={logo}
                 alt="ATS Logo"
-                className="w-9 h-9 sm:w-11 sm:h-11 object-contain brand-logo group-hover:scale-105 transition-transform duration-300"
+                className="w-9 h-9 sm:w-10 sm:h-10 object-contain brand-logo group-hover:scale-105 transition-transform duration-300"
               />
-              <div className="absolute inset-0 bg-accent-cyan/20 blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute inset-0 bg-accent-cyan/25 blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
-            <span className="font-display font-bold text-base sm:text-lg text-accent-cyan tracking-tight">
+            <span className="font-display font-bold text-base sm:text-lg text-accent-cyan tracking-tight group-hover:text-[#00d5ff] transition-colors whitespace-nowrap">
               AashishTechSecurity
             </span>
           </Link>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex items-center space-x-4 xl:space-x-6">
+          <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
             {NAV_LINKS.map((item) => {
-              const active = isLinkActive(item.href, item.id);
-              if (item.isExternal) {
-                return (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-text-muted hover:text-accent-cyan transition-colors font-mono text-xs xl:text-sm font-medium"
-                  >
-                    {item.name}
-                  </a>
-                );
-              }
+              const active = isLinkActive(item.href);
               return (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`relative font-mono text-xs xl:text-sm font-medium transition-colors py-1 group ${
+                  className={`relative font-mono text-sm tracking-wide transition-colors py-1 px-1 group ${
                     active ? 'text-accent-cyan font-bold' : 'text-text-muted hover:text-text-primary'
                   }`}
                 >
                   {item.name}
                   <span
-                    className={`absolute -bottom-0.5 left-0 h-0.5 bg-accent-cyan transition-all duration-200 ${
-                      active ? 'w-full' : 'w-0 group-hover:w-full'
+                    className={`absolute -bottom-1 left-0 h-0.5 bg-accent-cyan rounded-full transition-all duration-200 ${
+                      active ? 'w-full shadow-[0_0_8px_rgba(0,245,255,0.7)]' : 'w-0 group-hover:w-full'
                     }`}
                   />
                 </Link>
@@ -166,17 +119,17 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
             })}
           </div>
 
-          {/* Desktop Right Actions: Search + Get in Touch CTA + ThemeToggle */}
-          <div className="hidden sm:flex items-center space-x-2.5">
+          {/* Desktop Right Controls: Search + Get in Touch + ThemeToggle */}
+          <div className="hidden sm:flex items-center space-x-3 flex-shrink-0 ml-4">
             {onOpenCommandPalette && (
               <button
                 onClick={onOpenCommandPalette}
-                className="inline-flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-bg-card border border-border-glow/40 text-text-muted hover:text-accent-cyan hover:border-accent-cyan/50 font-mono text-xs transition-all group"
+                className="h-9 inline-flex items-center gap-2 px-3 rounded-lg bg-bg-card/70 hover:bg-bg-card border border-border-glow/40 hover:border-accent-cyan/50 text-text-muted hover:text-accent-cyan font-mono text-xs transition-all shadow-sm group"
                 aria-label="Search site (Ctrl+K)"
               >
-                <Search className="w-3.5 h-3.5 text-accent-cyan" />
-                <span className="hidden xl:inline text-text-muted group-hover:text-text-primary">Search</span>
-                <kbd className="px-1.5 py-0.5 rounded bg-bg-primary border border-border-glow text-[10px] text-text-muted group-hover:text-accent-cyan">
+                <Search className="w-3.5 h-3.5 text-accent-cyan group-hover:scale-110 transition-transform" />
+                <span className="hidden xl:inline text-text-muted group-hover:text-text-primary font-medium">Search</span>
+                <kbd className="px-1.5 py-0.5 rounded bg-bg-primary/80 border border-border-glow text-[10px] text-text-muted group-hover:text-accent-cyan font-mono">
                   ⌘K
                 </kbd>
               </button>
@@ -186,20 +139,21 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
               href="https://www.linkedin.com/in/aashishsec"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-accent-cyan/50 text-accent-cyan font-mono text-xs hover:bg-accent-cyan hover:text-black transition-all font-semibold whitespace-nowrap shadow-[0_0_12px_rgba(0,255,204,0.15)] group"
+              className="h-9 inline-flex items-center gap-1.5 px-4 rounded-lg bg-accent-cyan/10 hover:bg-accent-cyan text-accent-cyan hover:text-bg-primary border border-accent-cyan/40 hover:border-accent-cyan font-mono text-xs font-bold tracking-wide transition-all shadow-[0_0_12px_rgba(0,245,255,0.12)] hover:shadow-[0_0_18px_rgba(0,245,255,0.35)] whitespace-nowrap group"
             >
               <span>Get in Touch</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
             </a>
+
             <ThemeToggle />
           </div>
 
           {/* Mobile Right Controls: Search + ThemeToggle + Hamburger */}
-          <div className="flex sm:hidden items-center space-x-1.5">
+          <div className="flex sm:hidden items-center space-x-2">
             {onOpenCommandPalette && (
               <button
                 onClick={onOpenCommandPalette}
-                className="p-2 min-w-[40px] min-h-[40px] flex items-center justify-center text-text-muted hover:text-accent-cyan active:scale-95 transition-all"
+                className="h-9 w-9 rounded-lg border border-border-glow/40 bg-bg-card/60 text-text-muted hover:text-accent-cyan flex items-center justify-center active:scale-95 transition-all"
                 aria-label="Search site"
               >
                 <Search className="w-4 h-4 text-accent-cyan" />
@@ -208,10 +162,10 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
             <ThemeToggle />
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-text-primary hover:text-accent-cyan active:scale-95 transition-all"
+              className="h-9 w-9 rounded-lg border border-border-glow/40 bg-bg-card/60 text-text-primary hover:text-accent-cyan flex items-center justify-center active:scale-95 transition-all"
               aria-label={isOpen ? 'Close menu' : 'Open menu'}
             >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
@@ -231,25 +185,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
           >
             <div className="flex flex-col space-y-1">
               {NAV_LINKS.map((item, idx) => {
-                const active = isLinkActive(item.href, item.id);
-                if (item.isExternal) {
-                  return (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => setIsOpen(false)}
-                      className="flex items-center justify-between py-3 border-b border-border-glow/20 font-mono text-sm transition-colors text-text-primary hover:text-accent-cyan"
-                    >
-                      <span className="flex items-center gap-3">
-                        <span className="text-accent-cyan/60 text-xs">0{idx + 1}.</span>
-                        <span>{item.name}</span>
-                      </span>
-                      <ArrowRight className="w-4 h-4 text-text-muted/60" />
-                    </a>
-                  );
-                }
+                const active = isLinkActive(item.href);
                 return (
                   <Link
                     key={item.name}
@@ -274,7 +210,7 @@ const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setIsOpen(false)}
-                  className="w-full inline-flex items-center justify-center gap-2 py-3 rounded bg-accent-cyan text-black font-mono font-bold text-sm tracking-wide shadow-[0_0_15px_rgba(0,255,204,0.3)]"
+                  className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-lg bg-accent-cyan text-bg-primary font-mono font-bold text-sm tracking-wide shadow-[0_0_15px_rgba(0,255,204,0.3)] hover:brightness-110 transition-all"
                 >
                   <span>Get in Touch (LinkedIn)</span>
                   <ArrowRight className="w-4 h-4" />
