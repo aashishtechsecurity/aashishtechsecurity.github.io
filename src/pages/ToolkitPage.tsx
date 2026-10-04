@@ -1,8 +1,9 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ExternalLink, Terminal, Shield, Radar, Zap, Search, Filter, ChevronRight, ChevronDown } from 'lucide-react';
+import { ExternalLink, Terminal, Shield, Radar, Zap, Search, Filter, ChevronRight, ChevronDown, Copy } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SEO from '../components/SEO';
+import { useToast } from '../context/ToastContext';
 import { ethicalHackingToolkit, socToolkit, ctiToolkit } from '../data/toolkitData';
 import type { ToolkitCategory } from '../data/toolkitData';
 
@@ -17,10 +18,17 @@ type TabKey = 'ethical-hacking' | 'soc' | 'cti';
 const ToolkitPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All Categories');
   const [expandedCats, setExpandedCats] = useState<Set<string>>(new Set());
+
+  const copyToClipboard = (url: string, name: string) => {
+    navigator.clipboard.writeText(url).then(() => {
+      showToast(`Copied ${name} link to clipboard!`);
+    });
+  };
 
   const activeTab: TabKey = (() => {
     const hash = location.hash.toLowerCase();
@@ -289,15 +297,26 @@ const ToolkitPage = () => {
                                           </div>
                                         </div>
                                         {item.url && (
-                                          <a
-                                            href={item.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="p-2 bg-bg-card rounded-lg text-text-muted hover:text-accent-cyan hover:bg-accent-cyan/10 transition-colors flex-shrink-0"
-                                            title={`Visit ${item.name}`}
-                                          >
-                                            <ExternalLink className="w-4 h-4" />
-                                          </a>
+                                          <div className="flex items-center gap-1.5 flex-shrink-0">
+                                            <button
+                                              onClick={() => copyToClipboard(item.url!, item.name)}
+                                              className="p-2 bg-bg-card rounded-lg text-text-muted hover:text-accent-cyan hover:bg-accent-cyan/10 transition-colors"
+                                              title={`Copy ${item.name} link`}
+                                              aria-label={`Copy link for ${item.name}`}
+                                            >
+                                              <Copy className="w-4 h-4" />
+                                            </button>
+                                            <a
+                                              href={item.url}
+                                              target="_blank"
+                                              rel="noopener noreferrer"
+                                              className="p-2 bg-bg-card rounded-lg text-text-muted hover:text-accent-cyan hover:bg-accent-cyan/10 transition-colors"
+                                              title={`Visit ${item.name}`}
+                                              aria-label={`Visit ${item.name}`}
+                                            >
+                                              <ExternalLink className="w-4 h-4" />
+                                            </a>
+                                          </div>
                                         )}
                                       </div>
                                     </div>

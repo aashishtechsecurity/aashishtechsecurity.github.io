@@ -1,0 +1,10 @@
+# RFC 9116 Security Disclosure File for AashishTechSecurity
+# Website: https://www.aashishtechsecurity.in
+
+Contact: mailto:privacy@aashishtechsecurity.in
+Contact: https://www.linkedin.com/in/aashishsec
+Preferred-Languages: en, te
+Canonical: https://www.aashishtechsecurity.in/.well-known/security.txt
+Policy: https://www.aashishtechsecurity.in/privacy-policy
+Acknowledgments: https://www.aashishtechsecurity.in/about#achievements
+Expires: 2027-12-31T23:59:59.000Z

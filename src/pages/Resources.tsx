@@ -3,9 +3,10 @@ import type { Resource } from '../data/resourcesData';
 import { YOUTUBE_CHANNELS, PRACTICE_PLATFORMS, SECURITY_RESOURCES, JOB_SIMULATIONS, PEN_TESTING, SOC_RESOURCES, FREE_CERTS, CLOUD_SECURITY, CRYPTOGRAPHY, MOBILE_ANDROID, MOBILE_IOS, FUNDAMENTALS, AI_SECURITY, THREAT_INTEL , getFaviconUrl , API_PENTESTING, NETWORK_PENTESTING, RED_TEAMING} from '../data/resourcesData';
 
 import { useLocation, useNavigate } from 'react-router-dom';
-import { PlaySquare, Laptop, ShieldCheck, ExternalLink, Search, ArrowUp, Briefcase, Terminal, Award, Radar, Cloud, Key, Smartphone, BookOpen, Cpu, Globe, ChevronDown } from 'lucide-react';
+import { PlaySquare, Laptop, ShieldCheck, ExternalLink, Search, ArrowUp, Briefcase, Terminal, Award, Radar, Cloud, Key, Smartphone, BookOpen, Cpu, Globe, ChevronDown, Copy } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SEO from '../components/SEO';
+import { useToast } from '../context/ToastContext';
 
 
 
@@ -69,6 +70,15 @@ const TAB_TO_HASH = {
 
 const ResourceCard = ({ name, desc, url, tags, index }: Resource & { index: number }) => {
   const faviconUrl = getFaviconUrl(url);
+  const { showToast } = useToast();
+
+  const handleCopy = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText(url).then(() => {
+      showToast(`Copied ${name} link to clipboard!`);
+    });
+  };
 
   return (
     <motion.a
@@ -81,17 +91,27 @@ const ResourceCard = ({ name, desc, url, tags, index }: Resource & { index: numb
       className="block p-5 bg-bg-card border border-border-glow/30 rounded-lg hover:border-accent-cyan hover:box-glow-cyan group transition-all h-full flex flex-col"
     >
       <div className="flex justify-between items-start mb-3">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 min-w-0">
           {faviconUrl ? (
-            <img src={faviconUrl} alt={`${name} logo`} className="w-6 h-6 rounded bg-bg-primary object-contain" />
+            <img src={faviconUrl} alt={`${name} logo`} className="w-6 h-6 rounded bg-bg-primary object-contain flex-shrink-0" />
           ) : (
-            <div className="w-6 h-6 rounded bg-bg-primary flex items-center justify-center">
+            <div className="w-6 h-6 rounded bg-bg-primary flex items-center justify-center flex-shrink-0">
               <ExternalLink className="w-3 h-3 text-text-muted" />
             </div>
           )}
           <h3 className="font-bold font-display text-text-primary group-hover:text-accent-cyan transition-colors line-clamp-1">{name}</h3>
         </div>
-        <ExternalLink className="w-4 h-4 text-text-muted group-hover:text-accent-cyan shrink-0 transition-colors ml-2" />
+        <div className="flex items-center gap-1 shrink-0 ml-2">
+          <button
+            onClick={handleCopy}
+            title={`Copy ${name} link`}
+            aria-label={`Copy link for ${name}`}
+            className="p-1 rounded text-text-muted hover:text-accent-cyan hover:bg-accent-cyan/10 transition-colors"
+          >
+            <Copy className="w-3.5 h-3.5" />
+          </button>
+          <ExternalLink className="w-4 h-4 text-text-muted group-hover:text-accent-cyan shrink-0 transition-colors" />
+        </div>
       </div>
       
       <p className="text-text-muted text-sm font-mono leading-relaxed flex-grow mb-4">{desc}</p>

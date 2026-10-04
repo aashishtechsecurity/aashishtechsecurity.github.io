@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight, Search } from 'lucide-react';
 import logo from '../assets/logo.webp';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
@@ -10,6 +10,10 @@ interface NavItem {
   href: string;
   id: string;
   isExternal?: boolean;
+}
+
+interface NavbarProps {
+  onOpenCommandPalette?: () => void;
 }
 
 const NAV_LINKS: NavItem[] = [
@@ -23,7 +27,7 @@ const NAV_LINKS: NavItem[] = [
   { name: 'Contact', href: 'https://www.linkedin.com/in/aashishsec', id: '', isExternal: true },
 ];
 
-const Navbar: React.FC = () => {
+const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
@@ -162,8 +166,22 @@ const Navbar: React.FC = () => {
             })}
           </div>
 
-          {/* Desktop Right Actions: Get in Touch CTA + ThemeToggle */}
-          <div className="hidden sm:flex items-center space-x-3">
+          {/* Desktop Right Actions: Search + Get in Touch CTA + ThemeToggle */}
+          <div className="hidden sm:flex items-center space-x-2.5">
+            {onOpenCommandPalette && (
+              <button
+                onClick={onOpenCommandPalette}
+                className="inline-flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-bg-card border border-border-glow/40 text-text-muted hover:text-accent-cyan hover:border-accent-cyan/50 font-mono text-xs transition-all group"
+                aria-label="Search site (Ctrl+K)"
+              >
+                <Search className="w-3.5 h-3.5 text-accent-cyan" />
+                <span className="hidden xl:inline text-text-muted group-hover:text-text-primary">Search</span>
+                <kbd className="px-1.5 py-0.5 rounded bg-bg-primary border border-border-glow text-[10px] text-text-muted group-hover:text-accent-cyan">
+                  ⌘K
+                </kbd>
+              </button>
+            )}
+
             <a
               href="https://www.linkedin.com/in/aashishsec"
               target="_blank"
@@ -176,8 +194,17 @@ const Navbar: React.FC = () => {
             <ThemeToggle />
           </div>
 
-          {/* Mobile Right Controls: ThemeToggle + Hamburger */}
-          <div className="flex sm:hidden items-center space-x-2">
+          {/* Mobile Right Controls: Search + ThemeToggle + Hamburger */}
+          <div className="flex sm:hidden items-center space-x-1.5">
+            {onOpenCommandPalette && (
+              <button
+                onClick={onOpenCommandPalette}
+                className="p-2 min-w-[40px] min-h-[40px] flex items-center justify-center text-text-muted hover:text-accent-cyan active:scale-95 transition-all"
+                aria-label="Search site"
+              >
+                <Search className="w-4 h-4 text-accent-cyan" />
+              </button>
+            )}
             <ThemeToggle />
             <button
               onClick={() => setIsOpen(!isOpen)}
