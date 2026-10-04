@@ -71,16 +71,30 @@ const Footer: React.FC = () => {
                 { name: 'Privacy Policy', href: '/privacy-policy' },
                 { name: 'Terms & Conditions', href: '/terms' },
                 { name: 'Cookie Policy', href: '/cookie-policy' },
-                { name: 'Refund Policy', href: '/refund-policy' }
+                { name: 'Refund Policy', href: '/refund-policy' },
+                { name: 'Security (security.txt)', href: '/.well-known/security.txt', isExternal: true }
               ].map(link => (
-                <Link
-                  key={link.name}
-                  to={link.href}
-                  className="text-text-muted hover:text-accent-cyan transition-colors text-sm font-mono flex items-center justify-center sm:justify-start gap-1"
-                >
-                  <span className="text-accent-cyan/60 text-xs">{'>'}</span>
-                  <span>{link.name}</span>
-                </Link>
+                'isExternal' in link && link.isExternal ? (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-text-muted hover:text-accent-cyan transition-colors text-sm font-mono flex items-center justify-center sm:justify-start gap-1"
+                  >
+                    <span className="text-accent-cyan/60 text-xs">{'>'}</span>
+                    <span>{link.name}</span>
+                  </a>
+                ) : (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className="text-text-muted hover:text-accent-cyan transition-colors text-sm font-mono flex items-center justify-center sm:justify-start gap-1"
+                  >
+                    <span className="text-accent-cyan/60 text-xs">{'>'}</span>
+                    <span>{link.name}</span>
+                  </Link>
+                )
               ))}
             </div>
           </div>

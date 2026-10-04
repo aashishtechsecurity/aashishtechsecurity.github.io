@@ -98,6 +98,33 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       action: () => { navigate('/about'); onClose(); },
       keywords: ['bio', 'experience', 'resume', 'contact']
     },
+    {
+      id: 'page-privacy',
+      title: 'Privacy Policy',
+      category: 'Pages',
+      description: 'DPDP Act 2023 compliance, data minimization & user rights',
+      icon: <Shield className="w-4 h-4 text-accent-green" />,
+      action: () => { navigate('/privacy-policy'); onClose(); },
+      keywords: ['privacy', 'policy', 'dpdp', 'terms', 'compliance', 'legal']
+    },
+    {
+      id: 'page-security-txt',
+      title: 'Security Disclosure (security.txt)',
+      category: 'Pages',
+      description: 'RFC 9116 security contact, vulnerability policy & reporting',
+      icon: <Shield className="w-4 h-4 text-accent-cyan" />,
+      action: () => { window.open('/.well-known/security.txt', '_blank'); onClose(); },
+      keywords: ['security', 'security.txt', 'rfc9116', 'vulnerability', 'disclosure', 'bug', 'report']
+    },
+    {
+      id: 'page-robots-txt',
+      title: 'Robots.txt & Sitemap',
+      category: 'Pages',
+      description: 'Search engine crawler rules and XML sitemap index',
+      icon: <Globe className="w-4 h-4 text-text-muted" />,
+      action: () => { window.open('/robots.txt', '_blank'); onClose(); },
+      keywords: ['robots', 'robots.txt', 'sitemap', 'crawler', 'seo']
+    },
 
     // Domains
     {
