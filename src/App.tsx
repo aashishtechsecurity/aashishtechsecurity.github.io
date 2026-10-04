@@ -8,6 +8,7 @@ import ThemeTransitionOverlay from './components/ThemeTransitionOverlay';
 import CookieConsent from './components/CookieConsent';
 import ScrollToTopButton from './components/ScrollToTopButton';
 
+const AboutPage = lazy(() => import('./pages/AboutPage'));
 const Resources = lazy(() => import('./pages/Resources'));
 const Roadmap = lazy(() => import('./pages/Roadmap'));
 const ToolkitPage = lazy(() => import('./pages/ToolkitPage'));
@@ -55,6 +56,7 @@ function App() {
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+              <Route path="/about" element={<PageTransition><AboutPage /></PageTransition>} />
               <Route path="/toolkit" element={<PageTransition><ToolkitPage /></PageTransition>} />
               <Route path="/resources" element={<PageTransition><Resources /></PageTransition>} />
               <Route path="/roadmap" element={<PageTransition><Roadmap /></PageTransition>} />
