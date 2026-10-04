@@ -7,6 +7,7 @@ import { PlaySquare, Laptop, ShieldCheck, ExternalLink, Search, ArrowUp, Briefca
 import { motion, AnimatePresence } from 'framer-motion';
 import SEO from '../components/SEO';
 import { useToast } from '../context/ToastContext';
+import { sanitizeUrl } from '../utils/security';
 
 
 
@@ -82,7 +83,7 @@ const ResourceCard = ({ name, desc, url, tags, index }: Resource & { index: numb
 
   return (
     <motion.a
-      href={url}
+      href={sanitizeUrl(url)}
       target="_blank"
       rel="noopener noreferrer"
       initial={{ opacity: 0, y: 10 }}

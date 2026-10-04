@@ -6,6 +6,7 @@ import SEO from '../components/SEO';
 import { useToast } from '../context/ToastContext';
 import { ethicalHackingToolkit, socToolkit, ctiToolkit } from '../data/toolkitData';
 import type { ToolkitCategory } from '../data/toolkitData';
+import { sanitizeUrl } from '../utils/security';
 
 const HASH_TO_TAB = {
   '#ethical-hacking': 'ethical-hacking',
@@ -281,7 +282,7 @@ const ToolkitPage = () => {
                                           )}
                                           <div className="min-w-0">
                                             {item.url ? (
-                                              <a href={item.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-bold text-text-primary hover:text-accent-cyan transition-colors font-display group/link truncate max-w-full">
+                                              <a href={sanitizeUrl(item.url)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-bold text-text-primary hover:text-accent-cyan transition-colors font-display group/link truncate max-w-full">
                                                 {item.name}
                                               </a>
                                             ) : (
@@ -307,7 +308,7 @@ const ToolkitPage = () => {
                                               <Copy className="w-4 h-4" />
                                             </button>
                                             <a
-                                              href={item.url}
+                                              href={sanitizeUrl(item.url)}
                                               target="_blank"
                                               rel="noopener noreferrer"
                                               className="p-2 bg-bg-card rounded-lg text-text-muted hover:text-accent-cyan hover:bg-accent-cyan/10 transition-colors"
