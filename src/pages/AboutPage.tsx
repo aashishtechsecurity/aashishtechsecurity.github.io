@@ -282,10 +282,12 @@ const AboutPage = () => {
                   <span>GitHub Profile</span>
                 </a>
                 <a 
-                  href="#contact" 
-                  className="px-6 py-3 bg-bg-card/50 border border-border-glow/40 text-text-muted hover:text-text-primary rounded-lg transition-all inline-flex items-center gap-2 text-sm"
+                  href="https://www.linkedin.com/in/aashishsec" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="px-6 py-3 bg-bg-card/50 border border-border-glow/40 text-text-muted hover:text-accent-cyan rounded-lg transition-all inline-flex items-center gap-2 text-sm"
                 >
-                  <Mail className="w-4 h-4" />
+                  <Linkedin className="w-4 h-4" />
                   <span>Get in Touch</span>
                 </a>
               </div>

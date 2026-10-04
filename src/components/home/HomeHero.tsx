@@ -112,13 +112,15 @@ const HomeHero = () => {
                 <Terminal className="w-4 h-4" />
                 <span>Explore Toolkit</span>
               </Link>
-              <Link 
-                to="/about#contact" 
-                className="px-5 py-3.5 bg-transparent text-text-muted hover:text-text-primary border border-border-glow/20 hover:border-border-glow/60 rounded-lg transition-all inline-flex items-center justify-center gap-1.5 text-sm"
+              <a 
+                href="https://www.linkedin.com/in/aashishsec" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-3.5 bg-transparent text-text-muted hover:text-accent-cyan border border-border-glow/20 hover:border-accent-cyan/40 rounded-lg transition-all inline-flex items-center justify-center gap-1.5 text-sm group"
               >
-                <span>Work With Me</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+                <span>Get in Touch</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              </a>
             </motion.div>
 
           </div>

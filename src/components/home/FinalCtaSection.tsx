@@ -82,13 +82,15 @@ export const FinalCtaSection: React.FC = () => {
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
 
-          <Link
-            to="/about#contact"
+          <a
+            href="https://www.linkedin.com/in/aashishsec"
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded border border-border-glow/50 bg-bg-card/70 hover:bg-bg-card text-text-primary font-mono text-sm tracking-wide transition-all hover:border-accent-cyan/50 group"
           >
             <Briefcase className="w-4 h-4 text-accent-green group-hover:scale-110 transition-transform" />
-            <span>Work With Me</span>
-          </Link>
+            <span>Get in Touch (LinkedIn)</span>
+          </a>
         </div>
 
         {/* Social connections bar */}

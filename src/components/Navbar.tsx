@@ -14,14 +14,13 @@ interface NavItem {
 
 const NAV_LINKS: NavItem[] = [
   { name: 'Home', href: '/', id: 'home' },
-  { name: 'Learn', href: '/resources', id: 'learn' },
+  { name: 'Resources', href: '/resources', id: 'resources' },
   { name: 'Toolkit', href: '/toolkit', id: 'toolkit' },
   { name: 'Projects', href: '/#projects', id: 'projects' },
   { name: 'Services', href: '/#services', id: 'services' },
   { name: 'Research', href: '/#research', id: 'research' },
-  { name: '100 Days', href: '/#100-days', id: '100-days' },
   { name: 'About', href: '/about', id: 'about' },
-  { name: 'Contact', href: '/about#contact', id: 'contact' },
+  { name: 'Contact', href: 'https://www.linkedin.com/in/aashishsec', id: '', isExternal: true },
 ];
 
 const Navbar: React.FC = () => {
@@ -164,15 +163,17 @@ const Navbar: React.FC = () => {
             })}
           </div>
 
-          {/* Desktop Right Actions: Work With Me CTA + ThemeToggle */}
+          {/* Desktop Right Actions: Get in Touch CTA + ThemeToggle */}
           <div className="hidden sm:flex items-center space-x-3">
-            <Link
-              to="/about#contact"
+            <a
+              href="https://www.linkedin.com/in/aashishsec"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded border border-accent-cyan/50 text-accent-cyan font-mono text-xs hover:bg-accent-cyan hover:text-black transition-all font-semibold whitespace-nowrap shadow-[0_0_12px_rgba(0,255,204,0.15)] group"
             >
-              <span>Work With Me</span>
+              <span>Get in Touch</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
+            </a>
             <ThemeToggle />
           </div>
 
@@ -205,6 +206,24 @@ const Navbar: React.FC = () => {
             <div className="flex flex-col space-y-1">
               {NAV_LINKS.map((item, idx) => {
                 const active = isLinkActive(item.href, item.id);
+                if (item.isExternal) {
+                  return (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setIsOpen(false)}
+                      className="flex items-center justify-between py-3 border-b border-border-glow/20 font-mono text-sm transition-colors text-text-primary hover:text-accent-cyan"
+                    >
+                      <span className="flex items-center gap-3">
+                        <span className="text-accent-cyan/60 text-xs">0{idx + 1}.</span>
+                        <span>{item.name}</span>
+                      </span>
+                      <ArrowRight className="w-4 h-4 text-text-muted/60" />
+                    </a>
+                  );
+                }
                 return (
                   <Link
                     key={item.name}
@@ -224,14 +243,16 @@ const Navbar: React.FC = () => {
               })}
 
               <div className="pt-6">
-                <Link
-                  to="/about#contact"
+                <a
+                  href="https://www.linkedin.com/in/aashishsec"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => setIsOpen(false)}
                   className="w-full inline-flex items-center justify-center gap-2 py-3 rounded bg-accent-cyan text-black font-mono font-bold text-sm tracking-wide shadow-[0_0_15px_rgba(0,255,204,0.3)]"
                 >
-                  <span>Work With Me</span>
+                  <span>Get in Touch (LinkedIn)</span>
                   <ArrowRight className="w-4 h-4" />
-                </Link>
+                </a>
               </div>
             </div>
           </motion.div>

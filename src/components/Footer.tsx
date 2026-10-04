@@ -30,20 +30,33 @@ const Footer: React.FC = () => {
             <div className="flex flex-col space-y-2">
               {[
                 { name: 'Home', href: '/' },
-                { name: 'Learn Resources', href: '/resources' },
+                { name: 'Resources', href: '/resources' },
                 { name: 'Security Toolkit', href: '/toolkit' },
                 { name: 'Cyber Roadmap', href: '/roadmap' },
                 { name: 'About Aashish', href: '/about' },
-                { name: 'Work With Me', href: '/about#contact' }
+                { name: 'Contact (LinkedIn)', href: 'https://www.linkedin.com/in/aashishsec', isExternal: true }
               ].map(link => (
-                <Link
-                  key={link.name}
-                  to={link.href}
-                  className="text-text-muted hover:text-accent-cyan transition-colors text-sm font-mono flex items-center justify-center sm:justify-start gap-1"
-                >
-                  <span className="text-accent-cyan/60 text-xs">{'>'}</span>
-                  <span>{link.name}</span>
-                </Link>
+                link.isExternal ? (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-text-muted hover:text-accent-cyan transition-colors text-sm font-mono flex items-center justify-center sm:justify-start gap-1"
+                  >
+                    <span className="text-accent-cyan/60 text-xs">{'>'}</span>
+                    <span>{link.name}</span>
+                  </a>
+                ) : (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className="text-text-muted hover:text-accent-cyan transition-colors text-sm font-mono flex items-center justify-center sm:justify-start gap-1"
+                  >
+                    <span className="text-accent-cyan/60 text-xs">{'>'}</span>
+                    <span>{link.name}</span>
+                  </Link>
+                )
               ))}
             </div>
           </div>
