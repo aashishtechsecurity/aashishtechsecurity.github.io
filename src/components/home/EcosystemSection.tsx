@@ -49,7 +49,7 @@ const ECOSYSTEM_CARDS = [
     subtitle: 'Professional Advisory',
     desc: 'Professional cybersecurity services including vulnerability assessment, application security testing, and practical consulting.',
     icon: <Shield className="w-6 h-6 text-yellow-400" />,
-    badge: 'AppSec & Consulting',
+    badge: 'Coming Soon',
     link: '#services',
     isExternal: false
   },

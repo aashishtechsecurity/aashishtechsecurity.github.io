@@ -48,14 +48,15 @@ const ServicesSection = () => {
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-cyan/10 border border-accent-cyan/30 text-accent-cyan font-mono text-xs">
-            <span>Professional Capabilities</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-400/10 border border-yellow-400/30 text-yellow-400 font-mono text-xs">
+            <span className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
+            <span>Coming Soon · In Active Preparation</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-display font-bold text-text-primary tracking-tight">
             Cybersecurity <span className="text-accent-cyan text-glow-cyan">Services</span>
           </h2>
           <p className="text-text-muted text-base leading-relaxed">
-            Hands-on technical security evaluations, application assessments, and educational workshops tailored to your organizational needs.
+            Professional technical security evaluations, application assessments, and educational workshops — launching soon. Early discussions and inquiries are welcome.
           </p>
         </div>
 
@@ -71,8 +72,13 @@ const ServicesSection = () => {
               className="p-6 sm:p-7 rounded-2xl bg-bg-card border border-border-glow/30 hover:border-accent-cyan/50 transition-all flex flex-col justify-between group shadow-sm"
             >
               <div>
-                <div className="p-3 rounded-xl bg-bg-primary border border-border-glow/30 w-fit mb-5 group-hover:scale-105 transition-transform">
-                  {svc.icon}
+                <div className="flex items-center justify-between mb-5">
+                  <div className="p-3 rounded-xl bg-bg-primary border border-border-glow/30 group-hover:scale-105 transition-transform">
+                    {svc.icon}
+                  </div>
+                  <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-yellow-400/10 text-yellow-400 border border-yellow-400/30">
+                    Coming Soon
+                  </span>
                 </div>
 
                 <h3 className="text-xl font-display font-bold text-text-primary group-hover:text-accent-cyan transition-colors mb-2.5">
@@ -103,11 +109,14 @@ const ServicesSection = () => {
 
         {/* Call to Action Box */}
         <div className="p-8 sm:p-10 rounded-2xl bg-bg-card border border-border-glow/40 max-w-4xl mx-auto text-center space-y-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-400/10 border border-yellow-400/30 text-yellow-400 font-mono text-xs mx-auto">
+            <span>Pre-Launch Inquiry</span>
+          </div>
           <h3 className="text-2xl sm:text-3xl font-display font-bold text-text-primary">
-            Have a Security Assessment or Educational Requirement?
+            Have an Upcoming Security Requirement?
           </h3>
           <p className="text-text-muted text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-            Reach out directly to discuss scope, timeline, and security goals. Let's make your software and architecture measurably more resilient.
+            While formal services are launching soon, you can connect directly for early consultations, scoped evaluations, or regional security workshops.
           </p>
 
           <div className="flex flex-wrap justify-center gap-4 pt-2">
