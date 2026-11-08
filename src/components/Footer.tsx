@@ -151,7 +151,7 @@ const Footer: React.FC = () => {
                 <XTwitter className="w-4 h-4" />
               </a>
               <a
-                href="https://www.youtube.com/@aashishtechsecurity"
+                href="https://www.youtube.com/@AashishTechSecurity"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="YouTube"

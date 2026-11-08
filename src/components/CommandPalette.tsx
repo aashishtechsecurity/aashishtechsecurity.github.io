@@ -5,7 +5,7 @@ import {
   Search, Terminal, Globe, ArrowRight, X, ExternalLink, 
   BookOpen, Shield, Code, Cpu, User, Map, Sparkles
 } from 'lucide-react';
-import { GitHub, Linkedin, Instagram, Medium } from './Icons';
+import { GitHub, Linkedin, Instagram, Medium, YouTube } from './Icons';
 
 interface CommandItem {
   id: string;
@@ -238,6 +238,15 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       icon: <Instagram className="w-4 h-4 text-[#E4405F]" />,
       action: () => { window.open('https://www.instagram.com/aashishtechsecurity', '_blank'); onClose(); },
       keywords: ['reels', 'videos', 'telugu', 'community']
+    },
+    {
+      id: 'social-youtube',
+      title: 'YouTube Channel',
+      category: 'Socials',
+      description: '@AashishTechSecurity — Practical cybersecurity & ethical hacking tutorials in Telugu',
+      icon: <YouTube className="w-4 h-4 text-[#FF0000]" />,
+      action: () => { window.open('https://www.youtube.com/@AashishTechSecurity', '_blank'); onClose(); },
+      keywords: ['youtube', 'videos', 'tutorials', 'telugu', 'channel', 'watch']
     },
     {
       id: 'social-medium',

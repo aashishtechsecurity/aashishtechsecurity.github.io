@@ -5,7 +5,7 @@ import {
   Sparkles, Mail, Layers, ArrowUpRight, Compass
 } from 'lucide-react';
 import SEO from '../components/SEO';
-import { Instagram, Linkedin, Medium, XTwitter, GitHub } from '../components/Icons';
+import { Instagram, Linkedin, Medium, XTwitter, GitHub, YouTube } from '../components/Icons';
 
 // Verified Experience Data
 const EXPERIENCE = [
@@ -673,11 +673,16 @@ const AboutPage = () => {
                 — covering ethical hacking workflows, OSINT investigations, Termux setup, and defensive tactics for over 13,000+ aspiring professionals.
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 font-mono text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 font-mono text-xs">
                 <div className="p-4 rounded-xl bg-bg-primary border border-border-glow/30">
                   <div className="text-accent-cyan font-bold text-lg mb-1">Instagram</div>
                   <div className="text-text-muted">@aashishtechsecurity</div>
-                  <div className="text-text-primary mt-2">13k+ Followers · Reels & Live Demos</div>
+                  <div className="text-text-primary mt-2">13k+ Followers · Reels & Demos</div>
+                </div>
+                <div className="p-4 rounded-xl bg-bg-primary border border-border-glow/30">
+                  <div className="text-red-500 font-bold text-lg mb-1">YouTube</div>
+                  <div className="text-text-muted">@AashishTechSecurity</div>
+                  <div className="text-text-primary mt-2">Tutorials & Ethical Hacking</div>
                 </div>
                 <div className="p-4 rounded-xl bg-bg-primary border border-border-glow/30">
                   <div className="text-accent-purple font-bold text-lg mb-1">100 Days</div>
@@ -692,6 +697,15 @@ const AboutPage = () => {
               </div>
 
               <div className="pt-4 flex flex-wrap gap-4">
+                <a 
+                  href="https://www.youtube.com/@AashishTechSecurity" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="px-6 py-3 bg-red-600 text-white font-bold rounded-lg hover:bg-red-700 transition-all shadow-[0_0_15px_rgba(255,0,0,0.3)] inline-flex items-center gap-2 text-sm"
+                >
+                  <YouTube className="w-4 h-4" />
+                  <span>Subscribe on YouTube</span>
+                </a>
                 <a 
                   href="https://www.instagram.com/aashishtechsecurity" 
                   target="_blank" 
@@ -921,6 +935,15 @@ const AboutPage = () => {
             >
               <Instagram className="w-4 h-4" />
               <span>Instagram</span>
+            </a>
+            <a 
+              href="https://www.youtube.com/@AashishTechSecurity" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="px-6 py-3.5 bg-bg-card border border-border-glow text-text-primary font-bold rounded-lg hover:border-red-500 hover:text-red-400 transition-all inline-flex items-center gap-2 text-sm active:scale-95"
+            >
+              <YouTube className="w-4 h-4 text-red-500" />
+              <span>YouTube</span>
             </a>
             <a 
               href="https://x.com/AashishTechSec" 

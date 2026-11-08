@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { ExternalLink, Play } from 'lucide-react';
-import { Instagram } from '../Icons';
+import { Instagram, YouTube } from '../Icons';
 
 const FEATURED_REELS = [
   {
@@ -117,9 +117,18 @@ const InstagramContentSection = () => {
         {/* Section Bottom CTA */}
         <div className="text-center space-y-4">
           <div className="font-mono text-xs text-text-muted">
-            @aashishtechsecurity · Regular reels, live breakdowns & threat alerts in Telugu
+            @AashishTechSecurity · Regular reels, YouTube tutorials & threat alerts in Telugu
           </div>
-          <div>
+          <div className="flex flex-wrap justify-center gap-4">
+            <a
+              href="https://www.youtube.com/@AashishTechSecurity"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-3.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg transition-all inline-flex items-center gap-2 text-sm shadow-[0_0_20px_rgba(255,0,0,0.3)] hover:shadow-[0_0_25px_rgba(255,0,0,0.5)] active:scale-95"
+            >
+              <YouTube className="w-4 h-4" />
+              <span>Subscribe on YouTube →</span>
+            </a>
             <a
               href="https://www.instagram.com/aashishtechsecurity"
               target="_blank"

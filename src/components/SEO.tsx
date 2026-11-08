@@ -41,6 +41,7 @@ const SEO: React.FC<SEOProps> = ({
           "https://www.linkedin.com/in/aashishsec",
           "https://github.com/aashishtechsecurity",
           "https://www.instagram.com/aashishtechsecurity",
+          "https://www.youtube.com/@AashishTechSecurity",
           "https://aashishtechsecurity.medium.com/",
           "https://x.com/AashishTechSec"
         ]

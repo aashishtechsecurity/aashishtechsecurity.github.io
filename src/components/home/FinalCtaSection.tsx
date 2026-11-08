@@ -42,8 +42,8 @@ export const FinalCtaSection: React.FC = () => {
     },
     {
       name: 'YouTube',
-      handle: '@aashishtechsecurity',
-      href: 'https://www.youtube.com/@aashishtechsecurity',
+      handle: '@AashishTechSecurity',
+      href: 'https://www.youtube.com/@AashishTechSecurity',
       icon: YouTube,
       color: 'hover:text-[#FF0000] hover:border-[#FF0000]/40',
     },

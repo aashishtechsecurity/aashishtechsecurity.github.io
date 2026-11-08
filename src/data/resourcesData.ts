@@ -1,6 +1,7 @@
 export interface Resource { name: string; desc: string; url: string; tags: string[] }
 
 export const YOUTUBE_CHANNELS: Resource[] = [
+  { name: 'AashishTechSecurity', desc: 'Practical cybersecurity, ethical hacking tutorials, and defense in Telugu', url: 'https://www.youtube.com/@AashishTechSecurity', tags: ['Telugu', 'Ethical Hacking', 'Creator'] },
   { name: 'LiveOverflow', desc: 'Binary exploitation, reverse engineering, CTF', url: 'https://youtube.com/@LiveOverflow', tags: ['Binary Exp', 'Reverse Eng', 'CTF'] },
   { name: 'John Hammond', desc: 'Malware analysis, CTFs, security research', url: 'https://youtube.com/@_JohnHammond', tags: ['Malware', 'CTF', 'Research'] },
   { name: 'IppSec', desc: 'Penetration testing, Hack The Box walkthroughs', url: 'https://youtube.com/@ippsec', tags: ['Pentesting', 'HTB'] },
