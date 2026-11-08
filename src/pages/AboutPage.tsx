@@ -242,7 +242,7 @@ const AboutPage = () => {
                 I am a cybersecurity analyst with a strong engineering foundation (B.Tech from Vellore Institute of Technology). At 
                 <strong className="text-text-primary"> Pragma Edge Inc</strong>, I focus on vulnerability assessments, application security (SAST/DAST), 
                 and incident response. Beyond day-to-day defense, I actively conduct independent security research, develop open-source offensive tools, 
-                and lead <strong className="text-accent-cyan">AashishTechSecurity</strong> — empowering over 13,000 learners with practical, regional-language cybersecurity education.
+                and lead <strong className="text-accent-cyan">AashishTechSecurity</strong> — empowering over 15,000 learners with practical, regional-language cybersecurity education.
               </p>
 
               {/* Verified Meta Specs */}
@@ -343,7 +343,7 @@ const AboutPage = () => {
                     <div className="text-[10px] font-mono text-text-muted uppercase">Certifications</div>
                   </div>
                   <div className="p-2 rounded bg-bg-primary/50 border border-border-glow/20">
-                    <div className="text-2xl font-bold font-display text-accent-purple">13K+</div>
+                    <div className="text-2xl font-bold font-display text-accent-purple">15K+</div>
                     <div className="text-[10px] font-mono text-text-muted uppercase">Community</div>
                   </div>
                   <div className="p-2 rounded bg-bg-primary/50 border border-border-glow/20">
@@ -670,14 +670,14 @@ const AboutPage = () => {
               <p className="text-text-muted text-base leading-relaxed">
                 Cybersecurity has historically been dominated by high English-barrier resources. Through 
                 <strong className="text-text-primary"> AashishTechSecurity</strong>, I produce structured, real-world educational content in Telugu 
-                — covering ethical hacking workflows, OSINT investigations, Termux setup, and defensive tactics for over 13,000+ aspiring professionals.
+                — covering ethical hacking workflows, OSINT investigations, Termux setup, and defensive tactics for over 15,000+ aspiring professionals.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 font-mono text-xs">
                 <div className="p-4 rounded-xl bg-bg-primary border border-border-glow/30">
                   <div className="text-accent-cyan font-bold text-lg mb-1">Instagram</div>
                   <div className="text-text-muted">@aashishtechsecurity</div>
-                  <div className="text-text-primary mt-2">13k+ Followers · Reels & Demos</div>
+                  <div className="text-text-primary mt-2">15k+ Followers · Reels & Demos</div>
                 </div>
                 <div className="p-4 rounded-xl bg-bg-primary border border-border-glow/30">
                   <div className="text-red-500 font-bold text-lg mb-1">YouTube</div>
@@ -793,7 +793,7 @@ const AboutPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="p-6 rounded-xl bg-bg-card border border-border-glow/30 text-center">
-              <div className="text-3xl font-display font-bold text-accent-cyan mb-2">13,000+</div>
+              <div className="text-3xl font-display font-bold text-accent-cyan mb-2">15,000+</div>
               <h3 className="font-bold text-text-primary mb-1">Cyber Community</h3>
               <p className="text-text-muted text-xs leading-relaxed">Active student and professional community learning offensive security in Telugu.</p>
             </div>

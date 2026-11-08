@@ -234,7 +234,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose 
       id: 'social-instagram',
       title: 'Instagram Community',
       category: 'Socials',
-      description: '@aashishtechsecurity — 13k+ cybersecurity learners in Telugu',
+      description: '@aashishtechsecurity — 15k+ cybersecurity learners in Telugu',
       icon: <Instagram className="w-4 h-4 text-[#E4405F]" />,
       action: () => { window.open('https://www.instagram.com/aashishtechsecurity', '_blank'); onClose(); },
       keywords: ['reels', 'videos', 'telugu', 'community']

@@ -59,7 +59,7 @@ const ECOSYSTEM_CARDS = [
     subtitle: 'Community & Media',
     desc: 'Cybersecurity education delivered through Instagram reels, 100 Days of Hacking, YouTube guides, and Telugu live demonstrations.',
     icon: <PlayCircle className="w-6 h-6 text-pink-400" />,
-    badge: '13k+ Followers',
+    badge: '15k+ Followers',
     link: '#instagram',
     isExternal: false
   }
